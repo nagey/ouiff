@@ -10,8 +10,7 @@ var express = require('express')
   , passportSocketIo = require("passport.socketio")
   , ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn
   , mongojs = require('mongojs')
-  , fs = require('fs')
-  , Instagram = require("instagram-node-lib");
+  , fs = require('fs');
 
 
 var app = express();
@@ -23,6 +22,11 @@ app.config.sessionSecret = 'sumoftwosquares';
 
 app.extras = {};
 app.extras.cookieParser = express.cookieParser(app.config.sessionSecret);
+app.extras.Instagram = require("instagram-node-lib");
+
+app.extras.Instagram.set('client_id', '6527838fef5e4f0790a2aa7c9ddbc158');
+app.extras.Instagram.set('client_secret', '80d7a8a4247e498ab6df545f9c5806d2');
+
 
 app.extras.redisClient = redis.createClient();
 app.extras.sessionStore = new RedisStore({
@@ -36,6 +40,7 @@ var mongo = mongojs.connect('15sfest', ['instagramSubscriptionUpdates','users', 
 mongo.users.ensureIndex({email:1}, {unique:false});
 mongo.users.ensureIndex({'facebook.id':1}, {unique:true, sparse:true});
 mongo.users.ensureIndex({'twitter.id':1}, {unique:true, sparse:true});
+mongo.media.ensureIndex({id:1}, {unique:true});
 app.extras.mongo = mongo;
 
 var serverPort, server;
@@ -96,18 +101,5 @@ server.listen(app.get('port'), function(){
 
 
 
-Instagram.set('client_id', '6527838fef5e4f0790a2aa7c9ddbc158');
-Instagram.set('client_secret', '80d7a8a4247e498ab6df545f9c5806d2');
 
-Instagram.tags.info({
-  name: '15sfest',
-  complete: function(data){
-    console.log(data);
-  }
-});
 
-var tagName = '15sfest';
-Instagram.tags.subscribe({ 
-  object_id: tagName,
-  callback_url: "http://15sfest.com/instagram/subscription/"+ tagName +"/callback"
-});
