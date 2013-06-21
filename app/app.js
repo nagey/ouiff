@@ -98,5 +98,5 @@ Instagram.tags.info({
 var tagName = '15sfest';
 Instagram.tags.subscribe({ 
   object_id: tagName,
-  callback_url: "http://15sfest.com/instagram/subscription/callback?tag=" + tagName 
+  callback_url: "http://15sfest.com/instagram/subscription/"+ tagName +"/callback"
 });
