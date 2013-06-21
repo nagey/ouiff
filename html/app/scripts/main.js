@@ -1,8 +1,8 @@
 require.config({
     paths: {
         jquery: '../bower_components/jquery/jquery',
-        angular: '../bower_components/angular/angular'
-        'angular-ui': '../bower_components/angular-ui/build/angular-ui'
+        angular: '../bower_components/angular/angular',
+        'angular-ui': '../bower_components/angular-ui/build/angular-ui',
         bootstrap: 'vendor/bootstrap'
     },
     shim: {
