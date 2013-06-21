@@ -13,9 +13,29 @@ require.config({
     }
 });
 
-require(['app', 'jquery', 'bootstrap'], function (app, $) {
+require(
+  [
+  'app', 
+  'jquery', 
+  'bootstrap', 
+  'angular',
+  'BestOfCtrl'
+  ], function (app, $, bootstrap, angular_blank, BestOfCtrl) {
     'use strict';
     // use app here
     console.log(app);
     console.log('Running jQuery %s', $().jquery);
+
+    app = angular.module("fest", []).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
+      $locationProvider.html5Mode(true);
+    }]);
+
+    console.log(BestOfCtrl);
+
+    app.controller("BestOfCtrl", ["$location", "$scope", BestOfCtrl]);
+    
+    
+    $(document).ready(function () {
+      angular.bootstrap(document, ["fest"]);
+    })
 });
