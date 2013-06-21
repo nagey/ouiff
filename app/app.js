@@ -32,7 +32,7 @@ app.extras.sessionStore = new RedisStore({
 app.extras.ensureLoggedIn = ensureLoggedIn;
 app.extras.passport = require('passport');
 
-var mongo = mongojs.connect('15sfest', ['instagramSubscriptionUpdates','users']);
+var mongo = mongojs.connect('15sfest', ['instagramSubscriptionUpdates','users', 'media']);
 mongo.users.ensureIndex({email:1}, {unique:false});
 mongo.users.ensureIndex({'facebook.id':1}, {unique:true, sparse:true});
 mongo.users.ensureIndex({'twitter.id':1}, {unique:true, sparse:true});
