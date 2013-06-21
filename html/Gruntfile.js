@@ -1,4 +1,3 @@
-// Generated on 2013-06-20 using generator-webapp 0.2.4
 'use strict';
 var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
@@ -331,7 +330,7 @@ module.exports = function (grunt) {
         ]);
     });
 
-   grunt.registerTask('test', [
+    grunt.registerTask('test', [
         'clean:server',
         'concurrent:test',
         'connect:test',
