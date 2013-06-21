@@ -1,0 +1,41 @@
+{
+  "name": "ouiff-server",
+  "description": "The Offical (un-official) Instagram Film Festival.",
+  "version": "0.0.1",
+  "author": "Stefan Nagey (stefan@nagey.com)",
+  "contributors": [],
+  "dependencies": {
+    "express": ">= 3.0.0",
+    "instagram-node-lib": "0.0.1",
+    "ejs": "*",
+    "stylus": "*",
+    "mongojs": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "passport-facebook": "*",
+    "passport-twitter": "*",
+    "socket.io": "0.9.x",
+    "passport.socketio":"1.0.1",
+    "connect-ensure-login":"*"    
+  },
+  "keywords": [
+    "instagram",
+    "contest",
+    "agency"
+  ],
+  "main": "./app.js",
+  "engines": {
+    "node": ">= 0.10.11"
+  },
+  "files": [
+    ""
+  ],
+  "homepage": "https://github.com/nagey/ouiff",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nagey/ouiff.git"
+  },
+  "scripts": {
+    "start" : "node app.js"
+  }
+}
