@@ -42,6 +42,12 @@ h2 {
 	border-bottom:4px #567572 solid;
 }
 
+.green h1, .green h2 {
+	color:#E5C36E;
+	border-color:#E5C36E;
+}
+
+
 #header {
 
 	padding-bottom:20px;
@@ -137,6 +143,9 @@ h2 {
 
 #board .entry img {
 	display:block;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 
 
@@ -151,7 +160,6 @@ h2 {
 	min-height:300px;
 	padding-top:50px;
 	padding-bottom:70px;
-	background:#567572;
 }
 
 
@@ -166,5 +174,7 @@ h2 {
 	min-height:300px;
 	padding-top:50px;
 	padding-bottom:70px;
-	background:#E5C36E;
 }
+
+.green { background:#567572; }
+.gold { background:#E5C36E; }
