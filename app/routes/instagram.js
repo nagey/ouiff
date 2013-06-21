@@ -37,13 +37,13 @@ module.exports = function (app) {
 
   subscribeToTag("15sfest");
 
-  app.get('/instagram/subscription/:tagname/callback', function(req,res) {
+  app.get('/instagram/subscription/:tagname/callback', function (req,res) {
     console.log("Query", req.query);
     console.log("Parameters", req.params);
     res.send(req.query["hub.challenge"]);
   });
   
-  app.post('/instagram/subscription/:tagname/callback', function(req,res) {
+  app.post('/instagram/subscription/:tagname/callback', function (req,res) {
     console.log("Query", req.query);
     console.log("Parameters", req.params);
     console.log("Body", req.body);
@@ -59,6 +59,10 @@ module.exports = function (app) {
       }
     })
     res.send(req.query["hub.challenge"]);
+  });
+  
+  app.get('/instagram/forceUpdate/:tagname/:min_tag', function (req, res) {
+    getNewMedia(req.params.tagname, req.params.min_tag);
   });
   
 
