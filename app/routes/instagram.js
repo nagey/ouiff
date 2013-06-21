@@ -24,7 +24,16 @@ module.exports = function (app) {
       });
     });
   }
-    
+  
+  function subscribeToTag(tagName) {
+    app.extras.Instagram.tags.subscribe({ 
+      object_id: tagName,
+      callback_url: app.config.appProtocol + "://" + app.config.appDomain + "/instagram/subscription/"+ tagName +"/callback"
+    });
+  }
+
+  subscribeToTag("15sfest");
+
   app.get('/instagram/subscription/:tagname/callback', function(req,res) {
     console.log("Query", req.query);
     console.log("Parameters", req.params);

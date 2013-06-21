@@ -60,7 +60,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
   server = http.createServer(app);
 
-  app.config.appDomain = "localhost:3000";
+  app.config.appDomain = "15sfest.com";
   app.config.appProtocol = "http";
   app.use(express.logger('dev'));
 });
