@@ -40,8 +40,8 @@ var mongo = mongojs.connect('15sfest', ['instagramSubscriptionUpdates','users', 
 mongo.users.ensureIndex({email:1}, {unique:false});
 mongo.users.ensureIndex({'facebook.id':1}, {unique:true, sparse:true});
 mongo.users.ensureIndex({'twitter.id':1}, {unique:true, sparse:true});
-mongo.media.ensureIndex({id:1}, {unique:true});
-mongo.tags.ensureIndex({tag:1}, {unique:true});
+mongo.media.ensureIndex({id:1}, {unique:true, sparse:true});
+mongo.tags.ensureIndex({tag:1}, {unique:true, sparse:true});
 app.extras.mongo = mongo;
 
 var serverPort, server;
