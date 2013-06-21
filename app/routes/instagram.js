@@ -17,6 +17,9 @@ module.exports = function (app) {
             app.extras.redisClient.set(minTagId, pagination.min_tag_id);
           }
           app.extras.mongo.media.insert(data);
+          for (var i in data) {
+            app.extras.mongo.tags.insert(data[i].tags);
+          }
           if (data.length) {
             getNewMedia(tagName);
           }
