@@ -24,13 +24,147 @@ html {
 
 body {
 	background-color:#567572;
-	border:10px #E5C36E solid;
-	height:100%;
+	
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
+a {	color: #E5C36E;	text-decoration: none; }
+
+h1 {
+	font-family:salome, "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+h2 {
+	font-family:salome, "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	color:#567572;
+	border-bottom:4px #567572 solid;
+}
+
+#header {
+
+	padding-bottom:20px;
+}
+
+#branding {
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+#branding img {
+	display:block;
+	margin:0 auto;
+}
+
+#header h1 {
+	text-align:right;
+	color:#9E9C70;
+	font-size:4em;
+	line-height:1.2em;
+}
+
+#header nav {
+	height:100%;
+}
+
 #main-nav {
 	
+}
+
+.nav-tabs > li > a {
+	background-color:#E5C36E;
+	text-align:center;
+	font-size:2.5em;
+	color:#567572;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	line-height: 1.2em;
+	border:none;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.nav-tabs.nav-stacked > li > a {
+	font-family:tommaso, Helvetica, sans-serif;
+	border:none;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.nav-tabs.nav-stacked > li:first-child > a {
+	-webkit-border-top-right-radius: 0;
+	-moz-border-radius-topright: 0;
+	border-top-right-radius: 0;
+	-webkit-border-top-left-radius: 0;
+	-moz-border-radius-topleft: 0;
+	border-top-left-radius: 0;
+}
+
+.nav-tabs.nav-stacked > li:last-child > a {
+	-webkit-border-bottom-right-radius: 2px;
+	-moz-border-radius-bottomright: 2px;
+	border-bottom-right-radius: 2px;
+	-webkit-border-bottom-left-radius: 2px;
+	-moz-border-radius-bottomleft: 2px;
+	border-bottom-left-radius: 2px;
+}
+
+
+
+
+
+
+
+
+
+#board {
+	padding-top:50px;
+	padding-bottom:70px;
+	background:#E5C36E;
+}
+
+#board .entry {
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+#board h2 {
+	font-size:1.8em;
+}
+
+#board .entry img {
+	display:block;
+}
+
+
+
+
+
+
+
+
+
+#cats {
+	min-height:300px;
+	padding-top:50px;
+	padding-bottom:70px;
+	background:#567572;
+}
+
+
+
+
+
+
+
+
+
+#participate {
+	min-height:300px;
+	padding-top:50px;
+	padding-bottom:70px;
+	background:#E5C36E;
 }
