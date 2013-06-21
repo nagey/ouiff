@@ -4,6 +4,8 @@ module.exports = function (app) {
   "use strict";
   
   app.get('/instagram/subscription/callback', function(req,res) {
-  		res.send("foo");
-  	});
+    console.log("Query", req.query);
+    console.log("Parameters", req.params);
+    res.send(req.query["hub.challenge"]);
+  });
 }
