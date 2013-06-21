@@ -16,7 +16,7 @@ module.exports = function (app) {
           if (pagination.min_tag_id) {
             app.extras.redisClient.set(minTagId, pagination.min_tag_id);
           }
-          mongo.media.insert(data);
+          app.extras.mongo.media.insert(data);
           if (data.length) {
             getNewMedia(tagName);
           }
