@@ -63,6 +63,7 @@ module.exports = function (app) {
   
   app.get('/instagram/forceUpdate/:tagname/:min_tag', function (req, res) {
     getNewMedia(req.params.tagname, req.params.min_tag);
+    res.send("OK");
   });
   
 
