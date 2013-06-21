@@ -12,6 +12,7 @@ module.exports = function (app) {
   app.post('/instagram/subscription/:tagname/callback', function(req,res) {
     console.log("Query", req.query);
     console.log("Parameters", req.params);
+    console.log("Body", req.body);
     res.send(req.query["hub.challenge"]);
   });
   
