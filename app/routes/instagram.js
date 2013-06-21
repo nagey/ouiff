@@ -18,7 +18,11 @@ module.exports = function (app) {
           }
           app.extras.mongo.media.insert(data);
           for (var i in data) {
-            app.extras.mongo.tags.insert(data[i].tags);
+            var tagList = [];
+            for (var t in data[i].tags) {
+              tagList.append({tag:data[i].tags[t]});
+            }
+            app.extras.mongo.tags.insert(tagList);
           }
           if (data.length) {
             getNewMedia(tagName);
