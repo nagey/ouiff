@@ -15,20 +15,22 @@
         <script src="bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
     </head>
-    <body>
+    <body ng-app>
         <div class="container-fluid">
         
         	<div class="row-fluid">
             
             	<div id="branding" class="span3"><img src="images/logo-15sfest.png" width="487" height="317" alt="15s Festival"></div>
                 <nav class="span4 offset5">
-                
                 	
                 
                 </nav>
             
             </div>
             
+        </div>
+        <div ng-controller="fruitTest">
+            <span>{{name}}</span>
         </div>
 
         <!--[if lt IE 7]>
