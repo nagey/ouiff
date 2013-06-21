@@ -20,7 +20,7 @@ module.exports = function (app) {
           for (var i in data) {
             var tagList = [];
             for (var t in data[i].tags) {
-              tagList.append({tag:data[i].tags[t]});
+              tagList.push({tag:data[i].tags[t]});
             }
             app.extras.mongo.tags.insert(tagList);
           }
