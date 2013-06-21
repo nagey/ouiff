@@ -1,14 +1,15 @@
 'use strict';
 
 var express = require('express')
+  , RedisStore = require('connect-redis')(express)
   , https = require('https')
-	, http = require('http')
+  , http = require('http')
   , path = require('path')
   , socket = require('socket.io')
   , passportSocketIo = require("passport.socketio")
   , ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn
   , mongojs = require('mongojs')
-	, fs = require('fs')
+  , fs = require('fs')
   , Instagram = require("instagram-node-lib");
 
 
@@ -19,13 +20,19 @@ app.config = {};
 app.config.sessionSecret = 'sumoftwosquares';
 
 
-var httpsOptions = {};
+
+app.extras = {};
+app.extras.cookieParser = express.cookieParser(app.config.sessionSecret);
+app.extras.sessionStore = new RedisStore();
+app.extras.ensureLoggedIn = ensureLoggedIn;
+app.extras.passport = require('passport');
+
 var serverPort, server;
 
 app.configure('production', function() {
 
-	serverPort = 3000;
-	server = http.createServer(app);
+  serverPort = 3000;
+  server = http.createServer(app);
 
   app.config.appDomain = "15sfest.com";
   app.config.appProtocol = "http";
@@ -35,13 +42,11 @@ app.configure('production', function() {
 
 app.configure('development', function(){
   app.use(express.errorHandler());
-	server = http.createServer(app);
+  server = http.createServer(app);
 
   app.config.appDomain = "localhost:3000";
   app.config.appProtocol = "http";
   app.use(express.logger('dev'));
-  
-
 });
 
 app.configure(function(){
@@ -55,18 +60,13 @@ app.configure(function(){
   app.use(express.session({
     store: app.extras.sessionStore,
   }));
-	app.use(app.extras.passport.initialize());
-	app.use(app.extras.passport.session());
+  app.use(app.extras.passport.initialize());
+  app.use(app.extras.passport.session());
   app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-
-app.extras = {};
-app.extras.cookieParser = express.cookieParser(app.config.sessionSecret);
-app.extras.sessionStore = new MemoryStore();
-app.extras.ensureLoggedIn = ensureLoggedIn;
 
 
 var routes = {};

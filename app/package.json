@@ -16,7 +16,8 @@
     "passport-twitter": "*",
     "socket.io": "0.9.x",
     "passport.socketio":"1.0.1",
-    "connect-ensure-login":"*"    
+    "connect-ensure-login":"*",
+    "connect-redis": "*"
   },
   "keywords": [
     "instagram",
