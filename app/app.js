@@ -2,6 +2,7 @@
 
 var express = require('express')
   , RedisStore = require('connect-redis')(express)
+  , redis = require('redis')
   , https = require('https')
   , http = require('http')
   , path = require('path')
@@ -20,12 +21,22 @@ app.config = {};
 app.config.sessionSecret = 'sumoftwosquares';
 
 
-
 app.extras = {};
 app.extras.cookieParser = express.cookieParser(app.config.sessionSecret);
-app.extras.sessionStore = new RedisStore();
+
+app.extras.redisClient = redis.createClient();
+app.extras.sessionStore = new RedisStore({
+  client: app.extras.redisClient
+});
+
 app.extras.ensureLoggedIn = ensureLoggedIn;
 app.extras.passport = require('passport');
+
+var mongo = mongojs.connect('15sfest', ['instagramSubscriptionUpdates','users']);
+mongo.users.ensureIndex({email:1}, {unique:false});
+mongo.users.ensureIndex({'facebook.id':1}, {unique:true, sparse:true});
+mongo.users.ensureIndex({'twitter.id':1}, {unique:true, sparse:true});
+app.extras.mongo = mongo;
 
 var serverPort, server;
 
