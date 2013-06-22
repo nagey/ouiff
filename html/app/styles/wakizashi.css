@@ -51,7 +51,7 @@ h2 {
 
 
 #header {
-
+	background:transparent url(../images/q-pattern.png) top left repeat;
 	padding-bottom:20px;
 }
 
@@ -145,17 +145,17 @@ h2 {
 
 #board .entry img {
 	display:block;
-	-webkit-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 2px 2px 0 0;
+	-moz-border-radius: 2px 2px 0 0;
+	border-radius: 2px 2px 0 0;
 }
 
 #board .entry .meta {
 	padding:10px;
 	background-color:#567572;
-	-webkit-border-radius: 0 0 4px 4px;
-	-moz-border-radius: 0 0 4px 4px;
-	border-radius: 0 0 4px 4px;
+	-webkit-border-radius: 0 0 2px 2px;
+	-moz-border-radius: 0 0 2px 2px;
+	border-radius: 0 0 2px 2px;
 }
 
 #board .entry p {
