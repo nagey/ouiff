@@ -24,7 +24,9 @@ html {
 
 body {
 	background-color:#567572;
-	
+	font-family:"Courier New", Courier, monospace;
+	-webkit-font-smoothing: antialiased;
+	color:#567572;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
@@ -143,9 +145,52 @@ h2 {
 
 #board .entry img {
 	display:block;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+}
+
+#board .entry .meta {
+	padding:10px;
+	background-color:#567572;
+	-webkit-border-radius: 0 0 4px 4px;
+	-moz-border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 4px;
+}
+
+#board .entry p {
+	font-size:14px;
+	color:#E5C36E;
+}
+
+#board .entry .user {
+	font-size:16px;
+	font-weight:bold;
+	color:#E5C36E;
+}
+
+#board .entry .geo {
+	float:right;
+	font-size:12px;
+	text-align:right;
+}
+
+#board .entry .geo img {
+	display:inline;
+}
+
+#board .entry .rating {
+	float:left;
+	font-size:24px;
+	font-weight:bold;
+}
+
+#board .entry .rating .hash {
+	color:#E5C36E;
+}
+
+#board .entry .rating {
+	color:#8f936f;
 }
 
 
