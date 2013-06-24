@@ -847,21 +847,19 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       $scope.featuredList = [mock[4],mock[5]];
       $scope.latestList = [mock[6],mock[7]];
       $scope.modal = {};
-      $scope.modal.isOpen = true;
+      $scope.modal.isOpen = false;
       $scope.modal.video = '';
-
-      //$('#modal-window').modal({show: false});
 
       $scope.imgClick = function (item){
         $scope.modal.isOpen = true
 
-        //src.src =item.videos.standard_resolution.url;
-        //var video = document.getElementsByTagName('video'),
+        /*var myVideo = document.getElementsByTagName('video');
+        myVideo.src = item.videos.standard_resolution.url;
+        myVideo.load();*/
         var source = document.getElementsByTagName('source');
+        console.log(source)
         source[0].setAttribute('src', item.videos.standard_resolution.url);
         source[0].parentNode.load();
-
-        //$('#modal-window').modal('show')
       }
 
     };

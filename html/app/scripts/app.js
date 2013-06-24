@@ -3,14 +3,13 @@ define([
 	'jquery',
 	'bootstrap', 
     'angular',
-    'modal',
     'angular-modal',
   	'VideoListCtrl',
     "ng-resource"
-  ], function ($, bootstrap, angular_blank, angular_modal, modal, VideoListCtrl) {
+  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl) {
     'use strict';
 
-    var app = angular.module("fest", ["ngResource"]).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
+    var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
       $locationProvider.html5Mode(true);
     }]);
 
