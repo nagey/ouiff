@@ -4,9 +4,10 @@ define([
 	'bootstrap', 
     'angular',
     'modal',
+    'angular-modal',
   	'VideoListCtrl',
     "ng-resource"
-  ], function ($, bootstrap, angular_blank, modal, VideoListCtrl) {
+  ], function ($, bootstrap, angular_blank, angular_modal, modal, VideoListCtrl) {
     'use strict';
 
     var app = angular.module("fest", []).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {

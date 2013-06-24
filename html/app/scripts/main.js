@@ -4,6 +4,7 @@ require.config({
         angular: '../bower_components/angular/angular',
         "ng-resource": '../bower_components/angular-resource/angular-resource.min',
         'angular-ui': '../bower_components/angular-ui/build/angular-ui',
+        'angular-modal': '../bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.4.0',
         'modal': '../bower_components/sass-bootstrap/js/bootstrap-modal',
         bootstrap: 'vendor/bootstrap'
     },
