@@ -8,6 +8,7 @@
     "jquery": "~1.9.1",
     "angular": "*",
     "angular-ui": "*",
+    "angular-ui-bootstrap": "*",
     "angular-resource": "*"
   },
   "devDependencies": {}

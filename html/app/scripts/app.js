@@ -2,10 +2,11 @@
 define([
 	'jquery',
 	'bootstrap', 
-  	'angular',
+    'angular',
+    'modal',
   	'VideoListCtrl',
     "ng-resource"
-  ], function ($, bootstrap, angular_blank, VideoListCtrl) {
+  ], function ($, bootstrap, angular_blank, modal, VideoListCtrl) {
     'use strict';
 
     var app = angular.module("fest", ["ngResource"]).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {

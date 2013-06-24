@@ -1,9 +1,10 @@
 require.config({
     paths: {
-        jquery: '../bower_components/jquery/jquery.min',
-        angular: '../bower_components/angular/angular.min',
+        jquery: '../bower_components/jquery/jquery',
+        angular: '../bower_components/angular/angular',
         "ng-resource": '../bower_components/angular-resource/angular-resource.min',
-        'angular-ui': '../bower_components/angular-ui/build/angular-ui.min',
+        'angular-ui': '../bower_components/angular-ui/build/angular-ui',
+        'modal': '../bower_components/sass-bootstrap/js/bootstrap-modal',
         bootstrap: 'vendor/bootstrap'
     },
     shim: {
