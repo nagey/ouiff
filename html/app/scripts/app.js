@@ -20,7 +20,7 @@ define([
       console.log("media service");
       
       this.index = function () {
-        var user = User.get({}, function() {
+        var user = User.query(function() {
           console.log(user);
         });
       }
