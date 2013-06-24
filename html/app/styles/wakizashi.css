@@ -223,3 +223,34 @@ h2 {
 
 .green { background:#567572; }
 .gold { background:#E5C36E; }
+
+
+
+
+
+
+
+
+
+@media (max-width: 979px) {
+#header h1 {
+
+font-size: 3em;
+line-height: 1.2em;
+}
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 767px) {
+	
+body { padding:0; }
+.container { padding:0 20px; }
+
+}
