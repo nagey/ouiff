@@ -3,7 +3,8 @@ define([
 	'jquery',
 	'bootstrap', 
   	'angular',
-  	'VideoListCtrl'
+  	'VideoListCtrl',
+    "ng-resource"
   ], function ($, bootstrap, angular_blank, VideoListCtrl) {
     'use strict';
 
@@ -12,6 +13,19 @@ define([
     }]);
 
     app.controller("VideoListCtrl", ["$location", "$scope", VideoListCtrl]);
+    
+    
+    app.service("media", ["$resource", function ($resource) {
+      var User = $resource('http://15sfest.com/media/:id', {id:'@id'});
+      
+      this.index = function () {
+        var user = User.get({}, function() {
+          console.log(user);
+        });
+      }
+    }]);
+    
+    
     
     $(document).ready(function () {
       angular.bootstrap(document, ["fest"]);
