@@ -42,165 +42,63 @@
                             
                         
                         </ul>
-                    
                     </nav>
                 
                 </div>
-            
             </div>
             
-        </div>
-        
-        
-        
-        <div id="board">
+        </div> 
+        <div id="board"  ng-controller="VideoListCtrl">
         
             <div class="container">
-            
                 <div class="row">
-            
-                    <div class="best-of span6" ng-controller="BestOfCtrl">
-                    
-                        <h2>Highest Rated {{myvar}}</h2>
-                    
+                    <div class="best-of span6">
+                        <h2>Highest Rated</h2>
                         <div class="row">
-                        
-                            <div class="span3">
-                                
-                                <div class="entry">
-                                
-                                    <img src="images/suki.jpeg" width="612" height="612" alt="FPO">
-                                  	<div class="meta clearfix">
-                                    	<p class="user">natako</p>
-                                        <p class="desc">Retro sustainable McSweeney's meggings #15sFest</p>
+                                <div ng-repeat="best in bestOfList" class="entry span3">
+                                    <img src="{{best.imgUrl}}" width="612" height="612" alt="FPO">
+                                    <div class="meta clearfix">
+                                        <p class="user">{{best.user}}</p>
+                                        <p class="desc">{{best.desc}}</p>
                                         <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
                                         <p class="rating"><span class="hash">###</span>##</p>
-                                 	</div>
-                                
-                                </div>
-                                
-                                <div class="entry">
-                                
-                                    <img src="images/suki.jpeg" width="612" height="612" alt="FPO">
-                                  	<div class="meta clearfix">
-                                    	<p class="user">natako</p>
-                                        <p class="desc">Retro sustainable McSweeney's meggings #15sFest</p>
-                                        <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
-                                        <p class="rating"><span class="hash">###</span>##</p>
-                                 	</div>
-                                
-                                </div>                           
-                                
-                            </div>
-                            
-                            <div class="span3">
-                            
-                                <div class="entry">
-                                
-                                    <img src="images/suki.jpeg" width="612" height="612" alt="FPO">
-                                  	<div class="meta clearfix">
-                                    	<p class="user">natako</p>
-                                        <p class="desc">Retro sustainable McSweeney's meggings #15sFest</p>
-                                        <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
-                                        <p class="rating"><span class="hash">###</span>##</p>
-                                 	</div>
-                                
-                                </div>
-                                
-                                <div class="entry">
-                                
-                                    <img src="images/suki.jpeg" width="612" height="612" alt="FPO">
-                                  	<div class="meta clearfix">
-                                    	<p class="user">natako</p>
-                                        <p class="desc">Retro sustainable McSweeney's meggings #15sFest</p>
-                                        <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
-                                        <p class="rating"><span class="hash">###</span>##</p>
-                                 	</div>
-                                
-                                </div>   
-                            
-                            </div>
-                        
+                                    </div>
+                                </div>                        
                         </div>
-                        
                     </div>
+
                     
                     <div class="featured span3">
-                    
-                        <h2>Featured</h2>
-                                        
-                        <div class="entry">
+                        <h2>Featured</h2>       
+                        <div ng-repeat="feature in featuredList" class="entry">
                                 
-                                    <img src="images/suki.jpeg" width="612" height="612" alt="FPO">
-                                  	<div class="meta clearfix">
-                                    	<p class="user">natako</p>
-                                        <p class="desc">Retro sustainable McSweeney's meggings #15sFest</p>
-                                        <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
-                                        <p class="rating"><span class="hash">###</span>##</p>
-                                 	</div>
-                                
-                                </div>  
-                        
-                        <div class="entry">
-                                
-                                    <img src="images/suki.jpeg" width="612" height="612" alt="FPO">
-                                  	<div class="meta clearfix">
-                                    	<p class="user">natako</p>
-                                        <p class="desc">Retro sustainable McSweeney's meggings #15sFest</p>
-                                        <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
-                                        <p class="rating"><span class="hash">###</span>##</p>
-                                 	</div>
-                                
-                                </div>
-                             
+                            <img src="{{feature.imgUrl}}" width="612" height="612" alt="FPO">
+                            <div class="meta clearfix">
+                                <p class="user">{{feature.user}}</p>
+                                <p class="desc">{{feature.desc}}</p>
+                                <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
+                                <p class="rating"><span class="hash">###</span>##</p>
+                            </div>    
+                        </div>
                     </div>
-                        
-                       
+                    
                     
                     <div class="latest span3">
-                    
-                        <h2>Latest</h2>
-                                        
-                        <div class="entry">
-                                
-                                    <img src="images/suki.jpeg" width="612" height="612" alt="FPO">
-                                  	<div class="meta clearfix">
-                                    	<p class="user">natako</p>
-                                        <p class="desc">Retro sustainable McSweeney's meggings #15sFest</p>
-                                        <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
-                                        <p class="rating"><span class="hash">###</span>##</p>
-                                 	</div>
-                                
-                                </div>   
-                        
-                        <div class="entry">
-                                
-                                    <img src="images/suki.jpeg" width="612" height="612" alt="FPO">
-                                  	<div class="meta clearfix">
-                                    	<p class="user">natako</p>
-                                        <p class="desc">Retro sustainable McSweeney's meggings #15sFest</p>
-                                        <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
-                                        <p class="rating"><span class="hash">###</span>##</p>
-                                 	</div>
-                                
-                                </div>    
-                             
+                        <h2>Latest</h2>            
+                        <div ng-repeat="latest in latestList" class="entry"> 
+                            <img src="{{latest.imgUrl}}" width="612" height="612" alt="FPO">
+                            <div class="meta clearfix">
+                                <p class="user">{{latest.user}}</p>
+                                <p class="desc">{{latest.desc}}</p>
+                                <p class="geo"><img src="images/flags/pr.png" width="16" height="11" alt="Puerto Rico"></p>
+                                <p class="rating"><span class="hash">###</span>##</p>
+                            </div>    
+                        </div>   
                     </div>
-                    
                 </div>
-                   
             </div>
-        
         </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         <div id="participate" class="green">
         
         	<div class="container">
@@ -230,18 +128,7 @@
             </div>
         
         </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
         <div id="cats" class="gold">
-        
-        
         
         </div>
         

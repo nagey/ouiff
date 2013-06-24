@@ -21,38 +21,12 @@ require.config({
 });
 
 require(
-  [
-  'app', 
-  'jquery', 
-  'bootstrap', 
-  'angular',
-  'ng-resource',
-  'BestOfCtrl'
-  ], function (app, $, bootstrap, angular_blank, angular_resource_blank, BestOfCtrl) {
+
+  ['app'], function (app) {
     'use strict';
     // use app here
     console.log(app);
     console.log('Running jQuery %s', $().jquery);
 
-    app = angular.module("fest", ["ngResource"]).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
-      $locationProvider.html5Mode(true);
-    }]);
 
-
-    app.controller("BestOfCtrl", ["$location", "$scope", "media", BestOfCtrl]);
-    
-    app.service("media", ["$resource", function ($resource) {
-      var User = $resource('http://15sfest.com/media/:id', {id:'@id'});
-      
-      this.index = function () {
-        var user = User.get({}, function() {
-          console.log(user);
-        });
-      }
-    }]);
-    
-    
-    $(document).ready(function () {
-      angular.bootstrap(document, ["fest"]);
-    })
 });
