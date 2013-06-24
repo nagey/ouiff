@@ -9,7 +9,8 @@ module.exports = function (app) {
   
   function processGeocodeResult(result) {
     var locationObject = {};
-    if (result) {
+    if (result.status === "OK") {
+      result = result.results;
       for (var r in result) {
         for (var c in result[r].address_components) {
           for (var t in result[r].address_components[c].types) {
@@ -40,7 +41,7 @@ module.exports = function (app) {
       if (locationObject.country) { 
         document.location.country = locationObject.country;
       }
-      app.extras.mongo.media.update({_id: ObjectId(document._id)}, document);
+      app.extras.mongo.media.update({_id: document._id}, document);
     });
   }
   
