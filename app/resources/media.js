@@ -4,7 +4,7 @@ module.exports = function (app) {
   var media = {};
   
   media.index = function(req, res){
-    app.extras.mongo.media.find({}, function (err, docs) {
+    app.extras.mongo.media.find({}, {id: 1}, function (err, docs) {
       if (err) {
         res.status(500).send("Error: err");
       }
