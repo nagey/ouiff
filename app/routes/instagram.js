@@ -35,12 +35,12 @@ module.exports = function (app) {
   }
   
   function getCountryAndUpdate(document) {
-    geocoder.reverseGeocode(media.location.latitude, media.location.longitude, function (err, result) {
+    geocoder.reverseGeocode(document.location.latitude, document.location.longitude, function (err, result) {
       var locationObject = processGeocodeResult(result);
       if (locationObject.country) { 
-        media.location.country = locationObject.country;
+        document.location.country = locationObject.country;
       }
-      app.extras.mongo.media.update({_id: ObjectId(media._id)}, media);
+      app.extras.mongo.media.update({_id: ObjectId(document._id)}, document);
     });
   }
   
