@@ -3,6 +3,7 @@ require.config({
         jquery: '../bower_components/jquery/jquery',
         angular: '../bower_components/angular/angular',
         'angular-ui': '../bower_components/angular-ui/build/angular-ui',
+        'modal': '../bower_components/sass-bootstrap/js/bootstrap-modal',
         bootstrap: 'vendor/bootstrap'
     },
     shim: {
