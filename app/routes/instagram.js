@@ -47,7 +47,7 @@ module.exports = function (app) {
   function updateMediaTableWithCountries() {
     app.extras.mongo.media.find({}, function (err, docs) {
       for (var d in docs) {
-        getCountryAndUpdate(docs[d]);
+        if (docs[d].location) { getCountryAndUpdate(docs[d]); }
       }
     });
   }
