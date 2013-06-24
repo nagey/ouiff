@@ -10,6 +10,7 @@ var express = require('express')
   , passportSocketIo = require("passport.socketio")
   , ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn
   , mongojs = require('mongojs')
+  , Resource = require('express-resource')
   , fs = require('fs');
 
 
@@ -95,6 +96,15 @@ fs.readdirSync(__dirname+'/routes/').forEach(function(file){
   }
 });
 
+var resources = {};
+fs.readdirSync(__dirname+'/resources/').forEach(function(file){
+  var resource_fname = __dirname + '/resources/' + file;
+  var resource_name = path.basename(resource_fname, '.js');
+  if(resource_name[0] !== "."){ 
+    app.resource(resource_name, require(resource_fname)(app));
+    //resources[resource_name] = require(resource_fname)(app);
+  }
+});
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

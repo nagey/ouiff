@@ -1,5 +1,3 @@
-
-
 module.exports = function (app) {
   "use strict";
   
@@ -126,7 +124,7 @@ module.exports = function (app) {
   app.get("/instagram/getCountries", function (req, res) {
     updateMediaTableWithCountries();
     res.send("OK");
-  })
+  });
   
 
 }
