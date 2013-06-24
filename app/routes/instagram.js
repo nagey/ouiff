@@ -3,6 +3,55 @@
 module.exports = function (app) {
   "use strict";
   
+  var geocoder = require("geocoder");
+  
+  var ObjectId = require('mongojs').ObjectId;
+  
+  function processGeocodeResult(result) {
+    var locationObject = {};
+    if (result) {
+      for (var r in result) {
+        for (var c in result[r].address_components) {
+          for (var t in result[r].address_components[c].types) {
+            var tt = result[r].address_components[c].types[t];
+            if ( (tt === "country") || (tt == "political") ) {
+              locationObject.country = result[r].address_components[c].short_name.toLowerCase();
+            }
+          }
+        }
+      }
+    }
+    return locationObject;
+  }
+  
+  function getCountryAndInsert(media) {
+    geocoder.reverseGeocode(media.location.latitude, media.location.longitude, function (err, result) {
+      var locationObject = processGeocodeResult(result);
+      if (locationObject.country) { 
+        media.location.country = locationObject.country;
+      }
+      app.extras.mongo.media.insert(media);
+    });
+  }
+  
+  function getCountryAndUpdate(document) {
+    geocoder.reverseGeocode(media.location.latitude, media.location.longitude, function (err, result) {
+      var locationObject = processGeocodeResult(result);
+      if (locationObject.country) { 
+        media.location.country = locationObject.country;
+      }
+      app.extras.mongo.media.update({_id: ObjectId(media._id)}, media);
+    });
+  }
+  
+  function updateMediaTableWithCountries() {
+    app.extras.mongo.media.find({}, function (err, docs) {
+      for (var d in docs) {
+        getCountryAndUpdate(docs[d]);
+      }
+    });
+  }
+  
   function getNewMedia(tagName) {
     var minTagId = "instagram_media_min_id_"+tagName;
 
@@ -16,7 +65,10 @@ module.exports = function (app) {
           if (pagination.min_tag_id) {
             app.extras.redisClient.set(minTagId, pagination.min_tag_id);
           }
-          app.extras.mongo.media.insert(data);
+          for (var m in data) {
+            getCountryAndInsert(data[m]);
+          }
+          //app.extras.mongo.media.insert(data);
           for (var i in data) {
             var tagList = [];
             for (var t in data[i].tags) {
@@ -61,7 +113,7 @@ module.exports = function (app) {
         console.log("inserted instagram API subscription call", docs);
         getNewMedia(req.params.tagname);
       }
-    })
+    });
     res.send(req.query["hub.challenge"]);
   });
   
@@ -69,6 +121,11 @@ module.exports = function (app) {
     getNewMedia(req.params.tagname, req.params.min_tag);
     res.send("OK");
   });
+  
+  app.get("/instagram/getCountries", function (req, res) {
+    updateMediaTableWithCountries();
+    res.send("OK");
+  })
   
 
 }

@@ -18,7 +18,8 @@
     "passport.socketio":"1.0.1",
     "connect-ensure-login":"*",
     "connect-redis": "*",
-    "redis": "*"
+    "redis": "*",
+    "geocoder": "*"
   },
   "keywords": [
     "instagram",
