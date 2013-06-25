@@ -843,17 +843,28 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
 
     return function VideoListCtrl($location, $scope) {
 
+      $scope.modal = {};
+      $scope.modal.isOpen = false;
+
+      $scope.tpls = {};
+      $scope.tpls.modal = 'template/modal.html';
+      $scope.tpls.rate = "template/rate.html";
+
       $scope.bestOfList = [mock[0],mock[1],mock[2], mock[3]];
       $scope.featuredList = [mock[4],mock[5]];
       $scope.latestList = [mock[6],mock[7]];
-      $scope.modal = {};
-      $scope.modal.isOpen = false;
-      $scope.video = {};
 
       $scope.imgClick = function (item){
         $scope.modal.isOpen = true
-        $scope.video.src = item.videos.standard_resolution.url;
         $scope.modal.videoSrc = item.videos.standard_resolution.url;
+
+        $("#video").bind("ended", function() {
+          console.log('video ended');
+        });
+
+        $('.modal').bind('click',function(){
+          console.log('click');
+        })
       }
 
       $scope.closeModal = function (){
