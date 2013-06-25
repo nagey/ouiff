@@ -848,18 +848,16 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       $scope.latestList = [mock[6],mock[7]];
       $scope.modal = {};
       $scope.modal.isOpen = false;
-      $scope.modal.video = '';
+      $scope.video = {};
 
       $scope.imgClick = function (item){
         $scope.modal.isOpen = true
+        $scope.video.src = item.videos.standard_resolution.url;
+        $scope.modal.videoSrc = item.videos.standard_resolution.url;
+      }
 
-        /*var myVideo = document.getElementsByTagName('video');
-        myVideo.src = item.videos.standard_resolution.url;
-        myVideo.load();*/
-        var source = document.getElementsByTagName('source');
-        console.log(source)
-        source[0].setAttribute('src', item.videos.standard_resolution.url);
-        source[0].parentNode.load();
+      $scope.closeModal = function (){
+        $scope.modal.isOpen = false;
       }
 
     };

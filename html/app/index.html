@@ -96,10 +96,10 @@
                     </div>
                 </div>
             </div>
-            <div id="modal-window" modal="modal.isOpen" close="modal.close()" >
+            <div id="modal-window" modal="modal.isOpen" close="closeModal()" >
                 <div class="modal-body">
                     <video width="auto" height="auto" controls >
-                        <source src='' />
+                        <source ng-src="{{modal.videoSrc}}" />
                     </video>
                     Test 123
                 </div>
