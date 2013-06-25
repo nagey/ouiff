@@ -5,8 +5,9 @@ define([
     'angular',
     'angular-modal',
   	'Controllers/VideoListCtrl',
+    'Services/Media',
     "ng-resource"
-  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl) {
+  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, Media) {
     'use strict';
 
     var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -15,17 +16,7 @@ define([
 
     app.controller("VideoListCtrl", ["$location", "$scope", "media", VideoListCtrl]);
     
-    app.service("media", ["$resource", function ($resource) {
-      var User = $resource('http://15sfest.com/media/:id', {id:'@id'});
-      console.log("media service");
-      
-      this.index = function () {
-        var user = User.query(function() {
-          console.log(user);
-        });
-      }
-      this.index();
-    }]);
+    app.service("media", ["$resource", Media]);
     
     
     $(document).ready(function () {
