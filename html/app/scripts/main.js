@@ -4,7 +4,8 @@ require.config({
         angular: '../bower_components/angular/angular',
         "ng-resource": '../bower_components/angular-resource/angular-resource.min',
         'angular-ui': '../bower_components/angular-ui/build/angular-ui',
-        'modal': '../bower_components/sass-bootstrap/js/bootstrap-modal',
+        'angular-modal': '../bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.4.0',
+        /*'modal': '../bower_components/sass-bootstrap/js/bootstrap-modal',*/
         bootstrap: 'vendor/bootstrap'
     },
     shim: {
@@ -13,11 +14,14 @@ require.config({
             exports: 'jquery'
         },
         "angular-ui" : {
-            deps: ["jquery", "jquery-ui", "angular"]
+            deps: ["jquery", "angular"]
         },
         "ng-resource" : {
             deps: ["angular"]
         },
+        "angular-modal" : {
+            deps: ["angular-ui"]
+        }
     }
 });
 

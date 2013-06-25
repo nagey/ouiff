@@ -1,5 +1,5 @@
 /*global define */
-define(['angular', 'jquery', 'modal'], function (angular, $) {
+define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_modal) {
     'use strict';
     var mock = [
       {
@@ -847,20 +847,17 @@ define(['angular', 'jquery', 'modal'], function (angular, $) {
       $scope.featuredList = [mock[4],mock[5]];
       $scope.latestList = [mock[6],mock[7]];
       $scope.modal = {};
-      $scope.modal.video = '';
-
-      $('#modal-window').modal({show: false});
+      $scope.modal.isOpen = false;
+      $scope.video = {};
 
       $scope.imgClick = function (item){
-        //$scope.model.isOpen = true
+        $scope.modal.isOpen = true
+        $scope.video.src = item.videos.standard_resolution.url;
+        $scope.modal.videoSrc = item.videos.standard_resolution.url;
+      }
 
-        //src.src =item.videos.standard_resolution.url;
-        //var video = document.getElementsByTagName('video'),
-        var source = document.getElementsByTagName('source');
-        source[0].setAttribute('src', item.videos.standard_resolution.url);
-        source[0].parentNode.load();
-
-        $('#modal-window').modal('show')
+      $scope.closeModal = function (){
+        $scope.modal.isOpen = false;
       }
 
     };
