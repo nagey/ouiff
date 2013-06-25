@@ -4,7 +4,7 @@ define([
 	'bootstrap', 
     'angular',
     'angular-modal',
-  	'VideoListCtrl',
+  	'Controllers/VideoListCtrl',
     "ng-resource"
   ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl) {
     'use strict';
