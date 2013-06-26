@@ -10,6 +10,6 @@ define(['angular'], function (angular ) {
           console.log(user);
         });
       }
-      this.index();
+      //this.index();
     }
 });
