@@ -53,6 +53,16 @@ module.exports = function (app) {
     fetchAndSendTopMedia(queryDoc, res);
   });
 
+  app.get("/media/user/:queryUser", function (req, res) {
+    var queryUser = req.params.queryUser + '';
+    var userType = "user.";
+    userType += (Number(queryUser) === parseInt(queryUser)) ? "id" : "username";
+    var queryDoc = {};
+    queryDoc[userType] = req.params.queryUser;
+    
+    fetchAndSendMedia(queryDoc, res);
+  });
+
   app.get("/media/:medium", function(req, res){
     app.extras.mongo.media.find({id: req.params.medium}, function (err,docs) {
       if (err) {
