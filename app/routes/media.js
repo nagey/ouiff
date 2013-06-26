@@ -3,7 +3,7 @@ module.exports = function (app) {
   
   var media = {};
   
-  var resultDocument = { id: 1 }
+  var resultDocument = { };
   
   function fetchAndSendMedia(query, res) {
     app.extras.mongo.media.find(query, resultDocument, function (err,docs) {
