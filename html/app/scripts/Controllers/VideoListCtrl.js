@@ -841,7 +841,10 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       }
     ];
 
-    return function VideoListCtrl($location, $scope) {
+    return function VideoListCtrl($location, $scope, media) {
+
+      media.index();
+      media.index();
 
       $scope.bestOfList = [mock[0],mock[1],mock[2], mock[3]];
       $scope.featuredList = [mock[4],mock[5]];
