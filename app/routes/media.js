@@ -6,7 +6,7 @@ module.exports = function (app) {
   var resultDocument = { };
   
   function fetchAndSendMedia(query, res) {
-    app.extras.mongo.media.find(query, resultDocument).sort({"created_time": 1}).limit(10, function (err,docs) {
+    app.extras.mongo.media.find(query, resultDocument).sort({"created_time": -1}).limit(10, function (err,docs) {
       if (err) res.status(500).send("Error: "+ err);
       else res.send(docs);
     });
