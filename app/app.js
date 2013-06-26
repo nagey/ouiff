@@ -6,8 +6,6 @@ var express = require('express')
   , https = require('https')
   , http = require('http')
   , path = require('path')
-  , socket = require('socket.io')
-  , passportSocketIo = require("passport.socketio")
   , ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn
   , mongojs = require('mongojs')
   , Resource = require('express-resource')
@@ -24,9 +22,20 @@ app.config.sessionSecret = 'sumoftwosquares';
 app.extras = {};
 app.extras.cookieParser = express.cookieParser(app.config.sessionSecret);
 app.extras.Instagram = require("instagram-node-lib");
+app.extras.passport = require('passport');
 
-app.extras.Instagram.set('client_id', '6527838fef5e4f0790a2aa7c9ddbc158');
-app.extras.Instagram.set('client_secret', '80d7a8a4247e498ab6df545f9c5806d2');
+
+app.extras.twitter = {};
+app.extras.twitter.consumerKey = 'D8JARxxwjzdE2P65kws46A';
+app.extras.twitter.consumerSecret = '8XpcCNjE76iMNxnvNDiyeBiTaVexOFdtX8XtvRPU';
+
+app.extras.facebook = {};
+app.extras.facebook.appId = "191931704300142";
+app.extras.facebook.appSecret = "ae09cb72ff51543cee03ad32ffcb5f9c"
+
+app.extras.instagram = {};
+app.extras.instagram.clientId = '6527838fef5e4f0790a2aa7c9ddbc158';
+app.extras.instagram.clientSecret = '80d7a8a4247e498ab6df545f9c5806d2';
 
 
 app.extras.redisClient = redis.createClient();
@@ -114,6 +123,7 @@ fs.readdirSync(__dirname+'/routes/').forEach(function(file){
   }
 });
 
+/*
 var resources = {};
 fs.readdirSync(__dirname+'/resources/').forEach(function(file){
   var resource_fname = __dirname + '/resources/' + file;
@@ -123,6 +133,7 @@ fs.readdirSync(__dirname+'/resources/').forEach(function(file){
     //resources[resource_name] = require(resource_fname)(app);
   }
 });
+*/
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
