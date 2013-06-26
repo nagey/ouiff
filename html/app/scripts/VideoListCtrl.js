@@ -841,10 +841,9 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       }
     ];
 
-    return function VideoListCtrl($location, $scope, media) {
+    console.log('hello');
 
-      media.index();
-      media.index();
+    return function VideoListCtrl($location, $scope) {
 
       $scope.modal = {};
       $scope.modal.isOpen = false;
@@ -856,22 +855,19 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       $scope.bestOfList = [mock[0],mock[1],mock[2], mock[3]];
       $scope.featuredList = [mock[4],mock[5]];
       $scope.latestList = [mock[6],mock[7]];
+      console.log(jQuery)
 
       $scope.imgClick = function (item){
         $scope.modal.isOpen = true
         $scope.modal.videoSrc = item.videos.standard_resolution.url;
-
+        console.log('hello')
         $("#video").bind("ended", function() {
           console.log('video ended');
         });
-
-        $('.modal').bind('click',function(){
-          console.log('click');
-        })
       }
 
       $scope.closeModal = function (){
-        $scope.modal.isOpen = false;
+        //$scope.modal.isOpen = false;
       }
 
     };

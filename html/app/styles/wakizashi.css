@@ -195,7 +195,8 @@ h2 {
 
 
 
-
+.modal{width:auto;}
+.modal-body{max-height:inherit;}
 
 
 

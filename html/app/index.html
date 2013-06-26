@@ -96,16 +96,10 @@
                     </div>
                 </div>
             </div>
-            <div id="modal-window" modal="modal.isOpen" close="closeModal()" >
-                <div class="modal-body">
-                    <video width="auto" height="auto" controls >
-                        <source ng-src="{{modal.videoSrc}}" />
-                    </video>
-                    Test 123
-                </div>
+            <div    class="modal-container"
+                    ng-include src="'templates/modal.html'">
             </div>
         </div>
-
 
         <div id="participate" class="green">
         
