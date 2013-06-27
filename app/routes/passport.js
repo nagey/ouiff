@@ -8,45 +8,92 @@ module.exports = function (app) {
   
   var ObjectId = require("mongojs").ObjectId;
   
-  
-  var fetchOrCreateUser = function (profile, done) {
-    var selectorString = "socialProfiles." + profile.provider + ".id";
-    var queryObject = {};
-    queryObject[selectorString] = profile.id;
-    app.extras.mongo.users.find(queryObject, function (err, docs) {
+  var createOrUpdateUser = function (req, profile, done) {
+    if (!req.user) {
+      var userObject = {};
+      userObject.socialProfiles = {};
+    }
+    else {
+      userObject = req.user;
+    }
+    userObject.socialProfiles[profile.provider] = profile;
+    switch (profile.provider) {
+      case 'instagram':
+        userObject.instagramConnected = true;
+        if (!userObject.username) userObject.username = profile._json.data.username;
+        if (!userObject.displayName) userObject.displayName = profile._json.data.name;
+        if (!userObject.profilePicture) userObject.profilePicture = profile._json.data.profile_picture;
+        if (!userObject.website) userObject.website = profile._json.data.website;
+        if (!userObject.bio) userObject.bio = profile._json.data.bio;
+        break;
+      case 'facebook':
+        if (!userObject.username) userObject.username = profile._json.username;
+        if (!userObject.displayName) userObject.displayName = profile._json.name;
+        if (!userObject.gender) userObject.gender = profile._json.gender;
+        if (!userObject.email) userObject.email = profile._json.email;
+        if (!userObject.hometown) userObject.hometown = profile._json.hometown.name;
+        if (!userObject.location) userObject.location = profile._json.location.name;
+        break;
+      case 'twitter':
+        if (!userObject.username) userObject.username = profile._json.screen_name;
+        if (!userObject.displayName) userObject.displayName = profile._json.name;
+        if (!userObject.profilePicture) userObject.profilePicture = profile._json.profile_image_url;
+        if (!userObject.website) userObject.website = profile._json.url;
+        if (!userObject.bio) userObject.bio = profile._json.description;
+        if (!userObject.location) userObject.location = profile._json.location;
+        break;
+    }
+    
+    var mongoCallback = function (err, docs) {
       if (err) {
-        done(err,null);
-        return;
+        done(err, null);
       }
-      if (docs.length === 1) done(null, docs[0]);
-      else if (docs.length > 1) done("Contact Support", null);
       else {
-        var userObject = {};
-        userObject.socialProfiles = {};
-        userObject.socialProfiles[profile.provider] = profile;
-        if (profile.provider == "instagram") {
-          userObject.instagramConnected = true;
-        }
-        app.extras.mongo.users.insert(userObject, function (err, docs) {
-          if (err) {
-            done(err, null);
-          }
-          else {
-            done(null, docs[0]);
-          }
-        });
+        if (typeof docs == "Array") done(null, docs[0]);
+        else done(null, userObject);
       }
-    });
+    }
+    
+    if (req.user) {
+      app.extras.mongo.users.update({_id: req.user._id}, userObject, mongoCallback);
+    }
+    else {
+      app.extras.mongo.users.insert(userObject, mongoCallback);
+    }
+    
+  }
+  
+  var fetchOrCreateUser = function (req, profile, done) {
+    if (req.user) {
+      createOrUpdateUser(req, profile, done);
+    }
+    else {
+      var selectorString = "socialProfiles." + profile.provider + ".id";
+      var queryObject = {};
+      queryObject[selectorString] = profile.id;
+      app.extras.mongo.users.find(queryObject, function (err, docs) {
+        if (err) {
+          done(err,null);
+          return;
+        }
+        if (docs.length === 1) done(null, docs[0]);
+        else if (docs.length > 1) done("Contact Support", null);
+        else {
+          createOrUpdateUser(req, profile, done);
+        }
+      });
+    }
   } 
   
   // Setup Instagram
   app.extras.passport.use(new InstagramStrategy({
       clientID: app.extras.instagram.clientId,
       clientSecret: app.extras.instagram.clientSecret,
-      callbackURL: app.config.appProtocol+"://"+app.config.appDomain+"/auth/instagram/callback"
+      callbackURL: app.config.appProtocol+"://"+app.config.appDomain+"/auth/instagram/callback",
+      passReqToCallback: true
     },
-    function (accessToken, refeshToken, profile, done) {
-      fetchOrCreateUser(profile, done);
+    function (req, accessToken, refeshToken, profile, done) {
+      fetchOrCreateUser(req, profile, done);
     }
   ));
   
@@ -55,19 +102,11 @@ module.exports = function (app) {
   app.extras.passport.use(new FacebookStrategy({
       clientID:     app.extras.facebook.appId,
       clientSecret: app.extras.facebook.appSecret,
-      callbackURL:  app.config.appProtocol+"://"+app.config.appDomain+"/auth/facebook/callback"
+      callbackURL:  app.config.appProtocol+"://"+app.config.appDomain+"/auth/facebook/callback",
+      passReqToCallback: true
     },
-    function(accessToken, refreshToken, profile, done) {
-      var userRecord = {
-        facebook: profile,
-        email: profile.emails[0].value,
-        displayName: profile.displayName
-      };
-      userRecord.facebook.accessToken = accessToken;
-      userRecord.facebook.refreshToken = refreshToken;
-      User.findOrCreate(userRecord, function (user) {
-        done(null, user);
-      });
+    function (req, accessToken, refreshToken, profile, done) {
+      fetchOrCreateUser(req, profile, done);
     }
   ));
   
@@ -76,18 +115,11 @@ module.exports = function (app) {
   app.extras.passport.use(new TwitterStrategy({
       consumerKey: app.extras.twitter.consumerKey,
       consumerSecret: app.extras.twitter.consumerSecret,
-      callbackURL: app.config.appProtocol+"://"+app.config.appDomain+"/auth/twitter/callback"
+      callbackURL: app.config.appProtocol+"://"+app.config.appDomain+"/auth/twitter/callback",
+      passReqToCallback: true
     },
-    function(token, tokenSecret, profile, done) {
-      var userRecord = {
-        twitter: profile,
-        displayName: profile.displayName
-      }
-      userRecord.twitter.token = token;
-      userRecord.twitter.tokenSecret = tokenSecret;
-      User.findOrCreate(userRecord, function (user) {
-        done(null, user);
-      });
+    function (req, token, tokenSecret, profile, done) {
+      fetchOrCreateUser(req, profile, done);
     }
   ));
   
@@ -138,6 +170,8 @@ module.exports = function (app) {
   });
   
   app.get("/auth/success", function (req, res) {
+    var sanitizedUser = req.user;
+    delete sanitizedUser.socialProfiles;
     res.send(req.user);
   });
   
