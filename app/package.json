@@ -1,6 +1,7 @@
 {
   "name": "ouiff-server",
-  "description": "The Offical (un-official) Instagram Film Festival.",
+  "description": "Server for the 15sfest, The Offical (un-official) Instagram Film Festival.",
+  "readme": "Server for the 15sfest, The Offical (un-official) Instagram Film Festival.",
   "version": "0.0.1",
   "author": "Stefan Nagey (stefan@nagey.com)",
   "contributors": [],
@@ -21,7 +22,8 @@
     "connect-ensure-login":"*",
     "connect-redis": "*",
     "redis": "*",
-    "geocoder": "*"
+    "geocoder": "*",
+    "stathat": "*"
   },
   "keywords": [
     "instagram",

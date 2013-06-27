@@ -7,7 +7,10 @@ module.exports = function (app) {
   
   function fetchAndSendMedia(query, res) {
     app.extras.mongo.media.find(query, resultDocument).sort({"created_time": -1}).limit(10, function (err,docs) {
-      if (err) res.status(500).send("Error: "+ err);
+      if (err) {
+        res.status(500).send("Error: "+ err);
+        app.extras.stathat.track("database error", 1);
+      }
       else res.send(docs);
     });
   }
@@ -25,21 +28,27 @@ module.exports = function (app) {
     ];
     console.log(aggregationOptions);
     app.extras.mongo.ratings.aggregate(aggregationOptions, function (err, docs) {
-      if (err) res.status(500).send("Error: "+err);
+      if (err) {
+        app.extras.stathat.track("database error", 1);
+        res.status(500).send("Error: "+err);
+      }
       else res.send(docs);
     });
   }
   
   app.get("/media", function(req, res){
+    app.extras.stathat.track("media - fetch all", 1);
     fetchAndSendMedia({},res);
     
   });
 
   app.get("/media/top", function (req,res) {
+    app.extras.stathat.track("media - fetch top", 1);
     fetchAndSendTopMedia({}, res);
   });
   
   app.get("/media/tag/:tag", function (req, res) {
+    app.extras.stathat.track("media - fetch "+req.params.tag, 1);
     var queryDoc = {
       tags: req.params.tag
     };
@@ -54,6 +63,7 @@ module.exports = function (app) {
   });
 
   app.get("/media/user/:queryUser", function (req, res) {
+    app.extras.stathat.track("media - fetch for user "+req.params.queryUser, 1);
     var queryUser = req.params.queryUser + '';
     var userType = "user.";
     userType += (Number(queryUser) === parseInt(queryUser)) ? "id" : "username";
@@ -64,9 +74,11 @@ module.exports = function (app) {
   });
 
   app.get("/media/:medium", function(req, res){
+    app.extras.stathat.track("media - fetch media "+req.params.medium, 1);
     app.extras.mongo.media.find({id: req.params.medium}, function (err,docs) {
       if (err) {
         res.status(500).send("Error: ", err, docs);
+        app.extras.stathat.track("database error", 1);
       }
       else if (docs.length === 1) {
         res.send(docs[0]);
