@@ -185,7 +185,8 @@ module.exports = function (app) {
   app.get("/auth/success", function (req, res) {
     var sanitizedUser = req.user;
     delete sanitizedUser.socialProfiles;
-    res.send(req.user);
+    res.render("auth-success", { user: sanitizedUser });
+    //res.send(req.user);
   });
   
 };
