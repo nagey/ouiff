@@ -10,10 +10,6 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       $scope.modal = {};
       $scope.modal.isOpen = false;
 
-      $scope.tpls = {};
-      $scope.tpls.modal = 'template/modal.html';
-      $scope.tpls.rate = "template/rate.html";
-
       media.bestOf(function (result) {
         $scope.bestOfList = result;
       },4);

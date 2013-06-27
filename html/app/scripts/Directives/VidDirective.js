@@ -8,27 +8,40 @@ define(['angular'], function (angular ) {
       scope: { source: "@" },
       controller: function($scope, $element) {
         $scope.tpl={};
+        $scope.displays={};
         $scope.tpl.rank = 'templates/rate.html';
         $scope.tpl.share = 'templates/share.html';
+        $scope.tpl.auth = 'templates/auth.html';
 
-        $scope.showVideo = true;
-        $scope.showRank = false;
-        $scope.showShare = false;
+        $scope.displays.showVideo = true;
+        $scope.displays.showRank = false;
+        $scope.displays.showShare = false;
+        $scope.displays.showAuth = false;
+
+      $scope.$on('auth_request', function(event, mass) {
+        console.log('success')
+        for (var i in $scope.displays){
+          $scope.displays[i] = false
+        }
+
+        $scope.displays.showAuth = true;
+      });
       },
       link: function($scope, $element, attrs){
         $($element).children('video').bind('ended',function(e){
-          $scope.showVideo = false;
-          $scope.showRank = true;
+          $scope.displays.showVideo = false;
+          $scope.displays.showRank = true;
           $scope.$apply()
         })
       },
       template:
-        '<div class="video-container">' +
-          '<video ng-show="showVideo" id="video" width="auto" height="auto" controls>'+
-            '<source id="source" ng-src="{{source}}" />'+
-          '</video>'+
-          '<div ng-show="showRank" ng-include="tpl.rank"></div>'+
-          '<div ng-show="showShare" ng-include="tpl.share"></div>'+
+        '<div id="modal-content" >' +
+            '<video ng-show="displays.showVideo" id="video" width="auto" height="auto" controls>'+
+              '<source id="source" ng-src="{{source}}" />'+
+            '</video>'+
+            '<div ng-show="displays.showRank" ng-include="tpl.rank"></div>'+
+            '<div ng-show="displays.showShare" ng-include="tpl.share"></div>'+
+            '<div ng-show="displays.showAuth" ng-include="tpl.auth"></div>'+
         '</div>',
       replace: true
     };
