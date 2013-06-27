@@ -4,11 +4,12 @@ define([
 	'bootstrap', 
     'angular',
     'angular-modal',
-  	'Controllers/VideoListCtrl',
+    'Controllers/VideoListCtrl',
+  	'Controllers/RateCtrl',
     'Services/Media',
     'Directives/VidDirective',
     "ng-resource"
-  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, Media, VidDirective) {
+  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, Media, VidDirective) {
     'use strict';
 
     var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -16,6 +17,7 @@ define([
     }]);
 
     app.controller("VideoListCtrl", ["$location", "$scope", "media", VideoListCtrl]);
+    app.controller("RateCtrl", ["$location", "$scope", "media", RateCtrl]);
     app.directive('vid', VidDirective);
     
     app.service("media", ["$resource", Media]);

@@ -11,26 +11,24 @@ define(['angular'], function (angular ) {
         $scope.tpl.rank = 'templates/rate.html';
         $scope.tpl.share = 'templates/share.html';
 
-        $scope.tpl.active = $scope.tpl.rank;
-
-        $($element).children('video').bind('ended',function(e){
-      
-          $scope.tpl.active = $scope.tpl.share;
-          console.log($scope.tpl.active);
-        });
+        $scope.showVideo = true;
+        $scope.showRank = false;
+        $scope.showShare = false;
       },
-      link: function($scope, element, attrs){
-        /*$(element).children('video').bind('ended',function(e){
-          console.log('its over');
-          $scope.tpl.active = $scope.tpl.share;
-        })*/
+      link: function($scope, $element, attrs){
+        $($element).children('video').bind('ended',function(e){
+          $scope.showVideo = false;
+          $scope.showRank = true;
+          $scope.$apply()
+        })
       },
       template:
         '<div class="video-container">' +
-          '<video id="video" width="auto" height="auto" controls>'+
+          '<video ng-show="showVideo" id="video" width="auto" height="auto" controls>'+
             '<source id="source" ng-src="{{source}}" />'+
           '</video>'+
-        '<div ng-include="tpl.active"></div>'+
+          '<div ng-show="showRank" ng-include="tpl.rank"></div>'+
+          '<div ng-show="showShare" ng-include="tpl.share"></div>'+
         '</div>',
       replace: true
     };
