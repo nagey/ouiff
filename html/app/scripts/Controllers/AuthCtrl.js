@@ -6,13 +6,31 @@ define(['angular', 'jquery'], function (angular, $) {
       console.log('authCtrl');
 
       $scope.services = [
-      	{name: "Instagram", url: "/auth/instagram"},
-      	{name: "Facebook", url: "/auth/facebook"},
-      	{name: "Twitter", url: "/auth/twitter"}
+      	{name: "Instagram", url: "/auth/instagram", w: 500, h:200},
+      	{name: "Facebook", url: "/auth/facebook", w: 500, h:200},
+      	{name: "Twitter", url: "/auth/twitter", w: 500, h:200}
       ];
 
       $scope.login = function(service){
-      	window.open(service.url, '_blank');
-      }
+        var w = service.w;
+        var h = service.h;
+        var title = service.name+" Login";
+        var left = (screen.width/2)-(w/2);
+        var top = (screen.height/2)-(h/2);
+        return window.open(service.url, 
+          title, 
+          'toolbar=no,'+
+          ' location=no,'+
+          ' directories=no,'+
+          ' status=no,'+
+          ' menubar=no,'+
+          ' scrollbars=no,'+
+          ' resizable=no,'+
+          ' copyhistory=no,'+
+          ' width='+w+
+          ', height='+h+
+          ', top='+top+
+          ', left='+left);      
+        }
     };
 });
