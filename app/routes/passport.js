@@ -63,8 +63,8 @@ module.exports = function (app) {
     
     if (req.user) {
       if ((!req.user.socialProfiles[profile.provider]) || ((req.user.socialProfiles[profile.provider]) && (req.user.socialProfiles[profile.provider]._raw !== userObject.socialProfiles[profile.provider]._raw))) {
-        console.log("req.user: ",JSON.stringify(req.user));
-        console.log("userObject: ", JSON.stringify(userObject));
+        //console.log("req.user: ",JSON.stringify(req.user));
+        //console.log("userObject: ", JSON.stringify(userObject));
         if (!req.user.socialProfiles[profile.provider]) {
           app.extras.stathat.track("user - "+ profile.provider+" - connection to existing user", 1);
         }
