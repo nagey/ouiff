@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+  <title>#15sfest - Authorization Successful</title>
+</head>
+<body>
+  Authorization Successful
+  <script type="text/javascript">
+    userObject = <%- JSON.stringify(user) %>;
+    if (window.opener) {
+      window.opener.sendUser(userObject);
+      console.log("sent to opener");
+      window.close();
+    }
+  </script>
+</body>
+</html>

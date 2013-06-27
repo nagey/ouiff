@@ -19,22 +19,37 @@ module.exports = function (app) {
             var tt = result[r].address_components[c].types[t];
             if ( (tt === "country") || (tt == "political") ) {
               locationObject.country = result[r].address_components[c].short_name.toLowerCase();
+              app.extras.stathat.track("geocode - found country",1);
             }
           }
         }
       }
     }
+    if (!locationObject.country) app.extras.stathat.track("geocode - could not find country",1);
     return locationObject;
   }
   
   function getCountryAndInsert(media) {
-    geocoder.reverseGeocode(media.location.latitude, media.location.longitude, function (err, result) {
-      var locationObject = processGeocodeResult(result);
-      if (locationObject.country) { 
-        media.location.country = locationObject.country;
-      }
-      app.extras.mongo.media.insert(media);
-    });
+    if ((media.location) && ((media.location.latitude) && (media.location.longitude))) {
+      geocoder.reverseGeocode(media.location.latitude, media.location.longitude, function (err, result) {
+        var locationObject = processGeocodeResult(result);
+        if (locationObject.country) { 
+          media.location.country = locationObject.country;
+        }
+        app.extras.mongo.media.insert(media, function (err, docs) {
+          if (err) app.extras.stathat.track("database error", 1);
+          if (docs) app.extras.stathat.track("instagram - new media", docs.length);
+        });
+      });
+    }
+    else {
+      if (!media.location) media.location = {};
+      if (!media.location.country) media.location.country = '';
+      app.extras.mongo.media.insert(media, function (err, docs) {
+        if (err) app.extras.stathat.track("database error", 1);
+        if (docs) app.extras.stathat.track("instagram - new media", docs.length);
+      });
+    }
   }
   
   function getCountryAndUpdate(document) {
@@ -58,16 +73,20 @@ module.exports = function (app) {
   function getNewMedia(tagName) {
     var minTagId = "instagram_media_min_id_"+tagName;
 
-    console.log("getting media for ",tagName);
+    app.extras.stathat.track("instagram - fetching media", 1);
 
     app.extras.redisClient.get(minTagId, function (err, my_min_id) {
-      if (err) { console.log("error on redis retrieval", err) }
+      if (err) { 
+        console.log("error on redis retrieval", err) 
+        app.extras.stathat.track("redis error",1);
+      }
       app.extras.Instagram.tags.recent({ name: tagName,
         min_id: my_min_id,
         complete: function (data, pagination) {
           if (pagination.min_tag_id) {
             app.extras.redisClient.set(minTagId, pagination.min_tag_id);
           }
+          app.extras.stathat.track("instagram - media from API", data.length);
           for (var m in data) {
             getCountryAndInsert(data[m]);
           }
@@ -77,7 +96,10 @@ module.exports = function (app) {
             for (var t in data[i].tags) {
               tagList.push({tag:data[i].tags[t]});
             }
-            app.extras.mongo.tags.insert(tagList);
+            app.extras.mongo.tags.insert(tagList, function (err, docs) {
+              if (err) app.extras.stathat.track("database error", 1);
+              if (docs) app.extras.stathat.track("new tags", docs.length);
+            });
           }
           if (data.length) {
             getNewMedia(tagName);
@@ -97,23 +119,21 @@ module.exports = function (app) {
   subscribeToTag("15sfest");
 
   app.get('/instagram/subscription/:tagname/callback', function (req,res) {
-    console.log("Query", req.query);
-    console.log("Parameters", req.params);
     res.send(req.query["hub.challenge"]);
+    app.extras.stathat.track("instagram - new subscription",1);
   });
   
   app.post('/instagram/subscription/:tagname/callback', function (req,res) {
-    console.log("Query", req.query);
-    console.log("Parameters", req.params);
-    console.log("Body", req.body);
     for (var item in req.body) {
       req.body[item].created_at = new Date();
       req.body[item].tag = req.params.tagname;
     }
     app.extras.mongo.instagramSubscriptionUpdates.insert(req.body, function (err, docs) {
-      if (err) console.log("error on mongo insert", err);
+      if (err) {
+        app.extras.stathat.track("database error",1);
+      }
       if (docs){
-        console.log("inserted instagram API subscription call", docs);
+        app.extras.stathat.track("instagram - subscription update",1);
         getNewMedia(req.params.tagname);
       }
     });

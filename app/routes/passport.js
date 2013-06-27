@@ -12,11 +12,16 @@ module.exports = function (app) {
     if (!req.user) {
       var userObject = {};
       userObject.socialProfiles = {};
+      userObject.profileList = [];
     }
     else {
-      userObject = req.user;
+      userObject = JSON.parse(JSON.stringify(req.user));
+      userObject._id = ObjectId(userObject._id);
+      if (!userObject.profileList) userObject.profileList = [];
     }
     userObject.socialProfiles[profile.provider] = profile;
+    if (userObject.profileList.indexOf(profile.provider) === -1) userObject.profileList.push(profile.provider);
+    console.log(userObject.profileList.indexOf(profile.provider), profile.provider);
     switch (profile.provider) {
       case 'instagram':
         userObject.instagramConnected = true;
@@ -47,6 +52,8 @@ module.exports = function (app) {
     var mongoCallback = function (err, docs) {
       if (err) {
         done(err, null);
+        app.extras.stathat.track("database error", 1);
+        app.extras.stathat.track("user - "+ profile.provider+" - database error", 1);
       }
       else {
         if (typeof docs == "Array") done(null, docs[0]);
@@ -55,10 +62,25 @@ module.exports = function (app) {
     }
     
     if (req.user) {
-      app.extras.mongo.users.update({_id: req.user._id}, userObject, mongoCallback);
+      if ((!req.user.socialProfiles[profile.provider]) || ((req.user.socialProfiles[profile.provider]) && (req.user.socialProfiles[profile.provider]._raw !== userObject.socialProfiles[profile.provider]._raw))) {
+        //console.log("req.user: ",JSON.stringify(req.user));
+        //console.log("userObject: ", JSON.stringify(userObject));
+        if (!req.user.socialProfiles[profile.provider]) {
+          app.extras.stathat.track("user - "+ profile.provider+" - connection to existing user", 1);
+        }
+        else {
+          app.extras.stathat.track("user - "+ profile.provider+" - profile update", 1);
+        }
+        app.extras.mongo.users.update({_id: req.user._id}, userObject, mongoCallback);
+      }
+      else {
+        console.log("User Object unchanged");
+        done(null, userObject);
+      }
     }
     else {
-      app.extras.mongo.users.insert(userObject, mongoCallback);
+        app.extras.stathat.track("user - "+ profile.provider+" - new user registration", 1);
+        app.extras.mongo.users.insert(userObject, mongoCallback);
     }
     
   }
@@ -73,11 +95,20 @@ module.exports = function (app) {
       queryObject[selectorString] = profile.id;
       app.extras.mongo.users.find(queryObject, function (err, docs) {
         if (err) {
+          app.extras.stathat.track("user - "+ profile.provider+" - database error on find", 1);
+          app.extras.stathat.track("database error", 1);
           done(err,null);
           return;
         }
-        if (docs.length === 1) done(null, docs[0]);
-        else if (docs.length > 1) done("Contact Support", null);
+        if (docs.length === 1) {
+          app.extras.stathat.track("user - "+ profile.provider+" - successful login", 1);
+          done(null, docs[0]);
+        }
+        else if (docs.length > 1) {
+          app.extras.stathat.track("user - "+ profile.provider+" - multiple users found", 1);
+          app.extras.stathat.track("database error", 1);
+          done("Contact Support", null);
+        }
         else {
           createOrUpdateUser(req, profile, done);
         }
@@ -123,6 +154,13 @@ module.exports = function (app) {
     }
   ));
   
+  var trackLogin = function (service, status) {
+    return function (req, res, next) {
+      app.extras.stathat.track("login - "+ service+" - "+status, 1);  
+      next();
+    }
+  };
+  
   
   // User to Session & Back
   app.extras.passport.serializeUser(function(user, done) {
@@ -137,8 +175,8 @@ module.exports = function (app) {
   });
   
   //Authentication Routes
-  app.get('/auth/facebook', app.extras.passport.authenticate('facebook', {scope: ['email']}));
-  app.get('/auth/facebook/callback', 
+  app.get('/auth/facebook', trackLogin("facebook", "start"), app.extras.passport.authenticate('facebook', {scope: ['email']}));
+  app.get('/auth/facebook/callback', trackLogin("facebook", "complete"), 
     app.extras.passport.authenticate('facebook', 
       { 
         successReturnToOrRedirect: '/auth/success',
@@ -147,8 +185,8 @@ module.exports = function (app) {
     );
 
 
-  app.get('/auth/twitter', app.extras.passport.authenticate('twitter'));
-  app.get('/auth/twitter/callback', 
+  app.get('/auth/twitter', trackLogin("twitter", "start"), app.extras.passport.authenticate('twitter'));
+  app.get('/auth/twitter/callback', trackLogin("twitter", "complete"),
     app.extras.passport.authenticate('twitter', 
       { 
         successReturnToOrRedirect: '/auth/success',
@@ -156,8 +194,8 @@ module.exports = function (app) {
       })
   );
   
-  app.get('/auth/instagram', app.extras.passport.authenticate('instagram'));
-  app.get('/auth/instagram/callback', 
+  app.get('/auth/instagram', trackLogin("instagram", "start"), app.extras.passport.authenticate('instagram'));
+  app.get('/auth/instagram/callback', trackLogin("instagram", "complete"),
     app.extras.passport.authenticate('instagram', 
       { 
         successReturnToOrRedirect: '/auth/success',
@@ -166,13 +204,16 @@ module.exports = function (app) {
   );
   
   app.get("/auth/failed", function (req, res) {
+    app.extras.stathat.track("login - failure", 1);  
     res.status(401).send("Authentication Failed");
   });
   
   app.get("/auth/success", function (req, res) {
+    app.extras.stathat.track("login - success", 1);  
     var sanitizedUser = req.user;
     delete sanitizedUser.socialProfiles;
-    res.send(req.user);
+    res.render("auth-success", { user: sanitizedUser });
+    //res.send(req.user);
   });
   
 };

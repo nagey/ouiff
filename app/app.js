@@ -23,7 +23,11 @@ app.extras = {};
 app.extras.cookieParser = express.cookieParser(app.config.sessionSecret);
 app.extras.Instagram = require("instagram-node-lib");
 app.extras.passport = require('passport');
-
+app.extras.stathat = require("stathat");
+app.extras.stathat.track = function (counter, amount, cb) {
+  if (!cb) cb = function () {};
+  app.extras.stathat.trackEZCount("15sfest@nagey.com", counter, amount, cb);
+}
 
 app.extras.twitter = {};
 app.extras.twitter.consumerKey = 'D8JARxxwjzdE2P65kws46A';
