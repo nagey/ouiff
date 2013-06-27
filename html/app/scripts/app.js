@@ -11,18 +11,14 @@ define([
     'Services/User',
     'Directives/VidDirective',
     "ng-resource"
-<<<<<<< HEAD
-  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, AuthCtrl, Media, VidDirective) {
-=======
-  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, Media, User, VidDirective) {
->>>>>>> f81b4071a3dd8da320cbaea64c2d6b8d7d0beb39
+  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, AuthCtrl, Media, User, VidDirective) {
     'use strict';
 
     var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
       $locationProvider.html5Mode(true);
     }]);
 
-    app.controller("VideoListCtrl", ["$location", "$scope", "media", VideoListCtrl]);
+    app.controller("VideoListCtrl", ["$location", "$scope", "media", "user", VideoListCtrl]);
     app.controller("RateCtrl", ["$scope", '$rootScope', RateCtrl]);
     app.controller("AuthCtrl", ["$scope", AuthCtrl]);
     app.directive('vid', VidDirective);

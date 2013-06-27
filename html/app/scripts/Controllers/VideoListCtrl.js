@@ -2,7 +2,7 @@
 define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_modal) {
     'use strict';
 
-    return function VideoListCtrl($location, $scope, media) {
+    return function VideoListCtrl($location, $scope, media, user) {
 
       media.index();
       media.index();
