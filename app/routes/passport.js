@@ -12,11 +12,16 @@ module.exports = function (app) {
     if (!req.user) {
       var userObject = {};
       userObject.socialProfiles = {};
+      userObject.profileList = [];
     }
     else {
-      userObject = req.user;
+      userObject = JSON.parse(JSON.stringify(req.user));
+      userObject._id = ObjectId(userObject._id);
+      if (!userObject.profileList) userObject.profileList = [];
     }
     userObject.socialProfiles[profile.provider] = profile;
+    if (userObject.profileList.indexOf(profile.provider) === -1) userObject.profileList.push(profile.provider);
+    console.log(userObject.profileList.indexOf(profile.provider), profile.provider);
     switch (profile.provider) {
       case 'instagram':
         userObject.instagramConnected = true;
@@ -55,10 +60,18 @@ module.exports = function (app) {
     }
     
     if (req.user) {
-      app.extras.mongo.users.update({_id: req.user._id}, userObject, mongoCallback);
+      if ((!req.user.socialProfiles[profile.provider]) || ((req.user.socialProfiles[profile.provider]) && (req.user.socialProfiles[profile.provider]._raw !== userObject.socialProfiles[profile.provider]._raw))) {
+        console.log("req.user: ",JSON.stringify(req.user));
+        console.log("userObject: ", JSON.stringify(userObject));
+        app.extras.mongo.users.update({_id: req.user._id}, userObject, mongoCallback);
+      }
+      else {
+        console.log("User Object unchanged");
+        done(null, userObject);
+      }
     }
     else {
-      app.extras.mongo.users.insert(userObject, mongoCallback);
+        app.extras.mongo.users.insert(userObject, mongoCallback);
     }
     
   }
