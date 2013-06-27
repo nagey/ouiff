@@ -155,8 +155,8 @@ module.exports = function (app) {
   ));
   
   var trackLogin = function (service, status) {
-    app.extras.stathat.track("login - "+ service+" - "+status, 1);  
     return function (req, res, next) {
+      app.extras.stathat.track("login - "+ service+" - "+status, 1);  
       next();
     }
   };
