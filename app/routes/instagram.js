@@ -1,6 +1,10 @@
 module.exports = function (app) {
   "use strict";
   
+  app.extras.Instagram.set('client_id', app.extras.instagram.clientId);
+  app.extras.Instagram.set('client_secret', app.extras.instagram.clientSecret);
+  
+  
   var geocoder = require("geocoder");
   
   var ObjectId = require('mongojs').ObjectId;
