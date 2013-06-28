@@ -9,16 +9,14 @@ define(['angular', 'jquery'], function (angular, $) {
 
       $scope.$watch('rate', function(newValue, oldValue) {
         if(newValue != oldValue){
-          var status = user.status(function(i){
-            console.log('Callback',i);
+          user.status(function(status){
+            console.log('Callback',status);
+            if(status.loggedIn){
+              $rootScope.$broadcast('share_request'/*, [1,2,3]*/);
+            }else{
+              $rootScope.$broadcast('auth_request'/*, [1,2,3]*/);
+            }
           });
-
-          console.log('status!!',status);
-          if(status != undefined && status.loggedIn){
-            $rootScope.$broadcast('share_request'/*, [1,2,3]*/);
-          }else{
-            $rootScope.$broadcast('auth_request'/*, [1,2,3]*/);
-          }
         }
       });
     };
