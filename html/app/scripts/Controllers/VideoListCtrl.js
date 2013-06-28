@@ -23,14 +23,6 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       $scope.imgClick = function (item){
         $scope.modal.isOpen = true
         $scope.modal.videoSrc = item.videos.standard_resolution.url;
-
-        $("#video").bind("ended", function() {
-          console.log('video ended');
-        });
-
-        $('.modal').bind('click',function(){
-          console.log('click');
-        })
       }
 
       $scope.closeModal = function (){

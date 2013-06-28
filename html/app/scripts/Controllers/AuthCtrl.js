@@ -17,6 +17,9 @@ define(['angular', 'jquery'], function (angular, $) {
         var title = service.name+" Login";
         var left = (screen.width/2)-(w/2);
         var top = (screen.height/2)-(h/2);
+
+        console.log('connect to  service',service);
+        
         return window.open(service.url, 
           title, 
           'toolbar=no,'+
