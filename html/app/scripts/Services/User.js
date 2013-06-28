@@ -6,24 +6,19 @@ define(['angular'], function (angular ) {
       var hasStatus = false;
       var loggedIn = false;
       var userObj;
-      this.username = false;
-      this.profilePicture = false;
-      this.displayName = false;
 
       var loginUser = function (user) {
         if (user) {
+          hasStatus = true;
           console.log(user);
-          this.username = user.username;
-          this.profilePicture = user.profilePicture;
-          this.displayName = user.displayName;
+          loggedIn = true;
+          userObj = user;
           $rootScope.$broadcast("userLogin", user);
         }
       }
 
       $window.sendUser = function (user) {
         if (user.profileList) {
-          loggedIn = true;
-          userObj = user;
           loginUser(userObj);
         }
       }
@@ -48,7 +43,6 @@ define(['angular'], function (angular ) {
             success(function(data, status, headers, config) {
               console.log("return from auth status: ", data);
               if (data.status) {
-                hasStatus = true;
                 loginUser(data.user);
                 if (typeof cb == 'function') {
                   cb({"loggedIn": loggedIn, "profile": userObj});
