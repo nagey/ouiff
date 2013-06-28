@@ -24,7 +24,7 @@ define([
     app.directive('vid', VidDirective);
     
     app.service("media", ["$resource", Media]);
-    app.service("user", ["$resource", "$window", "$rootScope", User]);
+    app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);
     
 
     $(document).ready(function () {

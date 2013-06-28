@@ -6,9 +6,9 @@ define(['angular', 'jquery'], function (angular, $) {
       console.log('authCtrl');
 
       $scope.services = [
-      	{name: "Instagram", url: "/auth/instagram", w: 500, h:200},
+      	{name: "Instagram", url: "/auth/instagram", w: 575, h:400},
       	{name: "Facebook", url: "/auth/facebook", w: 500, h:200},
-      	{name: "Twitter", url: "/auth/twitter", w: 500, h:200}
+      	{name: "Twitter", url: "/auth/twitter", w: 575, h:400}
       ];
 
       $scope.login = function(service){

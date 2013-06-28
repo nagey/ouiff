@@ -42,9 +42,16 @@ module.exports = function (app) {
     
   });
 
+  app.get("/media/featured", function (req, res) {
+    app.extras.stathat.track("media - fetch featured", 1);
+    fetchAndSendMedia({featured: true}, res);
+  });
+
   app.get("/media/top", function (req,res) {
     app.extras.stathat.track("media - fetch top", 1);
-    fetchAndSendTopMedia({}, res);
+    // Leaving this sending all media until we get some things with ratings
+    //fetchAndSendTopMedia({}, res);
+    fetchAndSendMedia({}, res);
   });
   
   app.get("/media/tag/:tag", function (req, res) {

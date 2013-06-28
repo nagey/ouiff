@@ -216,4 +216,14 @@ module.exports = function (app) {
     //res.send(req.user);
   });
   
+  app.get("/auth/status", function (req, res) {
+    if (req.user) {
+      delete req.user.socialProfiles;
+      res.send({"status": true, "user": req.user});
+    }
+    else {
+      res.send({"status": false});
+    }
+  })
+  
 };
