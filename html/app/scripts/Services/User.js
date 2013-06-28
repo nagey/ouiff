@@ -12,6 +12,7 @@ define(['angular'], function (angular ) {
 
       var loginUser = function (user) {
         if (user) {
+          console.log(user);
           this.username = user.username;
           this.profilePicture = user.profilePicture;
           this.displayName = user.displayName;
