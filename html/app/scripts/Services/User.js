@@ -31,13 +31,13 @@ define(['angular'], function (angular ) {
             if (typeof cb == 'function') {
               cb({"loggedIn": loggedIn});
             }
-            return {"loggedIn": loggedIn};
+            else return {"loggedIn": loggedIn};
           }
           else {
             if (typeof cb == 'function') {
               cb({"loggedIn": loggedIn, "profile": userObj});
             }
-            return {"loggedIn": loggedIn, "profile": userObj};
+            else return {"loggedIn": loggedIn, "profile": userObj};
           }
         }
         else {
@@ -64,6 +64,8 @@ define(['angular'], function (angular ) {
       }
       
       
-      this.status();
+      this.status(function (user) {
+        console.log("User Status", user);
+      });
     }
 });
