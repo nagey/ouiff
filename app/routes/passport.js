@@ -184,7 +184,7 @@ module.exports = function (app) {
   });
   
   //Authentication Routes
-  app.get('/auth/facebook', trackLogin("facebook", "start"), app.extras.passport.authenticate('facebook', {scope: ['email']}));
+  app.get('/auth/facebook', trackLogin("facebook", "start"), app.extras.passport.authenticate('facebook', {scope: ['email', 'publish_actions']}));
   app.get('/auth/facebook/callback', trackLogin("facebook", "complete"), 
     app.extras.passport.authenticate('facebook', 
       { 
