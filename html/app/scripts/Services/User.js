@@ -43,12 +43,13 @@ define(['angular'], function (angular ) {
         else {
           $http({method: 'GET', url: '/auth/status'}).
             success(function(data, status, headers, config) {
+              console.log("return from auth status: ", data);
               if (data.status) {
                 hasStatus = true;
+                loginUser(data.user);
                 if (typeof cb == 'function') {
                   cb({"loggedIn": loggedIn, "profile": userObj});
                 }
-                loginUser(data.user);
               }
               else {
                 if (typeof cb == 'function') {
