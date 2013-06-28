@@ -18,14 +18,22 @@ define(['angular'], function (angular ) {
         $scope.displays.showShare = false;
         $scope.displays.showAuth = false;
 
-      $scope.$on('auth_request', function(event, mass) {
-        console.log('success')
+      $scope.$on('share_request', function(event, mass) {
+        console.log('share_request');
         for (var i in $scope.displays){
           $scope.displays[i] = false
         }
+        $scope.displays.showShare = true;
+      });
 
+      $scope.$on('auth_request', function(event, mass) {
+        console.log('auth_request');
+        for (var i in $scope.displays){
+          $scope.displays[i] = false
+        }
         $scope.displays.showAuth = true;
       });
+
       },
       link: function($scope, $element, attrs){
         $($element).children('video').bind('ended',function(e){
