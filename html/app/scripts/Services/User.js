@@ -11,10 +11,12 @@ define(['angular'], function (angular ) {
       this.displayName = false;
 
       var loginUser = function (user) {
-        this.username = user.username;
-        this.profilePicture = user.profilePicture;
-        this.displayName = user.displayName;
-        $rootScope.$broadcast("userLogin", user);
+        if (user) {
+          this.username = user.username;
+          this.profilePicture = user.profilePicture;
+          this.displayName = user.displayName;
+          $rootScope.$broadcast("userLogin", user);
+        }
       }
 
       $window.sendUser = function (user) {
