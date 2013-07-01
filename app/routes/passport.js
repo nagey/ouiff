@@ -124,10 +124,12 @@ module.exports = function (app) {
       passReqToCallback: true
     },
     function (req, accessToken, refeshToken, profile, done) {
-      req.session.instagram = req.session.instagram || {};
-      req.session.instagram.accessToken = accessToken;
-      req.session.instagram.refeshToken = refeshToken;
-      fetchOrCreateUser(req, profile, done);
+      if (req.session) {
+        req.session.instagram = req.session.instagram || {};
+        req.session.instagram.accessToken = accessToken;
+        req.session.instagram.refeshToken = refeshToken;
+        fetchOrCreateUser(req, profile, done);
+      }
     }
   ));
   
@@ -140,10 +142,12 @@ module.exports = function (app) {
       passReqToCallback: true
     },
     function (req, accessToken, refreshToken, profile, done) {
-      req.session.facebook = req.session.facebook || {};
-      req.session.facebook.accessToken = accessToken;
-      req.session.facebook.refreshToken = refreshToken;
-      fetchOrCreateUser(req, profile, done);
+      if (req.session) {
+        req.session.facebook = req.session.facebook || {};
+        req.session.facebook.accessToken = accessToken;
+        req.session.facebook.refreshToken = refreshToken;
+        fetchOrCreateUser(req, profile, done);
+      }
     }
   ));
   
@@ -156,10 +160,12 @@ module.exports = function (app) {
       passReqToCallback: true
     },
     function (req, token, tokenSecret, profile, done) {
-      req.session.twitter = req.session.twitter || {};
-      req.session.twitter.tokenSecret = tokenSecret;
-      req.session.twitter.token = token;
-      fetchOrCreateUser(req, profile, done);
+      if (req.session) {
+        req.session.twitter = req.session.twitter || {};
+        req.session.twitter.tokenSecret = tokenSecret;
+        req.session.twitter.token = token;
+        fetchOrCreateUser(req, profile, done);
+      }
     }
   ));
   
