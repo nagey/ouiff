@@ -10,7 +10,7 @@ define(['angular'], function (angular ) {
       var loginUser = function (user) {
         if (user) {
           hasStatus = true;
-          console.log(user);
+          console.log('loggedIn',user);
           loggedIn = true;
           userObj = user;
           $rootScope.$broadcast("userLogin", user);

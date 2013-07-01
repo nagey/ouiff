@@ -13,9 +13,12 @@ define(['angular', 'jquery'], function (angular, $) {
       ];
 
       $scope.loggedIn = false;
-
+      $scope.profile = {}
       user.status(function(status){
-        if(status.loggedIn)$scope.loggedIn = true;
+        if(status.loggedIn){
+          $scope.loggedIn = true;
+          $scope.profile = status.profile
+        }
       });
       $scope.openAuth = function(){
         $rootScope.$broadcast('open_modal', {display: 'auth'});

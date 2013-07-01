@@ -32,6 +32,11 @@ define(['angular'], function (angular ) {
           $scope.isOpen = true;
         });
 
+        $scope.$on('userLogin', function(event, data) {
+          console.log('userLogin')
+          $scope.isOpen = false;
+        });
+
         $scope.closeModal = function (){
           $scope.isOpen = false;
         }
