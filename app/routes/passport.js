@@ -87,7 +87,7 @@ module.exports = function (app) {
           req.user.tokens[profile.provider] = [token1, token2];
           var providerTokens = "tokens."+profile.provider;
           var updateDocument = {$set: {}};
-          updateDocument[providerTokens] = [token1, token2];
+          updateDocument["$set"][providerTokens] = [token1, token2];
           app.extras.mongo.users.update({_id: req.user._id}, updateDocument);
         }
         done(null, userObject);
