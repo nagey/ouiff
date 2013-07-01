@@ -8,7 +8,7 @@ module.exports = function (app) {
   
   var ObjectId = require("mongojs").ObjectId;
   
-  var createOrUpdateUser = function (req, profile, done) {
+  var createOrUpdateUser = function (req, profile, done, token1, token2) {
     if (!req.user) {
       var userObject = {};
       userObject.socialProfiles = {};
@@ -19,6 +19,8 @@ module.exports = function (app) {
       userObject._id = ObjectId(userObject._id);
       if (!userObject.profileList) userObject.profileList = [];
     }
+    userObject.tokens = userObject.tokens || {};
+    userObject.tokens[profile.provider] = [token1, token2];
     userObject.socialProfiles[profile.provider] = profile;
     if (userObject.profileList.indexOf(profile.provider) === -1) userObject.profileList.push(profile.provider);
     console.log(userObject.profileList.indexOf(profile.provider), profile.provider);
@@ -75,6 +77,10 @@ module.exports = function (app) {
       }
       else {
         console.log("User Object unchanged");
+        if ((!req.user.tokens) || (req.user.tokens[profile.provider][0] !== token1) || (req.user.tokens[profile.provider][1]) !== token2) {
+          var providerTokens = "tokens."+profile.provider;
+          app.extras.mongo.users.update({_id: ObjectId(req.user._id)}, {$set: {providerTokens: [token1, token2]}});
+        }
         done(null, userObject);
       }
     }
@@ -85,7 +91,7 @@ module.exports = function (app) {
     
   }
   
-  var fetchOrCreateUser = function (req, profile, done) {
+  var fetchOrCreateUser = function (req, profile, done, token1, token2) {
     if (req.user) {
       createOrUpdateUser(req, profile, done);
     }
@@ -102,6 +108,10 @@ module.exports = function (app) {
         }
         if (docs.length === 1) {
           app.extras.stathat.track("user - "+ profile.provider+" - successful login", 1);
+          if ((!docs[0].tokens) || (docs[0].tokens[profile.provider][0] !== token1) || (docs[0].tokens[profile.provider][1]) !== token2) {
+            var providerTokens = "tokens."+profile.provider;
+            app.extras.mongo.users.update({_id: docs[0]._id}, {$set: {providerTokens: [token1, token2]}});
+          }
           done(null, docs[0]);
         }
         else if (docs.length > 1) {
@@ -110,7 +120,7 @@ module.exports = function (app) {
           done("Contact Support", null);
         }
         else {
-          createOrUpdateUser(req, profile, done);
+          createOrUpdateUser(req, profile, done, token1, token2);
         }
       });
     }
@@ -124,12 +134,7 @@ module.exports = function (app) {
       passReqToCallback: true
     },
     function (req, accessToken, refeshToken, profile, done) {
-      if (req.session) {
-        req.session.instagram = req.session.instagram || {};
-        req.session.instagram.accessToken = accessToken;
-        req.session.instagram.refeshToken = refeshToken;
-        fetchOrCreateUser(req, profile, done);
-      }
+      fetchOrCreateUser(req, profile, done, accessToken, refeshToken);
     }
   ));
   
@@ -142,12 +147,7 @@ module.exports = function (app) {
       passReqToCallback: true
     },
     function (req, accessToken, refreshToken, profile, done) {
-      if (req.session) {
-        req.session.facebook = req.session.facebook || {};
-        req.session.facebook.accessToken = accessToken;
-        req.session.facebook.refreshToken = refreshToken;
-        fetchOrCreateUser(req, profile, done);
-      }
+      fetchOrCreateUser(req, profile, done, accessToken, refreshToken);
     }
   ));
   
@@ -160,12 +160,7 @@ module.exports = function (app) {
       passReqToCallback: true
     },
     function (req, token, tokenSecret, profile, done) {
-      if (req.session) {
-        req.session.twitter = req.session.twitter || {};
-        req.session.twitter.tokenSecret = tokenSecret;
-        req.session.twitter.token = token;
-        fetchOrCreateUser(req, profile, done);
-      }
+      fetchOrCreateUser(req, profile, done, token, tokenSecret);
     }
   ));
   
