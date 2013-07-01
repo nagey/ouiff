@@ -6,8 +6,7 @@ define(['angular'], function (angular ) {
       restrict: 'E',
       transclude: true,
       scope: { source: "@" },
-      controller: function($scope, $element) {
-        console.log('ModalDirective');
+      controller: function($scope, $rootScope, $element) {
 
         $scope.tpl={};
         $scope.displays={};
@@ -28,6 +27,7 @@ define(['angular'], function (angular ) {
         });
 
         $scope.$on('open_modal', function(event, data) {
+          console.log('ModalDirective| e:'+event,data);
           $scope.display = data.display;
           $scope.isOpen = true;
         });
@@ -44,7 +44,8 @@ define(['angular'], function (angular ) {
           $('#modal-content video').bind('ended',function(e){
             $scope.display = "rank";
             $scope.$apply();
-          })
+          });
+
         }
       },
       link: function($scope, $element, attrs){
@@ -58,7 +59,7 @@ define(['angular'], function (angular ) {
                   '<source id="source" ng-src="{{source}}" />'+
                 '</video>'+
                 '<div ng-switch-when="rank" ng-include="tpl.rank"></div>'+
-                '<div ng-switch-when="share" ng-include="tpl.share"></div>'+
+                //'<div ng-switch-when="share" ng-include="tpl.share"></div>'+
                 '<div ng-switch-when="auth" ng-include="tpl.auth"></div>'+
             '</div>'+
           '</div>'+

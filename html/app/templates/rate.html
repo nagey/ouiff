@@ -1,5 +1,10 @@
 <div id="rate-window" ng-controller="RateCtrl">
     <rating value="rate" max="5" readonly="isReadonly"></rating>
-    <textarea rows="4" cols="50">http://15sfest.com Rocks my Socks!! #15sfest</textarea>
+    <textarea rows="4" cols="50" ng-model="message">http://15sfest.com Rocks my Socks!! #15sfest</textarea>
+    <div id="share-window" ng-controller="AuthCtrl">
+	    <div class="btn-group"  ng-init="checkStatus()">
+	        <button type="button" class="btn btn-primary"  ng-repeat="service in services"  ng-model="service.checked" ng-click="login(service)" btn-checkbox>{{service.name}}</button>
+	    </div>
+	</div>
 </div>
 

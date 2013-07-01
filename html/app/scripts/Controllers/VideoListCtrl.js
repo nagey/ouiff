@@ -20,8 +20,10 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       },2);
 
       $scope.imgClick = function (item){
+        console.log(item);
         $scope.modal.videoSrc = item.videos.standard_resolution.url;
-        $rootScope.$broadcast('open_modal', {display: 'video'});
+        $rootScope.activeVid = item.id;
+        $rootScope.$broadcast('open_modal', {display: 'video', vid: item.id});
       }
 
     };

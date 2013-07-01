@@ -7,45 +7,63 @@ define(['angular', 'jquery'], function (angular, $) {
 
       
       $scope.services = [
-      	{name: "Instagram", url: "/auth/instagram", w: 575, h:400},
-      	{name: "Facebook", url: "/auth/facebook", w: 500, h:200},
-      	{name: "Twitter", url: "/auth/twitter", w: 575, h:400}
+      	{name: "Instagram", key:'instagram', url: "/auth/instagram", w: 575, h:400, checked: false, auth: false},
+      	{name: "Facebook", key:'facebook', url: "/auth/facebook", w: 500, h:200, checked: false, auth: false},
+      	{name: "Twitter", key:'twitter', url: "/auth/twitter", w: 575, h:400, checked: false, auth: false}
       ];
 
       $scope.loggedIn = false;
       $scope.profile = {}
-      user.status(function(status){
-        if(status.loggedIn){
-          $scope.loggedIn = true;
-          $scope.profile = status.profile
-        }
-      });
+
+
       $scope.openAuth = function(){
         $rootScope.$broadcast('open_modal', {display: 'auth'});
       }
+      $scope.checkStatus = function(){
+        user.status(function(status){
+          if(status.loggedIn){
+            $scope.loggedIn = true;
+            $scope.profile = status.profile
+            for(var i in $scope.profile.profileList){
+              for(var j in $scope.services){
+                if($scope.profile.profileList[i] == $scope.services[j].key){
+                  $scope.services[j].checked = true;
+                  $scope.services[j].auth = true;
+                  break;
+                }
+              }
+            }
+          }
+        });
+      }
+      
       $scope.login = function(service){
-        var w = service.w;
-        var h = service.h;
-        var title = service.name+" Login";
-        var left = (screen.width/2)-(w/2);
-        var top = (screen.height/2)-(h/2);
+        if(!service.auth){
+          var w = service.w;
+          var h = service.h;
+          var title = service.name+" Login";
+          var left = (screen.width/2)-(w/2);
+          var top = (screen.height/2)-(h/2);
 
-        console.log('connect to  service',service);
-        
-        return window.open(service.url, 
-          title, 
-          'toolbar=no,'+
-          ' location=no,'+
-          ' directories=no,'+
-          ' status=no,'+
-          ' menubar=no,'+
-          ' scrollbars=no,'+
-          ' resizable=no,'+
-          ' copyhistory=no,'+
-          ' width='+w+
-          ', height='+h+
-          ', top='+top+
-          ', left='+left);      
+          console.log('connect to  service',service);
+          
+          return window.open(service.url, 
+            title, 
+            'toolbar=no,'+
+            ' location=no,'+
+            ' directories=no,'+
+            ' status=no,'+
+            ' menubar=no,'+
+            ' scrollbars=no,'+
+            ' resizable=no,'+
+            ' copyhistory=no,'+
+            ' width='+w+
+            ', height='+h+
+            ', top='+top+
+            ', left='+left);      
+          }
         }
     };
+    
+    $scope.checkStatus();
 });

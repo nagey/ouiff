@@ -1,7 +1,7 @@
 <div id="share-window" ng-controller="ShareCtrl">
     <h1>Share this film</h1>
     <div class="btn-group">
-        <button type="button" class="btn btn-primary"  ng-repeat="service in services"  ng-model="service.checked" btn-checkbox>{{service.name}}</button>
+        <button type="button" class="btn btn-primary"  ng-repeat="service in services"  ng-model="service.checked" ng-click="checkAuth(service)" btn-checkbox>{{service.name}}</button>
      
     </div>
 </div>

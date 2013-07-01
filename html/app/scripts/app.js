@@ -22,7 +22,7 @@ define([
     app.controller("RateCtrl", ["$scope", '$rootScope', "user", RateCtrl]);
     app.controller("VideoListCtrl", ["$location", "$scope", '$rootScope',"media", "user", VideoListCtrl]);
     app.controller("AuthCtrl", ["$scope", '$rootScope', "user", AuthCtrl]);
-    app.controller("ShareCtrl", ["$scope", ShareCtrl]);
+    //app.controller("ShareCtrl", ["$scope", "$rootScope", 'user', ShareCtrl]);
     app.directive('lightbox', ModalDirective);
     
     app.service("media", ["$resource", "$rootScope", Media]);
