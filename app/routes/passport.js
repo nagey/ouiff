@@ -80,7 +80,7 @@ module.exports = function (app) {
         if ((!req.user.tokens) || (req.user.tokens[profile.provider][0] !== token1) || (req.user.tokens[profile.provider][1]) !== token2) {
           console.log("setting tokens for "+profile.provider, token1, token2);
           var providerTokens = "tokens."+profile.provider;
-          app.extras.mongo.users.update({_id: ObjectId(req.user._id)}, {$set: {providerTokens: [token1, token2]}});
+          app.extras.mongo.users.update({_id: req.user._id}, {$set: {providerTokens: [token1, token2]}});
         }
         done(null, userObject);
       }
