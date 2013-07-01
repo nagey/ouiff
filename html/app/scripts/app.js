@@ -25,7 +25,7 @@ define([
     app.controller("ShareCtrl", ["$scope", ShareCtrl]);
     app.directive('vid', VidDirective);
     
-    app.service("media", ["$resource", Media]);
+    app.service("media", ["$resource", "$rootScope", Media]);
     app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);
     
 
