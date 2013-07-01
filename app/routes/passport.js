@@ -78,6 +78,10 @@ module.exports = function (app) {
       else {
         console.log("User Object unchanged");
         if ((!req.user.tokens) || (!req.user.tokens[profile.provider]) || (req.user.tokens[profile.provider][0] != token1) || (req.user.tokens[profile.provider][1] != token2)) {
+          console.log((!req.user.tokens));
+          console.log((!req.user.tokens[profile.provider]));
+          console.log((req.user.tokens[profile.provider][0] != token1));
+          console.log((req.user.tokens[profile.provider][1] != token2));
           console.log("setting tokens for "+profile.provider, token1, token2);
           req.user.tokens = req.user.tokens || {};
           req.user.tokens[profile.provider] = [token1, token2];
