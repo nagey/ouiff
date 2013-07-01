@@ -94,7 +94,7 @@ module.exports = function (app) {
   
   var fetchOrCreateUser = function (req, profile, done, token1, token2) {
     if (req.user) {
-      createOrUpdateUser(req, profile, done);
+      createOrUpdateUser(req, profile, done, token1, token2);
     }
     else {
       var selectorString = "socialProfiles." + profile.provider + ".id";
