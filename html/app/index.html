@@ -60,7 +60,7 @@
                                     <div class="meta clearfix">
                                         <p class="user">{{best.user.username}}</p>
                                         <p class="desc">{{best.caption.text}}</p>
-                                        <p class="geo">{{best.location.country}}</p>
+                                        <p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
                                         <p class="rating"><span class="hash">###</span>##</p>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                             <div class="meta clearfix">
                                 <p class="user">{{feature.user.username}}</p>
                                 <p class="desc">{{feature.caption.text}}</p>
-                                <p class="geo">{{best.location.country}}</p>
+                                <p class="geo"><img ng-show="{{feature.location.country}}" ng-src="/images/flags/{{feature.location.country}}.png"></p>
                                 <p class="rating"><span class="hash">###</span>##</p>
                             </div>    
                         </div>
@@ -89,7 +89,7 @@
                             <div class="meta clearfix">
                                 <p class="user">{{latest.user.username}}</p>
                                 <p class="desc">{{latest.caption.text}}</p>
-                                <p class="geo">{{best.location.country}}</p>
+                                <p class="geo"><img ng-show="{{latest.location.country}}" ng-src="/images/flags/{{latest.location.country}}.png"></p>
                                 <p class="rating"><span class="hash">###</span>##</p>
                             </div>    
                         </div>   
