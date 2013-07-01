@@ -10,7 +10,6 @@ define(['angular', 'jquery'], function (angular, $) {
       $scope.$watch('rate', function(newValue, oldValue) {
         if(newValue != oldValue){
           user.status(function(status){
-            console.log('Callback',status);
             if(status.loggedIn){
               $rootScope.$broadcast('share_request'/*, [1,2,3]*/);
             }else{

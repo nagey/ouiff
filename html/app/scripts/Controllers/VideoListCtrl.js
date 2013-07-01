@@ -2,13 +2,12 @@
 define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_modal) {
     'use strict';
 
-    return function VideoListCtrl($location, $scope, media, user) {
+    return function VideoListCtrl($location, $scope, $rootScope, media, user) {
 
       media.index();
       media.index();
 
       $scope.modal = {};
-      $scope.modal.isOpen = false;
 
       media.bestOf(function (result) {
         $scope.bestOfList = result;
@@ -21,12 +20,8 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       },2);
 
       $scope.imgClick = function (item){
-        $scope.modal.isOpen = true
         $scope.modal.videoSrc = item.videos.standard_resolution.url;
-      }
-
-      $scope.closeModal = function (){
-        $scope.modal.isOpen = false;
+        $rootScope.$broadcast('open_modal', {display: 'video'});
       }
 
     };

@@ -10,9 +10,9 @@ define([
   	'Controllers/ShareCtrl',
     'Services/Media',
     'Services/User',
-    'Directives/VidDirective',
+    'Directives/ModalDirective',
     "ng-resource"
-  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, AuthCtrl, ShareCtrl, Media, User, VidDirective) {
+  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, AuthCtrl, ShareCtrl, Media, User, ModalDirective) {
     'use strict';
 
     var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -20,10 +20,10 @@ define([
     }]);
 
     app.controller("RateCtrl", ["$scope", '$rootScope', "user", RateCtrl]);
-    app.controller("VideoListCtrl", ["$location", "$scope", "media", "user", VideoListCtrl]);
-    app.controller("AuthCtrl", ["$scope", AuthCtrl]);
+    app.controller("VideoListCtrl", ["$location", "$scope", '$rootScope',"media", "user", VideoListCtrl]);
+    app.controller("AuthCtrl", ["$scope", '$rootScope', "user", AuthCtrl]);
     app.controller("ShareCtrl", ["$scope", ShareCtrl]);
-    app.directive('vid', VidDirective);
+    app.directive('lightbox', ModalDirective);
     
     app.service("media", ["$resource", Media]);
     app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);

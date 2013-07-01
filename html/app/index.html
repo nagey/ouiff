@@ -32,13 +32,14 @@
                     
                     </div>
                     
-                    <nav class="span3">
+                    <nav class="span3" ng-controller="AuthCtrl">
                     
                         <ul id="main-nav" class="nav nav-tabs nav-stacked">
                         
                             <li><a href="#">Submit a Film</a></li>
                             <li><a href="#">Categories</a></li>
                             <li><a href="#">Winners</a></li>
+                            <li><a href="#" ng-hide="loggedIn" ng-click="openAuth()">Login</a></li>
                             
                         
                         </ul>
@@ -96,8 +97,8 @@
                     </div>
                 </div>
             </div>
-            <div    class="modal-container"
-                    ng-include src="'templates/modal.html'">
+            <div    class="modal-container">
+                <lightbox source="{{modal.videoSrc}}"></lightbox>
             </div>
         </div>
 
