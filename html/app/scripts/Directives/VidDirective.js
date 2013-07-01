@@ -39,7 +39,7 @@ define(['angular'], function (angular ) {
         $($element).children('video').bind('ended',function(e){
           $scope.displays.showVideo = false;
           $scope.displays.showRank = true;
-          $scope.$apply()
+          $scope.$apply();
         })
       },
       template:
