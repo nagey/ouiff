@@ -21,7 +21,7 @@ module.exports = function (app) {
             tags: foundMedia.tags,
             author: {username: foundMedia.user.username, id: foundMedia.user.id },
             rater: { username: req.user.username, id: req.user._id},
-            score: req.body.score,
+            score: parseInt(req.body.score),
             review: req.body.review,
             shares: req.body.shares,
             created_at: new Date()
