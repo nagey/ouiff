@@ -25,8 +25,9 @@ html {
 body {
 	background-color:#567572;
 	font-family:"Courier New", Courier, monospace;
+	font-size:16px;
+	color:#E5C36E;
 	-webkit-font-smoothing: antialiased;
-	color:#567572;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
@@ -40,13 +41,17 @@ h1 {
 
 h2 {
 	font-family:salome, "Palatino Linotype", "Book Antiqua", Palatino, serif;
-	color:#567572;
-	border-bottom:4px #567572 solid;
+	border-bottom:4px #E5C36E solid;
 }
 
-.green h1, .green h2 {
-	color:#E5C36E;
-	border-color:#E5C36E;
+.gold h1, .gold h2 {
+	color:#567572;
+	border-color:#567572;
+}
+
+div.gold p {
+	color:#567572;
+
 }
 
 
@@ -82,7 +87,7 @@ h2 {
 
 .nav-tabs > li > a {
 	background-color:#E5C36E;
-	text-align:center;
+	text-align:left;
 	font-size:2.5em;
 	color:#567572;
 	padding-top: 8px;
@@ -163,8 +168,7 @@ h2 {
 
 #board {
 	padding-top:50px;
-	padding-bottom:70px;
-	background:#E5C36E;
+	padding-bottom:100px;
 }
 
 #board .entry {
@@ -240,9 +244,61 @@ h2 {
 
 
 #cats {
-	min-height:300px;
-	padding-top:50px;
-	padding-bottom:70px;
+	padding-top:80px;
+	padding-bottom:100px;
+}
+
+.btn {
+display: inline-block;
+padding: 10px 20px;
+margin-bottom: 0;
+font-family:tommaso, Helvetica, sans-serif;
+letter-spacing:2px;
+font-size: 40px;
+line-height: 40px;
+text-align: center;
+vertical-align: middle;
+cursor: pointer;
+color: #E5C36E;
+text-shadow:none;
+background-color: #567572;
+background-image: none;
+background-image: none;
+background-image: none;
+background-image: none;
+background-image: none;
+background-repeat: none;
+filter: none;
+border-color: none;
+border-color: none;
+filter: none;
+border: 4px #43625f solid;
+border-bottom-color: none;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+}
+
+.btn:hover {
+	color:#E5C36E;
+	background-color:#43625f;
+}
+
+div#cats .btn {
+	margin:20px 40px 20px 0;
+}
+
+.green .hilite {
+	color:#43625f;
+	background-color:#E5C36E;
+}
+
+.green .hilite:hover {
+	color:#43625f;
+	background-color:#dfb346;
 }
 
 
@@ -251,12 +307,14 @@ h2 {
 
 
 
-
-
 #participate {
-	min-height:300px;
-	padding-top:50px;
-	padding-bottom:70px;
+	padding-top:80px;
+	padding-bottom:100px;
+}
+
+#footer {
+	padding-top:80px;
+	padding-bottom:100px;
 }
 
 .green { background:#567572; }

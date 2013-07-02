@@ -5,7 +5,7 @@
     </div>
     <div id="share-window" ng-controller="AuthCtrl">
 	    <div class="btn-group span6"  ng-init="checkStatus()">
-	        <button type="button" class="btn btn-primary"  ng-repeat="service in services"  ng-model="service.checked" ng-click="login(service)" btn-checkbox>{{service.name}}</button>
+	        <button type="button" class="btn btn-large btn-primary"  ng-repeat="service in services"  ng-model="service.checked" ng-click="login(service)" btn-checkbox>{{service.name}}</button>
 	    </div>
 	</div>
 
