@@ -19,7 +19,7 @@ define([
       $locationProvider.html5Mode(true);
     }]);
 
-    app.controller("RateCtrl", ["$scope", '$rootScope', "user", RateCtrl]);
+    app.controller("RateCtrl", ["$scope", '$rootScope', "user", "$http", RateCtrl]);
     app.controller("VideoListCtrl", ["$location", "$scope", '$rootScope',"media", "user", VideoListCtrl]);
     app.controller("AuthCtrl", ["$scope", '$rootScope', "user", AuthCtrl]);
     //app.controller("ShareCtrl", ["$scope", "$rootScope", 'user', ShareCtrl]);

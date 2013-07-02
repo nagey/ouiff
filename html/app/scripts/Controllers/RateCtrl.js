@@ -2,7 +2,7 @@
 define(['angular', 'jquery'], function (angular, $) {
     'use strict';
 
-    return function RateCtrl($scope, $rootScope, user) {
+    return function RateCtrl($scope, $rootScope, user, $http) {
 
       $scope.rate = 0;
       $scope.isReadonly = false;
@@ -18,10 +18,10 @@ define(['angular', 'jquery'], function (angular, $) {
             if(status.loggedIn){
               var ratingPost = {
                 'id': $rootScope.activeVid,
-                'profile':status.profile,
                 'message': $scope.message,
                 'rate': $scope.rate
               }
+              $http.post("/rate/"+ratingPost.id, ratingPost);
               console.log('RATE OBJ',ratingPost);
             }else{
               $rootScope.$broadcast('auth_request'/*, [1,2,3]*/);
