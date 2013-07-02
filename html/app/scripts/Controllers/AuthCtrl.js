@@ -21,6 +21,7 @@ define(['angular', 'jquery'], function (angular, $) {
       }
       $scope.checkStatus = function(){
         user.status(function(status){
+          console.log('test',status);
           if(status.loggedIn){
             $scope.loggedIn = true;
             $scope.profile = status.profile
@@ -64,6 +65,4 @@ define(['angular', 'jquery'], function (angular, $) {
           }
         }
     };
-    
-    $scope.checkStatus();
 });

@@ -34,7 +34,7 @@
                     
                     </div>
                     
-                    <nav class="span3" ng-controller="AuthCtrl">
+                    <nav class="span3" ng-controller="AuthCtrl" ng-init="checkStatus()">
                     
                         <ul id="main-nav" class="nav nav-tabs nav-stacked">
                             <li><a href="#" ng-hide="loggedIn" ng-click="openAuth()">Login</a></li>
