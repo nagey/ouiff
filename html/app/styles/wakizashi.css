@@ -49,6 +49,11 @@ h2 {
 	border-color:#567572;
 }
 
+div.gold p {
+	color:#567572;
+
+}
+
 
 #header {
 	background:transparent url(../images/q-pattern.png) top left repeat;
@@ -163,8 +168,7 @@ h2 {
 
 #board {
 	padding-top:50px;
-	padding-bottom:70px;
-	background:#E5C36E;
+	padding-bottom:100px;
 }
 
 #board .entry {
@@ -240,9 +244,61 @@ h2 {
 
 
 #cats {
-	min-height:300px;
-	padding-top:50px;
-	padding-bottom:70px;
+	padding-top:80px;
+	padding-bottom:100px;
+}
+
+.btn {
+display: inline-block;
+padding: 10px 20px;
+margin-bottom: 0;
+font-family:tommaso, Helvetica, sans-serif;
+letter-spacing:2px;
+font-size: 40px;
+line-height: 40px;
+text-align: center;
+vertical-align: middle;
+cursor: pointer;
+color: #E5C36E;
+text-shadow:none;
+background-color: #567572;
+background-image: none;
+background-image: none;
+background-image: none;
+background-image: none;
+background-image: none;
+background-repeat: none;
+filter: none;
+border-color: none;
+border-color: none;
+filter: none;
+border: 4px #43625f solid;
+border-bottom-color: none;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+}
+
+.btn:hover {
+	color:#E5C36E;
+	background-color:#43625f;
+}
+
+div#cats .btn {
+	margin:20px 40px 20px 0;
+}
+
+.green .hilite {
+	color:#43625f;
+	background-color:#E5C36E;
+}
+
+.green .hilite:hover {
+	color:#43625f;
+	background-color:#dfb346;
 }
 
 
@@ -251,12 +307,14 @@ h2 {
 
 
 
-
-
 #participate {
-	min-height:300px;
-	padding-top:50px;
-	padding-bottom:70px;
+	padding-top:80px;
+	padding-bottom:100px;
+}
+
+#footer {
+	padding-top:80px;
+	padding-bottom:100px;
 }
 
 .green { background:#567572; }
