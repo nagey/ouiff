@@ -11,7 +11,6 @@ define(['angular'], function (angular ) {
         //console.log("in loginUser", user, $rootScope);
         if (user) {
           hasStatus = true;
-          console.log('loggedIn',user);
           loggedIn = true;
           userObj = user;
           $rootScope.$broadcast("userLogin", user);

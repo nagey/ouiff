@@ -7,10 +7,6 @@ define(['angular', 'jquery'], function (angular, $) {
       $scope.rate = 0;
       $scope.isReadonly = false;
 
-      $scope.$on('open_modal', function(event, data) {
-        console.log('RateCtrl| e:'+event,data);
-        $scope.vid = data.vid;
-      });
       $scope.submitRating = function (){
         user.status(function(status){
           if(status.loggedIn){

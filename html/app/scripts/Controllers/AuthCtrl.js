@@ -3,8 +3,6 @@ define(['angular', 'jquery'], function (angular, $) {
     'use strict';
 
     return function AuthCtrl($scope, $rootScope, user) {
-      console.log('authCtrl');
-
       
       $scope.services = [
       	{name: "Instagram", key:'instagram', url: "/auth/instagram", w: 575, h:400, checked: false, auth: false},

@@ -96,8 +96,22 @@
                     </div>
                 </div>
             </div>
-            <div    class="modal-container">
-                <lightbox source="{{modal.videoSrc}}" ></lightbox>
+            <div class="modal-container">
+                <div ng-controller="LightboxCtrl" id="modal-window" modal="isOpen" close="closeModal()" >
+                    <div class="modal-body row">
+                        <div id="modal-content" class="span6">
+                            <div class="row" >
+                                <video id="videoPlayer" ng-init="videoInit()" class="span6" width="auto" height="auto" controls>
+                                    <source id="source" ng-src="{{source}}" />
+                                </video>
+                                <div ng-show="display=='rate'" ng-include src="'templates/rate.html'" />
+                                
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
 
