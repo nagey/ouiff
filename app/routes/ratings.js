@@ -3,6 +3,17 @@ module.exports = function (app) {
   var Twit = require("twit");
   var FB = require("fb");
   
+  var validateRating = function (rating) {
+    if (!rating.review) {
+      rating.review = "Check out this Film on #15sfest http://15sfest.com/watch/"+rating.id;
+    }
+    if (rating.review.indexOf("http://15sfest.com/watch/") === -1) {
+      rating.review += " http://15sfest.com/watch/"+rating.id;
+    }
+    rating.score = parseInt(rating.score);
+    return rating;
+  }
+  
   app.post("/rate/:media_id", function (req, res) {
     if (!req.user) {
       app.extras.stathat.track("rating - user not logged in");
@@ -21,27 +32,30 @@ module.exports = function (app) {
             tags: foundMedia.tags,
             author: {username: foundMedia.user.username, id: foundMedia.user.id },
             rater: { username: req.user.username, id: req.user._id},
-            score: parseInt(req.body.score),
+            score: req.body.score,
             review: req.body.review,
             shares: req.body.shares,
             created_at: new Date()
           };
+          ratingDocument = validateRating(ratingDocument);
           if (ratingDocument.shares) {
             for (var network in ratingDocument.shares) {
               switch (ratingDocument.shares[network]) {
                 case "facebook":
+                  if (!req.user.tokens.facebook) break;
                   FB.setAccessToken(req.user.tokens.facebook[0]);
                   FB.api("/me/video.rates", 'post', {"rating:value": ratingDocument.score, "rating:scale": 5, "rating:normalized_value": ratingDocument.score*.2, "review_text": ratingDocument.review, "movie": "http://15sfest.com/watch/"+ratingDocument.id}, function (res) { console.log(res); });
                   // something
                   break;
                 case "twitter":
+                  if (!req.user.tokens.twitter) break;
                   var T = new Twit({
-                    consumer_key: app.twitter.consumerKey,
-                    consumer_secret: app.twitter.consumerSecret,
+                    consumer_key: app.extras.twitter.consumerKey,
+                    consumer_secret: app.extras.twitter.consumerSecret,
                     access_token: req.user.tokens.twitter[0],
                     access_token_secret: req.user.tokens.twitter[1]
                   });
-                  T.post("/statuses/update", {status: ratingDocument.review});
+                  T.post("/statuses/update", {status: ratingDocument.review}, function () {});
                   //something else
                   break;
               }
