@@ -41,7 +41,9 @@ define(['angular'], function (angular ) {
           $scope.isOpen = false;
         }
         $scope.videoInit = function(){
+          console.log('videoInit',$('#modal-content video'));
           $('#modal-content video').bind('ended',function(e){
+            console.log('ended');
             $scope.display = "rank";
             $scope.$apply();
           });
@@ -53,14 +55,15 @@ define(['angular'], function (angular ) {
       },
       template:
         '<div id="modal-window" modal="isOpen" close="closeModal()" >'+
-          '<div class="modal-body">'+
-            '<div id="modal-content" ng-switch on="display">' +
-                '<video ng-switch-when="video" ng-init="videoInit()" id="video" width="auto" height="auto" controls>'+
+          '<div class="modal-body row">'+
+            '<div id="modal-content" class="span6" ng-switch on="display">' +
+              '<div class="row" ng-switch-when="video" ng-init="videoInit()">' +
+                '<video id="video" class="span6" width="auto" height="auto" controls>'+
                   '<source id="source" ng-src="{{source}}" />'+
                 '</video>'+
-                '<div ng-switch-when="rank" ng-include="tpl.rank"></div>'+
-                //'<div ng-switch-when="share" ng-include="tpl.share"></div>'+
-                '<div ng-switch-when="auth" ng-include="tpl.auth"></div>'+
+              '</div>'+
+              '<div class="row" ng-switch-when="rank" ng-include="tpl.rank"></div>'+
+              '<div class="row" ng-switch-when="auth" ng-include="tpl.auth"></div>'+
             '</div>'+
           '</div>'+
         '</div>',
