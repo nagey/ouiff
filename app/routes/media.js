@@ -32,7 +32,31 @@ module.exports = function (app) {
         app.extras.stathat.track("database error", 1);
         res.status(500).send("Error: "+err);
       }
-      else res.send(docs);
+      else {
+        // Get Media IDs of Rated videos
+        var mediaIds = docs.map(function (element) {
+          return element._id;
+        });
+        app.extras.mongo.media.find({id:{$in: mediaIds}}, function (err, media) {
+          if (err) {
+            app.extras.stathat.track("database error", 1);
+            res.status(500).send("Error: "+err);
+          }
+          else {
+            var mediaObj = {};
+            media.forEach(function (element) {
+              mediaObj[element.id] = element;
+            });
+            docs.forEach(function (element, index, array) {
+              if (mediaObj[element._id]) {
+                mediaObj[element._id].score = element.score; 
+                array[index] = mediaObj[element._id];
+              }
+            });
+            res.send(docs);
+          }
+        });
+      }
     });
   }
   
@@ -49,9 +73,7 @@ module.exports = function (app) {
 
   app.get("/media/top", function (req,res) {
     app.extras.stathat.track("media - fetch top", 1);
-    // Leaving this sending all media until we get some things with ratings
-    //fetchAndSendTopMedia({}, res);
-    fetchAndSendMedia({}, res);
+    fetchAndSendTopMedia({}, res);
   });
   
   app.get("/media/tag/:tag", function (req, res) {
