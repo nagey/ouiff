@@ -120,6 +120,39 @@ h2 {
 	border-bottom-left-radius: 2px;
 }
 
+.nav-tabs.nav-stacked > li > a:hover, .nav-tabs.nav-stacked > li > a:focus {
+	background-color:#dfb346;
+}
+
+#main-nav .login-btn {
+	border-bottom:4px #567572 solid;
+}
+
+#main-nav .login-btn a {
+	background:#fff url(../images/icon-login.png) center 20px no-repeat;
+	text-align:right;
+	font-family:salome, "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size:1.4em;
+	line-height:1.6em;
+}
+
+#main-nav .logged-in a {
+	background-image:none;
+}
+
+#main-nav .login-btn a:hover {
+	background-color:#fff7e2;
+}
+
+.profile-img {
+	display:block;
+	float:left;
+	width:35px;
+	height:35px;
+	-webkit-border-radius: 500px;
+    		border-radius: 500px;
+}
+
 
 
 
@@ -167,6 +200,10 @@ h2 {
 	font-size:16px;
 	font-weight:bold;
 	color:#E5C36E;
+}
+
+#board .entry .desc {
+	height:40px;
 }
 
 #board .entry .geo {
