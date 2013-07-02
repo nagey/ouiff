@@ -143,6 +143,10 @@ module.exports = function (app) {
   ));
   
   
+  FacebookStrategy.prototype.autorizationParams = function () {
+    return {display: "popup"};
+  }
+  
   // Setup Facebook
   app.extras.passport.use(new FacebookStrategy({
       clientID:     app.extras.facebook.appId,

@@ -23,7 +23,9 @@
     "connect-redis": "*",
     "redis": "*",
     "geocoder": "*",
-    "stathat": "*"
+    "stathat": "*",
+    "twit": "*",
+    "fb": "*"
   },
   "keywords": [
     "instagram",
