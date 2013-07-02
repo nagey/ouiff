@@ -32,18 +32,22 @@ define(['angular'], function (angular ) {
           $scope.isOpen = true;
         });
 
+        $scope.$on('close_modal', function(event, data) {
+          $scope.closeModal();
+        });
+
         $scope.$on('userLogin', function(event, data) {
-          console.log('userLogin')
-          $scope.isOpen = false;
+          if($scope.isOpen){
+            $scope.closeModal();
+            $scope.$apply();
+          }
         });
 
         $scope.closeModal = function (){
           $scope.isOpen = false;
         }
         $scope.videoInit = function(){
-          console.log('videoInit',$('#modal-content video'));
           $('#modal-content video').bind('ended',function(e){
-            console.log('ended');
             $scope.display = "rank";
             $scope.$apply();
           });
