@@ -8,6 +8,7 @@ define(['angular'], function (angular ) {
       var userObj;
 
       var loginUser = function (user) {
+        //console.log("in loginUser", user, $rootScope);
         if (user) {
           hasStatus = true;
           console.log('loggedIn',user);
@@ -18,8 +19,9 @@ define(['angular'], function (angular ) {
       }
 
       $window.sendUser = function (user) {
+        //console.log("in sendUser");
         if (user.profileList) {
-          loginUser(userObj);
+          loginUser(user);
         }
       }
       

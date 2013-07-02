@@ -56,6 +56,7 @@ mongo.users.ensureIndex({'facebook.id':1}, {unique:true, sparse:true});
 mongo.users.ensureIndex({'twitter.id':1}, {unique:true, sparse:true});
 mongo.media.ensureIndex({id:1}, {unique:true, sparse:true});
 mongo.tags.ensureIndex({tag:1}, {unique:true, sparse:true});
+mongo.ratings.ensureIndex({id:1, "rater.id":1}, {unique:true});
 app.extras.mongo = mongo;
 
 
