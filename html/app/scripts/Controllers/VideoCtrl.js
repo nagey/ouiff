@@ -6,9 +6,9 @@ define(['angular', 'jquery'], function (angular, $) {
       console.log('VideoCtrl');
         $scope.bindListener = function(){
 
-          $('#videoPlayer').bind('click',function(){
+          $('#control-window').bind('click',function(){
             var video = document.getElementById("videoPlayer");
-
+            console.log('yo!')
             if($('#control-window').hasClass('playing'))
               video.pause();
             else
