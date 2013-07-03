@@ -366,11 +366,11 @@ position: fixed;
 top: 10%;
 left: 50%;
 z-index: 1050;
-width: 600px;
-margin-left: -280px;
+width: 570px;
+margin-left: -285px;
 background-color:#365350;
-border: 1px solid #365350;
-border: 1px solid rgba(54, 83, 80, 0.3);
+border: none;
+border: none;
 -webkit-border-radius: 2px;
 -moz-border-radius: 2px;
 border-radius: 2px;
@@ -382,6 +382,8 @@ box-shadow: none;
 background-clip: padding-box;
 outline: none;
 }
+
+
 
 .modal-body {
 	overflow:visible;
