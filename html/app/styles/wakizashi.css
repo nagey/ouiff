@@ -389,9 +389,6 @@ outline: none;
 	overflow:visible;
 }
 
-#modal-content {
-	margin-left:10px;
-}
 
 #videoPlayer {
 	z-index:990;
