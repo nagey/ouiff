@@ -411,6 +411,7 @@ outline: none;
 	background:#567572;
 	text-align:center;
 	line-height:30px;
+	cursor:pointer;
 }
 
 #control-window.playing #play-btn {
@@ -471,11 +472,11 @@ outline: none;
 	margin-top:30px;
 }
 .animate-enter {
--webkit-transition: 1s linear all;
-	-moz-transition: 1s linear all;
-	-o-transition: 1s linear all;
-	-ms-transition: 1s linear all;
-	transition: 1s linear all;
+-webkit-transition: 0.3s linear all;
+	-moz-transition: 0.3s linear all;
+	-o-transition: 0.3s linear all;
+	-ms-transition: 0.3s linear all;
+	transition: 0.3s linear all;
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	filter: alpha(opacity=0);
 	opacity: 0;
