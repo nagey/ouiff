@@ -1,5 +1,6 @@
-<div id="auth-window" ng-controller="AuthCtrl">
-<h2 class="span6">Log in</h2>
-	<button class="btn btn-large btn-block btn-primary span6" type="button" ng-repeat="service in services" ng-click="login(service)">{{service.name}}</button>
+<div id="auth-window" ng-controller="AuthCtrl" class="span6">
+	<div class="rate-pad-hate-myself">
+	<h2>Log in</h2>
+	<button class="btn btn-large btn-primary" type="button" ng-repeat="service in services" ng-click="login(service)">{{service.name}}</button>
+    </div>
 </div>
-
