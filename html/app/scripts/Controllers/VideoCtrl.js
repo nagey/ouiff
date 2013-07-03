@@ -5,12 +5,27 @@ define(['angular', 'jquery'], function (angular, $) {
     return function VideoCtrl($scope) {
       console.log('VideoCtrl');
         $scope.bindListener = function(){
-          console.log('hi all');
+
+          $('#videoPlayer').bind('click',function(){
+            var video = document.getElementById("videoPlayer");
+
+            if($('#control-window').hasClass('playing'))
+              video.pause();
+            else
+              video.play();
+
+            $('#control-window').toggleClass('playing');
+          });
+
           $('#mute-btn').bind('click',function(){
-            var video = document.getElementById("Video1");
-            console.log('click!',$("#videoPlayer"));
-            
-          })
+            console.log($('#videoPlayer').prop('muted'))
+            if($('#control-window').hasClass('muted'))
+              $('#videoPlayer').prop('muted', false);
+            else
+              $('#videoPlayer').prop('muted', true);
+
+            $('#control-window').toggleClass('muted');
+          });
         }
     };
 });
