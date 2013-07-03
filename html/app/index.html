@@ -96,6 +96,9 @@
                     </div>
                 </div>
             </div>
+            <!--
+            ### MODAL ###
+            -->
             <div class="modal-container">
                 <div ng-controller="LightboxCtrl" id="modal-window" modal="isOpen" close="closeModal()" >
                     <div class="modal-body row">
@@ -104,15 +107,23 @@
                                 <video id="videoPlayer" ng-init="videoInit()" class="span6" width="auto" height="auto" controls>
                                     <source id="source" ng-src="{{source}}" />
                                 </video>
-                                <div ng-show="display=='rate'" ng-include src="'templates/rate.html'" />
-                                
                             </div>
-                           
+                            <div ng-switch on="display">
+                                <!--<div ng-show="display=='video'" ng-include src="'templates/video.html'" />
+                                <div ng-show="display=='rate'" ng-include src="'templates/rate.html'" />
+                                <div ng-show="display=='auth'" ng-include src="'templates/auth.html'" />-->
+                                <div ng-switch-when="video" ng-include src="tpl.videoControls" />
+                                <div ng-switch-when="rate" ng-include src="tpl.rate" />
+                                <div ng-switch-when="auth" ng-include src="tpl.auth" />
+                            </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
+            <!--
+            ### MODAL END ###
+            -->
+        </div>
         </div>
         
         <div id="cats" class="green">

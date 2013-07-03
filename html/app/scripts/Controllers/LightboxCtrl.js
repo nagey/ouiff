@@ -6,7 +6,7 @@ define(['angular', 'jquery'], function (angular, $) {
     $scope.tpl={};
     $scope.isOpen = false;
 
-    $scope.tpl.rank = 'templates/rate.html';
+    $scope.tpl.rate = 'templates/rate.html';
     $scope.tpl.videoControls = 'templates/videoControls.html';
     $scope.tpl.auth = 'templates/auth.html';
 
@@ -38,9 +38,9 @@ define(['angular', 'jquery'], function (angular, $) {
         $scope.setHandler = false;
         console.log("in timeout");
         $('#videoPlayer').bind('ended',function(e){
-          console.log('@@@#####rd@')
+          
           $scope.display = "rate";
-          console.log($scope.display);
+          console.log("display:", $scope.display);
           $scope.$apply();
         });
       }, 500);
