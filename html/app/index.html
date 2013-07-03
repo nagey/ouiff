@@ -55,7 +55,7 @@
                     <div class="best-of span6">
                         <h2>Highest Rated</h2>
                         <div class="row">
-                                <div ng-repeat="best in bestOfList" class="entry span3">
+                                <div ng-repeat="best in bestOfList" ng-animate=" 'animate' " class="entry span3">
                                     <img ng-click="imgClick(best)" ng-src="{{best.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
                                     <div class="meta clearfix">
                                         <p class="user">{{best.user.username}}</p>
@@ -100,7 +100,7 @@
             ### MODAL ###
             -->
             <div class="modal-container">
-                <div ng-controller="LightboxCtrl" id="modal-window" modal="isOpen" close="closeModal()" >
+                <div ng-controller="LightboxCtrl" id="modal-window" modal="isOpen" close="closeModal()" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
                     <div class="modal-body row">
                         <div id="modal-content" class="span6">
                             <div class="row" >
@@ -108,13 +108,13 @@
                                     <source id="source" ng-src="{{source}}" />
                                 </video>
                             </div>
-                            <div class="row" ng-switch on="display">
+                            <div class="row" ng-switch on="display" ng-animate=" 'animate' ">
                                 <!--<div ng-show="display=='video'" ng-include src="'templates/video.html'" />
                                 <div ng-show="display=='rate'" ng-include src="'templates/rate.html'" />
                                 <div ng-show="display=='auth'" ng-include src="'templates/auth.html'" />-->
-                                <div ng-switch-when="rate" ng-include src="tpl.rate" ></div>
-                                <div ng-switch-when="auth" ng-include src="tpl.auth" ></div>
-                                <div ng-switch-when="video" ng-include src="tpl.videoControls" ></div>
+                                <div ng-switch-when="rate" ng-include src="tpl.rate" ng-animate=" 'animate' "></div>
+                                <div ng-switch-when="auth" ng-include src="tpl.auth" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"></div>
+                                <div ng-switch-when="video" ng-include src="tpl.videoControls" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"></div>
                                 
                             </div>
                         </div>

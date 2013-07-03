@@ -6,7 +6,8 @@
     "requirejs": "~2.1.4",
     "modernizr": "~2.6.2",
     "jquery": "~1.9.1",
-    "angular": "*",
+    "angular": "~1.1.5",
+    "angular-unstable": "~1.1.5",
     "angular-ui": "*",
     "angular-ui-bootstrap": "*",
     "angular-resource": "*"

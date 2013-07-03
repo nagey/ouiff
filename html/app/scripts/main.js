@@ -1,7 +1,7 @@
 require.config({
     paths: {
         jquery: '../bower_components/jquery/jquery',
-        angular: '../bower_components/angular/angular',
+        angular: '../bower_components/angular-unstable/angular',
         "ng-resource": '../bower_components/angular-resource/angular-resource.min',
         'angular-ui': '../bower_components/angular-ui/build/angular-ui',
         'angular-modal': '../bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.4.0',
