@@ -392,6 +392,7 @@ outline: none;
 
 #videoPlayer {
 	z-index:990;
+	cursor: pointer;
 }
 
 #control-window {
