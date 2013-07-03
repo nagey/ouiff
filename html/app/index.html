@@ -70,7 +70,7 @@
                     
                     <div class="featured span3">
                         <h2>Featured</h2>       
-                        <div ng-repeat="feature in featuredList" class="entry">
+                        <div ng-repeat="feature in featuredList" ng-animate=" 'animate' " class="entry">
                             <img ng-click="imgClick(feature)" ng-src="{{feature.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
                             <div class="meta clearfix">
                                 <p class="user">{{feature.user.username}}</p>
@@ -84,7 +84,7 @@
                     
                     <div class="latest span3">
                         <h2>Latest</h2>            
-                        <div ng-repeat="latest in latestList" class="entry"> 
+                        <div ng-repeat="latest in latestList" ng-animate=" 'animate' " class="entry"> 
                             <img ng-click="imgClick(latest)" ng-src="{{latest.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
                             <div class="meta clearfix">
                                 <p class="user">{{latest.user.username}}</p>
