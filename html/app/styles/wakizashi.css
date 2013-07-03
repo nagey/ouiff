@@ -139,7 +139,7 @@ div.gold p {
 }
 
 #main-nav .login-btn a {
-	background:#fff url(../images/icon-login.png) center 20px no-repeat;
+	background:#fff url(../images/icon-login.png) 20px 20px no-repeat;
 	text-align:right;
 	font-family:salome, "Palatino Linotype", "Book Antiqua", Palatino, serif;
 	font-size:1.4em;
