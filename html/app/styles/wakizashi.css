@@ -287,16 +287,24 @@ box-shadow: none;
 	background-color:#43625f;
 }
 
+.btn:active {
+	background-color:#365350;
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+	        box-shadow: none;
+	
+}
+
 div#cats .btn {
 	margin:20px 40px 20px 0;
 }
 
-.green .hilite {
-	color:#43625f;
+.hilite {
+	color:#567572;
 	background-color:#E5C36E;
 }
 
-.green .hilite:hover {
+.hilite:hover {
 	color:#43625f;
 	background-color:#dfb346;
 }
@@ -321,7 +329,11 @@ div#cats .btn {
 .gold { background:#E5C36E; }
 
 
-
+::selection {
+background: #567572;
+color:#E5C36E;
+text-shadow: none;
+}
 
 
 
