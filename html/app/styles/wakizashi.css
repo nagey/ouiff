@@ -431,9 +431,45 @@ outline: none;
 
 
 #rate-window {
-	background-color:rgba(66,98,95, 0.9);
+	background-color:rgba(231,193,100, 0.6);
 }
 
+.rate-pad-hate-myself {
+	width:80%;
+	height:80%;
+	padding:10%;
+}
+
+#rate-window h2 {
+	margin-top:60px;
+	color:#567572;
+	border-color:#567572;
+	
+}
+
+#rate-window .icon-star-empty {
+	width:80px;
+	height:80px;
+	background:transparent url(../images/icon-rate-hash.png) center center no-repeat;
+}
+
+#rate-window .icon-star {
+	width:80px;
+	height:80px;
+	background:transparent url(../images/icon-rate-hash-filled.png) center center no-repeat;
+}
+
+#rate-window #share-window {
+	display:none;
+}
+
+#rate-window textarea {
+	display:none;
+}
+
+.rate-submit {
+	margin-top:30px;
+}
 
 
 

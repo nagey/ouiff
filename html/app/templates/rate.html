@@ -1,4 +1,6 @@
-<div id="rate-window" ng-controller="RateCtrl">
+<div id="rate-window" ng-controller="RateCtrl" class="span6">
+	<div class="rate-pad-hate-myself">
+    <h2>Rate this film</h2>
     <rating value="rate" max="5" readonly="isReadonly"></rating>
     <div>
     	<textarea rows="4" cols="50" ng-model="message">http://15sfest.com Rocks my Socks!! #15sfest</textarea>
@@ -9,6 +11,7 @@
 	    </div>
 	</div>
 
-	<button class="btn btn-large btn-block btn-primary" ng-click="submitRating()" type="button">Submit</button>
+	<button class="btn btn-large btn-block btn-primary rate-submit" ng-click="submitRating()" type="button">Submit</button>
+    </div>
 </div>
 
