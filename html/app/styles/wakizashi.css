@@ -380,6 +380,13 @@ background-clip: padding-box;
 outline: none;
 }
 
+#control-window {
+	height:100%;
+	background:transparent url(../images/icon-btn-play.png) center center no-repeat;
+	position:absolute;
+	z-index:999;
+}
+
 
 
 
