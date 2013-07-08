@@ -472,11 +472,11 @@ outline: none;
 	margin-top:30px;
 }
 .fadeIn-enter {
--webkit-transition: 0.3s linear all;
-	-moz-transition: 0.3s linear all;
-	-o-transition: 0.3s linear all;
-	-ms-transition: 0.3s linear all;
-	transition: 0.3s linear all;
+-webkit-transition: .5s linear all;
+	-moz-transition: .5s linear all;
+	-o-transition: .5s linear all;
+	-ms-transition: .5s linear all;
+	transition: .5s linear all;
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	filter: alpha(opacity=0);
 	opacity: 0;

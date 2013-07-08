@@ -6,6 +6,10 @@ define(['angular', 'jquery'], function (angular, $) {
 
     $scope.tpl={};
     $scope.isOpen = false;
+    $scope.opts = {
+      backdropFade: true,
+      dialogFade:true
+    }
 
     $scope.tpl.rate = 'templates/rate.html';
     $scope.tpl.videoControls = 'templates/videoControls.html';
