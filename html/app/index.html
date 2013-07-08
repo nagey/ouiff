@@ -38,9 +38,11 @@
                         <ul id="main-nav" class="nav nav-tabs nav-stacked">
                             <li class="login-btn"><a href="#" ng-hide="loggedIn" ng-click="openAuth()">Login</a></li>
                             <li class="login-btn logged-in"><a href="#" ng-show="loggedIn" class="clearfix" ><img class="profile-img" ng-src="{{profile.profilePicture}}">{{profile.username}}</a></li>
-                            <li><a href="#">Submit a Film</a></li>
-                            <li><a href="#">Categories</a></li>
-                            <li><a href="#">Winners</a></li>
+                            <li><a class="scroll-btn" href="#" data="categories">Categories</a></li>
+                            <li><a class="scroll-btn" href="#" data="participate">Submit a Film</a></li>
+                            <!--
+                                <li><a href="#">Winners</a></li>
+                            -->
                         </ul>
                     </nav>
                 
@@ -128,7 +130,7 @@
         </div>
         
         
-        <div id="cats" class="green">
+        <div id="categories" class="green">
         
         	<div class="container">            
             	               

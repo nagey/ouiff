@@ -11,6 +11,7 @@ define([
     'Services/Media',
     'Services/User',
     'Controllers/LightboxCtrl',
+    'Utils/menuScroll',
     "ng-resource"
   ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, Media, User, LightboxCtrl) {
     'use strict';

@@ -1,0 +1,13 @@
+$(document).ready(function(){
+	var links = $('#main-nav li a.scroll-btn');
+	links.click(function (e) {
+		console.log($(this).attr('data'));
+		e.preventDefault();
+    	goToByScroll($(this).attr('data'));
+    });
+    function goToByScroll(dataslide) {
+        $('html,body').animate({
+            scrollTop: $("#"+dataslide).offset().top
+        }, 500/*, 'easeInOutQuint'*/);
+    }
+});
