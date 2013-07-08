@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	var links = $('#main-nav li a.scroll-btn');
 	links.click(function (e) {
-		console.log($(this).attr('data'));
 		e.preventDefault();
     	goToByScroll($(this).attr('data'));
     });

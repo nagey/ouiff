@@ -17,19 +17,22 @@ define([
     'use strict';
 
     var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
-      $locationProvider.html5Mode(true);
+      
+      $locationProvider.html5Mode(false);
+
+      console.log('$locationProvider',$locationProvider);
+      console.log('$routeProvider',$routeProvider);
     }]);
 
     app.controller("RateCtrl", ["$scope", '$rootScope', "user", "$http", RateCtrl]);
     app.controller("VideoListCtrl", ["$location", "$scope", '$rootScope',"media", "user", VideoListCtrl]);
-    app.controller("AuthCtrl", ["$scope", '$rootScope', "user", AuthCtrl]);
-    app.controller("LightboxCtrl", ["$scope", "$rootScope", "$timeout", LightboxCtrl]);
+    app.controller("AuthCtrl", ["$location", "$scope", '$rootScope', "user", AuthCtrl]);
+    app.controller("LightboxCtrl", ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media", LightboxCtrl]);
     app.controller("VideoCtrl", ["$scope",  VideoCtrl]);
     
     app.service("media", ["$resource", "$rootScope", Media]);
     app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);
     
-
     $(document).ready(function () {
       angular.bootstrap(document, ["fest"]);
     })

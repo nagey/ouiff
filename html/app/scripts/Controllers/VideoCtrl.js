@@ -3,12 +3,10 @@ define(['angular', 'jquery'], function (angular, $) {
     'use strict';
 
     return function VideoCtrl($scope) {
-      console.log('VideoCtrl');
         $scope.bindListener = function(){
 
           $('#play-btn, #videoPlayer').bind('click',function(){
             var video = document.getElementById("videoPlayer");
-            console.log('yo!')
             if($('#control-window').hasClass('playing'))
               video.pause();
             else
@@ -18,7 +16,6 @@ define(['angular', 'jquery'], function (angular, $) {
           });
 
           $('#mute-btn').bind('click',function(){
-            console.log($('#videoPlayer').prop('muted'))
             if($('#control-window').hasClass('muted'))
               $('#videoPlayer').prop('muted', false);
             else

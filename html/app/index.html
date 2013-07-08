@@ -57,13 +57,13 @@
                     <div class="best-of span6">
                         <h2>Highest Rated</h2>
                         <div class="row">
-                                <div ng-repeat="best in bestOfList" ng-animate=" 'animate' " class="entry span3">
+                                <div ng-repeat="best in bestOfList" ng-animate=" 'fadeIn' " class="entry span3">
                                     <img ng-click="imgClick(best)" ng-src="{{best.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
                                     <div class="meta clearfix">
                                         <p class="user">{{best.user.username}}</p>
                                         <p class="desc">{{best.caption.text}}</p>
                                         <p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
-                                        <p class="rating"><span class="hash">###</span>##</p>
+                                        <p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
                                     </div>
                                 </div>
                         </div>
@@ -72,7 +72,7 @@
                     
                     <div class="featured span3">
                         <h2>Featured</h2>       
-                        <div ng-repeat="feature in featuredList" ng-animate=" 'animate' " class="entry">
+                        <div ng-repeat="feature in featuredList" ng-animate=" 'fadeIn' " class="entry">
                             <img ng-click="imgClick(feature)" ng-src="{{feature.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
                             <div class="meta clearfix">
                                 <p class="user">{{feature.user.username}}</p>
@@ -86,7 +86,7 @@
                     
                     <div class="latest span3">
                         <h2>Latest</h2>            
-                        <div ng-repeat="latest in latestList" ng-animate=" 'animate' " class="entry"> 
+                        <div ng-repeat="latest in latestList" ng-animate=" 'fadeIn' " class="entry"> 
                             <img ng-click="imgClick(latest)" ng-src="{{latest.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
                             <div class="meta clearfix">
                                 <p class="user">{{latest.user.username}}</p>
@@ -110,13 +110,13 @@
                                     <source id="source" ng-src="{{source}}" />
                                 </video>
                             </div>
-                            <div class="row" ng-switch on="display" ng-animate=" 'animate' ">
+                            <div class="row" ng-switch on="display" ng-animate=" 'fadeIn' ">
                                 <!--<div ng-show="display=='video'" ng-include src="'templates/video.html'" />
                                 <div ng-show="display=='rate'" ng-include src="'templates/rate.html'" />
                                 <div ng-show="display=='auth'" ng-include src="'templates/auth.html'" />-->
-                                <div ng-switch-when="rate" ng-include src="tpl.rate" ng-animate=" 'animate' "></div>
-                                <div ng-switch-when="auth" ng-include src="tpl.auth" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"></div>
-                                <div ng-switch-when="video" ng-include src="tpl.videoControls" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"></div>
+                                <div ng-switch-when="rate" ng-include src="tpl.rate" ng-animate=" 'fadeIn' "></div>
+                                <div ng-switch-when="auth" ng-include src="tpl.auth" ng-animate=" 'fadeIn' "></div>
+                                <div ng-switch-when="video" ng-include src="tpl.videoControls" ng-animate=" 'fadeIn' "></div>
                                 
                             </div>
                         </div>

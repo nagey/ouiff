@@ -5,10 +5,9 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
     return function VideoListCtrl($location, $scope, $rootScope, media, user) {
 
       media.index();
-      media.index();
 
       $scope.modal = {};
-
+      //console.log("$location.parse(url):",$location.$$parse("http://15sfest.com/watch/489918443045812158_582588") );
       media.bestOf(function (result) {
         $scope.bestOfList = result;
       },4);
@@ -20,10 +19,7 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       },2);
 
       $scope.imgClick = function (item){
-        $scope.modal.videoSrc = item.videos.standard_resolution.url;
-        $rootScope.activeVid = item.id;
-        $rootScope.$broadcast('open_modal', {display: 'video', vid: item.id, vid_src:item.videos.standard_resolution.url});
+        $location.path('/watch/'+ item.id);
       }
-
     };
 });

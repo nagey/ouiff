@@ -471,7 +471,7 @@ outline: none;
 .rate-submit {
 	margin-top:30px;
 }
-.animate-enter {
+.fadeIn-enter {
 -webkit-transition: 0.3s linear all;
 	-moz-transition: 0.3s linear all;
 	-o-transition: 0.3s linear all;
@@ -482,7 +482,7 @@ outline: none;
 	opacity: 0;
 }
  
-.animate-enter.animate-enter-active {
+.fadeIn-enter.fadeIn-enter-active {
 	opacity: 1;
 }
 

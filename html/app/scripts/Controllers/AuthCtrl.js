@@ -2,7 +2,7 @@
 define(['angular', 'jquery'], function (angular, $) {
     'use strict';
 
-    return function AuthCtrl($scope, $rootScope, user) {
+    return function AuthCtrl($location, $scope, $rootScope, user) {
       
       $scope.services = [
       	{name: "Instagram", key:'instagram', url: "/auth/instagram", w: 575, h:400, checked: false, auth: false},
@@ -18,7 +18,8 @@ define(['angular', 'jquery'], function (angular, $) {
       });
 
       $scope.openAuth = function(){
-        $rootScope.$broadcast('open_modal', {display: 'auth'});
+        $//rootScope.$broadcast('open_modal', {display: 'auth'});
+        $location.path('/login');
       }
       $scope.checkStatus = function(){
         user.status(function(status){
