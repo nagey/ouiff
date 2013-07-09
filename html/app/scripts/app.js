@@ -26,7 +26,7 @@ define([
         when('/watch', {templateUrl: 'templates/watch.html',   controller: VideoListCtrl}).
         when('/watch/:videoId', {templateUrl: 'templates/modal.html', controller: LightboxCtrl}).
         when('/login', {templateUrl: 'templates/modal.html', controller: LightboxCtrl}).
-        when('/profile', {templateUrl: 'templates/user.html', controller: ProfileCtrl}).
+        when('/profile', {templateUrl: 'templates/profile.html', controller: ProfileCtrl}).
         when('/profile/:userId', {templateUrl: 'templates/user.html', controller: ProfileCtrl}).
         otherwise({redirectTo: '/watch'});
     }]);
@@ -36,7 +36,7 @@ define([
     app.controller("AuthCtrl", ["$location", "$scope", '$rootScope', "user", AuthCtrl]);
     app.controller("LightboxCtrl", ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media", LightboxCtrl]);
     app.controller("VideoCtrl", ["$scope",  VideoCtrl]);
-    app.controller("ProfileCtrl", ["$scope", "$routeParams", "user", ProfileCtrl]);
+    app.controller("ProfileCtrl", ["$scope", "$location", "$routeParams", "user", ProfileCtrl]);
     
     app.service("media", ["$resource", "$rootScope", Media]);
     app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);

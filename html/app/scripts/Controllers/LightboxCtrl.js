@@ -67,35 +67,22 @@ define(['angular', 'jquery'], function (angular, $) {
       $scope.isOpen = false;
     }
 
-    /*$scope.checkURL = function (){
-      $scope.pathArr = $location.$$path.split('/')
-      if($scope.pathArr[1] == "watch"){
-        media.mediaById(function (result) {
-          $scope.videoItem = result[0];
+    console.log("asdfas",$location)
+    if($routeParams.videoId){
+        media.mediaById($routeParams.videoId, function (result) {
+          $scope.videoItem = result;
           $rootScope.activeVid = $scope.videoItem.id;
 
           $scope.source = $scope.videoItem.videos.standard_resolution.url;
           $scope.display = 'video';
           $scope.setHandler = true;
           $scope.isOpen = true;
-          console.log("checkURL")
-        },$scope.pathArr[2]);
-      }else if($scope.pathArr[1] == "login"){
-        $scope.display = 'auth';
-        $scope.isOpen = true;
-      }
-    }*/
-
-    if($routeParams.videoId){
-        media.mediaById($routeParams.videoId, function (result) {
-        $scope.videoItem = result;
-        $rootScope.activeVid = $scope.videoItem.id;
-
-        $scope.source = $scope.videoItem.videos.standard_resolution.url;
-        $scope.display = 'video';
-        $scope.setHandler = true;
-        $scope.isOpen = true;
       });
+    }else if($location.$$path == '/login'){
+      console.log("asdfas",$location)
+
+      $scope.display = 'auth';
+      $scope.isOpen = true;
     }
   };
 });
