@@ -8,13 +8,13 @@ define([
     'Controllers/RateCtrl',
     'Controllers/AuthCtrl',
     'Controllers/VideoCtrl',
-  	'Controllers/UserCtrl',
+  	'Controllers/ProfileCtrl',
     'Services/Media',
     'Services/User',
     'Controllers/LightboxCtrl',
     'Utils/menuScroll',
     "ng-resource"
-  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, UserCtrl, Media, User, LightboxCtrl) {
+  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, ProfileCtrl, Media, User, LightboxCtrl) {
     'use strict';
 
     var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -36,7 +36,7 @@ define([
     app.controller("AuthCtrl", ["$location", "$scope", '$rootScope', "user", AuthCtrl]);
     app.controller("LightboxCtrl", ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media", LightboxCtrl]);
     app.controller("VideoCtrl", ["$scope",  VideoCtrl]);
-    app.controller("UserCtrl", ["$scope", "$routeParams", "user", UserCtrl]);
+    app.controller("ProfileCtrl", ["$scope", "$routeParams", "user", ProfileCtrl]);
     
     app.service("media", ["$resource", "$rootScope", Media]);
     app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);
