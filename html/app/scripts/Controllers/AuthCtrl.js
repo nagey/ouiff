@@ -1,35 +1,37 @@
-/*global define */
-define(['angular', 'jquery'], function (angular, $) {
+/*global define, screen, console */
+define(['angular', 'jquery'], function () {
     'use strict';
 
-    return function AuthCtrl($location, $scope, $rootScope, user) {
+    return function AuthCtrl($location, $scope, $rootScope, user, $window) {
       
       $scope.services = [
-      	{name: "Instagram", key:'instagram', url: "/auth/instagram", w: 575, h:400, checked: false, auth: false},
-      	{name: "Facebook", key:'facebook', url: "/auth/facebook", w: 500, h:200, checked: false, auth: false},
-      	{name: "Twitter", key:'twitter', url: "/auth/twitter", w: 575, h:400, checked: false, auth: false}
+        {name: "Instagram", key:'instagram', url: "/auth/instagram", w: 575, h:400, checked: false, auth: false},
+        {name: "Facebook", key:'facebook', url: "/auth/facebook", w: 500, h:200, checked: false, auth: false},
+        {name: "Twitter", key:'twitter', url: "/auth/twitter", w: 575, h:400, checked: false, auth: false}
       ];
 
       $scope.loggedIn = false;
-      $scope.profile = {}
+      $scope.profile = {};
 
-      $scope.$on('userLogin', function(event, data) {
+      $scope.$on('userLogin', function() {
         $scope.checkStatus();
       });
 
       $scope.openAuth = function(){
-        $//rootScope.$broadcast('open_modal', {display: 'auth'});
+        //$rootScope.$broadcast('open_modal', {display: 'auth'});
         $location.path('/login');
-      }
+      };
+      
       $scope.openProfile = function(){
-        $//rootScope.$broadcast('open_modal', {display: 'auth'});
+        //$rootScope.$broadcast('open_modal', {display: 'auth'});
         $location.path('/profile');
-      }
+      };
+      
       $scope.checkStatus = function(){
         user.status(function(status){
           if(status.loggedIn){
             $scope.loggedIn = true;
-            $scope.profile = status.profile
+            $scope.profile = status.profile;
             for(var i in $scope.profile.profileList){
               for(var j in $scope.services){
                 if($scope.profile.profileList[i] == $scope.services[j].key){
@@ -41,7 +43,7 @@ define(['angular', 'jquery'], function (angular, $) {
             }
           }
         });
-      }
+      };
       
       $scope.login = function(service){
         if(!service.auth){
@@ -53,7 +55,7 @@ define(['angular', 'jquery'], function (angular, $) {
 
           console.log('connect to  service',service);
           
-          return window.open(service.url, 
+          return $window.open(service.url, 
             title, 
             'toolbar=no,'+
             ' location=no,'+
@@ -68,6 +70,6 @@ define(['angular', 'jquery'], function (angular, $) {
             ', top='+top+
             ', left='+left);      
           }
-        }
+        };
     };
 });

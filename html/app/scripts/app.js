@@ -1,19 +1,19 @@
-/*global define */
+/*global define, angular, document */
 define([
-	'jquery',
-	'bootstrap', 
-    'angular',
-    'angular-modal',
-    'Controllers/VideoListCtrl',
-    'Controllers/RateCtrl',
-    'Controllers/AuthCtrl',
-    'Controllers/VideoCtrl',
-  	'Controllers/ProfileCtrl',
-    'Services/Media',
-    'Services/User',
-    'Controllers/LightboxCtrl',
-    'Utils/menuScroll',
-    "ng-resource"
+  'jquery',
+  'bootstrap', 
+  'angular',
+  'angular-modal',
+  'Controllers/VideoListCtrl',
+  'Controllers/RateCtrl',
+  'Controllers/AuthCtrl',
+  'Controllers/VideoCtrl',
+	'Controllers/ProfileCtrl',
+  'Services/Media',
+  'Services/User',
+  'Controllers/LightboxCtrl',
+  'Utils/menuScroll',
+  "ng-resource"
   ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, ProfileCtrl, Media, User, LightboxCtrl) {
     'use strict';
 
@@ -32,7 +32,7 @@ define([
 
     app.controller("RateCtrl", ["$scope", '$rootScope', "user", "$http", RateCtrl]);
     app.controller("VideoListCtrl", ["$location", "$scope", '$rootScope',"media", "user", VideoListCtrl]);
-    app.controller("AuthCtrl", ["$location", "$scope", '$rootScope', "user", AuthCtrl]);
+    app.controller("AuthCtrl", ["$location", "$scope", '$rootScope', "user", "$window", AuthCtrl]);
     app.controller("LightboxCtrl", ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media", LightboxCtrl]);
     app.controller("VideoCtrl", ["$scope",  VideoCtrl]);
     app.controller("ProfileCtrl", ["$scope", "$location", "$routeParams", "user",  "media", ProfileCtrl]);
@@ -42,7 +42,7 @@ define([
     
     $(document).ready(function () {
       angular.bootstrap(document, ["fest"]);
-    })
+    });
 
     return '\'Allo \'Allo!';
 });
