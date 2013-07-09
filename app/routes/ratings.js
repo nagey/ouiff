@@ -5,10 +5,10 @@ module.exports = function (app) {
   
   var validateRating = function (rating) {
     if (!rating.review) {
-      rating.review = "Check out this Film on #15sfest http://15sfest.com/watch/"+rating.id;
+      rating.review = "Check out this Film on #15sfest http://15sfest.com/social/watch/"+rating.id;
     }
-    if (rating.review.indexOf("http://15sfest.com/watch/") === -1) {
-      rating.review += " http://15sfest.com/watch/"+rating.id;
+    if (rating.review.indexOf("http://15sfest.com/social/watch/") === -1) {
+      rating.review += " http://15sfest.com/social/watch/"+rating.id;
     }
     rating.score = parseInt(rating.score);
     return rating;
@@ -37,7 +37,10 @@ module.exports = function (app) {
             shares: req.body.shares,
             created_at: new Date()
           };
+          ratingDocument.shares = ["facebook", "twitter"];
+          ratingDocument.review = "this video is great!"
           ratingDocument = validateRating(ratingDocument);
+          console.log(req.user.tokens);
           if (ratingDocument.shares) {
             for (var network in ratingDocument.shares) {
               switch (ratingDocument.shares[network]) {
