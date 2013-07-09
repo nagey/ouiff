@@ -59,6 +59,11 @@ define(['angular'], function (angular ) {
         var tagMedia = $resource("http://15sfest.com/media/tag/"+tag+"/top", {id: "@id"});
         tagMedia.query(returnResults);
       };
+      
+      this.tags = function (cb, count, offset) {
+        var tagService = $resource("http://15sfest.com/media/tag", {id: "@id"});
+        tagService.query(returnResults);
+      };
 
     };
 });

@@ -1,7 +1,6 @@
+/*global console */
 module.exports = function (app) {
-  "use strict"
-  
-  var media = {};
+  "use strict";
   
   var resultDocument = { };
   
@@ -20,7 +19,7 @@ module.exports = function (app) {
       { $match: query },
       { $group: 
         { _id: "$id", 
-        score: { $avg : "$score" },
+        score: { $avg : "$score" }
         }
       },
       { $sort: { score: -1 } },
@@ -76,6 +75,18 @@ module.exports = function (app) {
     fetchAndSendTopMedia({}, res);
   });
   
+  app.get("/media/tag", function (req, res) {
+    app.extras.stathat.track("tags - fetch list", 1);
+    app.extras.mongo.tags.find({}, function (err, docs) {
+      if (err) {
+        console.log(err);
+        app.extras.stathat.track("database error", 1);
+        res.status(500).send("database error");
+      }
+      else res.send(docs);
+    });
+  });
+  
   app.get("/media/tag/:tag", function (req, res) {
     app.extras.stathat.track("media - fetch "+req.params.tag, 1);
     var queryDoc = {
@@ -95,7 +106,7 @@ module.exports = function (app) {
     app.extras.stathat.track("media - fetch for user "+req.params.queryUser, 1);
     var queryUser = req.params.queryUser + '';
     var userType = "user.";
-    userType += (Number(queryUser) === parseInt(queryUser)) ? "id" : "username";
+    userType += (Number(queryUser) === parseInt(queryUser,10)) ? "id" : "username";
     var queryDoc = {};
     queryDoc[userType] = req.params.queryUser;
     
@@ -113,7 +124,7 @@ module.exports = function (app) {
         res.send(docs[0]);
       }
       else {
-        res.status(404).send({status: "Not Found"})
+        res.status(404).send({status: "Not Found"});
       }
     });
   });
