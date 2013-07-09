@@ -36,8 +36,8 @@
                     
                     <nav class="span3" ng-controller="AuthCtrl" ng-init="checkStatus()">                    
                         <ul id="main-nav" class="nav nav-tabs nav-stacked">
-                            <li class="login-btn"><a href="#" ng-hide="loggedIn" ng-click="openAuth()">Login</a></li>
-                            <li class="login-btn logged-in"><a href="#" ng-show="loggedIn" class="clearfix" ><img class="profile-img" ng-src="{{profile.profilePicture}}">{{profile.username}}</a></li>
+                            <li class="login-btn"><a ng-hide="loggedIn" ng-click="openAuth()">Login</a></li>
+                            <li class="login-btn logged-in"><a ng-show="loggedIn" ng-click="openProfile()" class="clearfix" ><img class="profile-img" ng-src="{{profile.profilePicture}}">{{profile.username}}</a></li>
                             <li><a class="scroll-btn" href="#" data="categories">Categories</a></li>
                             <li><a class="scroll-btn" href="#" data="participate">Submit a Film</a></li>
                             <!--

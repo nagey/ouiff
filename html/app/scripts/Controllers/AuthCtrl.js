@@ -21,6 +21,10 @@ define(['angular', 'jquery'], function (angular, $) {
         $//rootScope.$broadcast('open_modal', {display: 'auth'});
         $location.path('/login');
       }
+      $scope.openProfile = function(){
+        $//rootScope.$broadcast('open_modal', {display: 'auth'});
+        $location.path('/profile');
+      }
       $scope.checkStatus = function(){
         user.status(function(status){
           if(status.loggedIn){

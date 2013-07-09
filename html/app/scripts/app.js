@@ -22,12 +22,11 @@ define([
       $locationProvider.html5Mode(false);
 
       $routeProvider.
-        when('', {templateUrl: 'templates/watch.html',   controller: VideoListCtrl}).
         when('/watch', {templateUrl: 'templates/watch.html',   controller: VideoListCtrl}).
         when('/watch/:videoId', {templateUrl: 'templates/modal.html', controller: LightboxCtrl}).
         when('/login', {templateUrl: 'templates/modal.html', controller: LightboxCtrl}).
         when('/profile', {templateUrl: 'templates/profile.html', controller: ProfileCtrl}).
-        when('/profile/:userId', {templateUrl: 'templates/user.html', controller: ProfileCtrl}).
+        when('/profile/:userId', {templateUrl: 'templates/profile.html', controller: ProfileCtrl}).
         otherwise({redirectTo: '/watch'});
     }]);
 
