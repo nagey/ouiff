@@ -49,15 +49,47 @@ h2 {
 	border-color:#567572;
 }
 
-div.gold p {
+.green h1, .green h2 {
+	color:#E5C36E;
+	border-color:#E5C36E;
+}
+
+div.gold p, div.gold a {
 	color:#567572;
 
+}
+
+div.gold a {
+	font-weight:bold;
 }
 
 #participate p {
 	font-size:20px;
 	line-height:24px;
 }
+
+.arrow_box {
+	position: relative;
+	background: #567572;
+}
+.arrow_box:after {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(86, 117, 114, 0);
+	border-bottom-color: #567572;
+	border-width: 30px;
+	left: 50%;
+	margin-left: -30px;
+}
+
 
 
 #header {
@@ -192,7 +224,7 @@ div.gold p {
 	border-radius: 2px 2px 0 0;
 }
 
-#board .entry .meta {
+.gold .entry .meta {
 	padding:10px;
 	background-color:#567572;
 	-webkit-border-radius: 0 0 2px 2px;
@@ -200,42 +232,61 @@ div.gold p {
 	border-radius: 0 0 2px 2px;
 }
 
-#board .entry p {
+.green .entry .meta {
+	padding:10px;
+	background-color:#E5C36E;
+	-webkit-border-radius: 0 0 2px 2px;
+	-moz-border-radius: 0 0 2px 2px;
+	border-radius: 0 0 2px 2px;
+}
+
+.gold .entry p {
 	font-size:14px;
 	color:#E5C36E;
 }
 
-#board .entry .user {
+.green .entry p {
+	font-size:14px;
+	color:#567572;
+}
+
+.gold .entry .user {
 	font-size:16px;
 	font-weight:bold;
 	color:#E5C36E;
 }
 
-#board .entry .desc {
+.green .entry .user {
+	font-size:16px;
+	font-weight:bold;
+	color:#567572;
+}
+
+.green .entry .desc {
 	height:40px;
 }
 
-#board .entry .geo {
+.green .entry .geo {
 	float:right;
 	font-size:12px;
 	text-align:right;
 }
 
-#board .entry .geo img {
+.entry .geo img {
 	display:inline;
 }
 
-#board .entry .rating {
+.entry .rating {
 	float:left;
 	font-size:24px;
 	font-weight:bold;
 }
 
-#board .entry .rating .hash {
+.green .entry .rating .hash {
 	color:#E5C36E;
 }
 
-#board .entry .rating {
+.green .entry .rating {
 	color:#8f936f;
 }
 
@@ -523,10 +574,17 @@ outline: none;
 	margin:10px 0;
 }
 
+#profile {
+	padding-bottom:50px;
+}
 
-
+#profile + #films {
+	padding-top:50px;
+}
 
 #profile .avatar {
+	display:block;
+	margin:0 auto;
 	-webkit-border-radius: 500px;
 	   -moz-border-radius: 500px;
 	        border-radius: 500px;

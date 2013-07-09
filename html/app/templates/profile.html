@@ -1,78 +1,45 @@
-<div id="profile" class="container">
+<div id="profile" class="container gold">
+    
     <div class="row">
-    	<div class="span4">
+        <div class="span3">
             <img class="avatar" ng-src="{{profile.profilePicture}}">
-             
-            <h1>{{profile.username}}</h1>
-        
+        </div>
+        <div class="span3">
+        	<h1>{{profile.username}}</h1>
             <p><a href="{{profile.website}}">{{profile.website}}</a></p>
+        	<p>{{profile.bio}}</p>
+        </div>
+        <div class="span3">
+            <a href="#"><img src="images/icon-Instagram.png" width="48" height="48" alt="Instagram" /></a>
+            <a href="#"><img src="images/icon-FB.png" width="48" height="48" alt="Facebook" /></a>
+            <a href="#"><img src="images/icon-Twitter.png" width="48" height="48" alt="Twitter" /></a>
+        </div>
+        <div class="span3 badges">
         
-            <p>{{profile.bio}}</p>
+        
+            
         </div>
 	</div>	
+
 </div>
 
-<div class="container">
-	<h2>Films</h2>
-    <div class="row">
-		
-				<div ng-animate=" 'fadeIn' " class="entry span3">
-					<img src="images/suki.jpeg" width="612" height="612" alt="FPO" />
-					<div class="meta clearfix">
-						
-						<p class="desc">#Gin and #tonic with @fevertree and @greenhatgin #15sfest</p>
-						<p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
-						<p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
-				 	</div>
-           		</div>
-			
-				<div ng-animate=" 'fadeIn' " class="entry span3">
-					<img src="images/suki.jpeg" width="612" height="612" alt="FPO" />
-					<div class="meta clearfix">
-						
-						<p class="desc">#Gin and #tonic with @fevertree and @greenhatgin #15sfest</p>
-						<p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
-						<p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
-				 	</div>
-           		</div>
-			
-				<div ng-animate=" 'fadeIn' " class="entry span3">
-					<img src="images/suki.jpeg" width="612" height="612" alt="FPO" />
-					<div class="meta clearfix">
-						
-						<p class="desc">#Gin and #tonic with @fevertree and @greenhatgin #15sfest</p>
-						<p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
-						<p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
-				 	</div>
-           		</div>
-			
-				<div ng-animate=" 'fadeIn' " class="entry span3">
-					<img src="images/suki.jpeg" width="612" height="612" alt="FPO" />
-					<div class="meta clearfix">
-						
-						<p class="desc">#Gin and #tonic with @fevertree and @greenhatgin #15sfest</p>
-						<p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
-						<p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
-				 	</div>
-           		</div>
-			
-		
-	</div>
+<div id="films" class="green arrow_box">
 
-	<div class="row">
-		<div class="span12">
-			<div class="row">
-				<div ng-repeat="video in videos" ng-animate=" 'fadeIn' " class="entry span3">
-                    <img ng-click="imgClick(video)" ng-src="{{video.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
-                    <div class="meta clearfix">
-                        <p class="user">{{video.user.username}}</p>
-                        <p class="desc">{{video.caption.text}}</p>
-                        <p class="geo"><img ng-show="{{video.location.country}}" ng-src="/images/flags/{{video.location.country}}.png"></p>
-                        <p class="rating"><rating value="video.score" max="5" readonly="true"></rating></p>
-                    </div>
+	<div class="container">
+	
+        <h2>Films</h2>
+    
+        <div class="row">
+            <div ng-repeat="video in videos" ng-animate=" 'fadeIn' " class="entry span3">
+                <img ng-click="imgClick(video)" ng-src="{{video.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
+                <div class="meta clearfix">
+                    <p class="desc">{{video.caption.text}}</p>
+                    <p class="geo"><img ng-show="{{video.location.country}}" ng-src="/images/flags/{{video.location.country}}.png"></p>
+                    <p class="rating"><rating value="video.score" max="5" readonly="true"></rating></p>
                 </div>
-			</div>				
-		</div>
-	</div>
+            </div>
+        </div>	
+        
+    </div>			
 
 </div>
