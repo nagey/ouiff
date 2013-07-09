@@ -9,24 +9,27 @@ define(['angular'], function (angular ) {
       var userMedia = false; 
 
       $rootScope.$on("userLogin", function (user) {
-        userMedia = $resource("http://15sfest.com/media/user/"+user.username, {id: "@is"});
+        userMedia = $resource("http://15sfest.com/media/user/"+user.username, {id: "@id"});
       });
       
-      this.index = function (cb, count) {
+      this.index = function (cb, count, offset) {
+        if (!offset) offset = 0;
         MediaRsc.query(function(result) {
-          if (typeof cb === "function") cb(result.splice(0,count));
+          if (typeof cb === "function") cb(result.splice(offset,count));
         });
       };
       
-      this.bestOf = function (cb, count) {
+      this.bestOf = function (cb, count, offset) {
+        if (!offset) offset = 0;
         BestMedia.query(function (result) {
-          if (typeof cb === "function") cb(result.splice(0,count));
+          if (typeof cb === "function") cb(result.splice(offset,count));
         });
       };
 
-      this.featured = function (cb, count) {
+      this.featured = function (cb, count, offset) {
+        if (!offset) offset = 0;
         FeaturedMedia.query(function (result) {
-          if (typeof cb === "function") cb(result.splice(0,count));
+          if (typeof cb === "function") cb(result.splice(offset,count));
         });
       };
 
@@ -37,9 +40,18 @@ define(['angular'], function (angular ) {
         });
       };
       
-      this.mediaByUser = function (username, cb) {
-        MediaRsc.query(function(result) {
-          if (typeof cb === "function") cb(result.splice(0,count));
+      this.mediaCurrentUser = function (cb, count, offset) {
+        if (!offset) offset = 0;
+        userMedia.query(function (result) {
+          if (typeof cb === "function") cb(result.splice(offset, count));
+        });
+      };
+      
+      this.mediaByUser = function (username, cb, count, offset) {
+        if (!offset) offset = 0;
+        var mediaResource = $resource("http://15sfest.com/media/user/"+username, {id: "@id"});
+        mediaResource.query(function(result) {
+          if (typeof cb === "function") cb(result.splice(offset,count));
         });
       };
 
