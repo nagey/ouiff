@@ -36,6 +36,12 @@ define(['angular'], function (angular ) {
           else return clip;
         });
       };
+      
+      this.mediaByUser = function (username, cb) {
+        MediaRsc.query(function(result) {
+          if (typeof cb === "function") cb(result.splice(0,count));
+        });
+      };
 
     };
 });
