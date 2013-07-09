@@ -1,0 +1,43 @@
+
+    <div class="container">
+        <div class="row">
+            <div class="best-of span6">
+                <h2>Highest Rated</h2>
+                <div class="row">
+                    <div ng-repeat="best in bestOfList" ng-animate=" 'fadeIn' " class="entry span3">
+                        <img ng-click="imgClick(best)" ng-src="{{best.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
+                        <div class="meta clearfix">
+                            <p class="user">{{best.user.username}}</p>
+                            <p class="desc">{{best.caption.text}}</p>
+                            <p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
+                            <p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
+                        </div>
+                    </div>
+				</div>
+			</div>
+			<div class="featured span3">
+                <h2>Featured</h2>       
+            	<div ng-repeat="feature in featuredList" ng-animate=" 'fadeIn' " class="entry">
+                    <img ng-click="imgClick(feature)" ng-src="{{feature.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
+                    <div class="meta clearfix">
+                        <p class="user">{{feature.user.username}}</p>
+                        <p class="desc">{{feature.caption.text}}</p>
+                        <p class="geo"><img ng-show="{{feature.location.country}}" ng-src="/images/flags/{{feature.location.country}}.png"></p>
+                        <p class="rating"><span class="hash">###</span>##</p>
+                    </div>    
+                </div>
+            </div>
+			<div class="latest span3">
+                <h2>Latest</h2>            
+                <div ng-repeat="latest in latestList" ng-animate=" 'fadeIn' " class="entry"> 
+                    <img ng-click="imgClick(latest)" ng-src="{{latest.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
+                    <div class="meta clearfix">
+                        <p class="user">{{latest.user.username}}</p>
+                        <p class="desc">{{latest.caption.text}}</p>
+                        <p class="geo"><img ng-show="{{latest.location.country}}" ng-src="/images/flags/{{latest.location.country}}.png"></p>
+                        <p class="rating"><span class="hash">###</span>##</p>
+                    </div>    
+                </div>   
+            </div>
+        </div>
+    </div>

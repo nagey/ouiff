@@ -1,8 +1,24 @@
-<div id="modal-window" modal="modal.isOpen" close="closeModal()" >
-    <div class="modal-body" ng-app="components">
-        <vid source="{{modal.videoSrc}}">
-        </vid>
+<!--
+### MODAL ###
+-->
+<div class="modal-container" ng-init="init()">
+    <div ng-controller="LightboxCtrl" id="modal-window" modal="isOpen" close="closeModal()" options="opts">
+        <div class="modal-body row">
+            <div id="modal-content" class="span6">
+                <div class="row" >
+                    <video id="videoPlayer" ng-init="videoInit()" class="span6" width="auto" height="auto">
+                        <source id="source" ng-src="{{source}}" />
+                    </video>
+                </div>
+                <div class="row" ng-switch on="display" ng-animate=" 'fadeIn' ">
+                    <div ng-switch-when="rate" ng-include src="tpl.rate" ng-animate=" 'fadeIn' "></div>
+                    <div ng-switch-when="auth" ng-include src="tpl.auth" ng-animate=" 'fadeIn' "></div>
+                    <div ng-switch-when="video" ng-include src="tpl.videoControls" ng-animate=" 'fadeIn' "></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
+<!--
+### MODAL END ###
+-->
