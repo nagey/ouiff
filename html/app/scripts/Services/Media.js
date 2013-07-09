@@ -15,6 +15,7 @@ define(['angular'], function (angular ) {
       this.index = function (cb, count, offset) {
         if (!offset) offset = 0;
         MediaRsc.query(function(result) {
+          if (!count) count = result.length;
           if (typeof cb === "function") cb(result.splice(offset,count));
         });
       };
@@ -22,6 +23,7 @@ define(['angular'], function (angular ) {
       this.bestOf = function (cb, count, offset) {
         if (!offset) offset = 0;
         BestMedia.query(function (result) {
+          if (!count) count = result.length;
           if (typeof cb === "function") cb(result.splice(offset,count));
         });
       };
@@ -29,6 +31,7 @@ define(['angular'], function (angular ) {
       this.featured = function (cb, count, offset) {
         if (!offset) offset = 0;
         FeaturedMedia.query(function (result) {
+          if (!count) count = result.length;
           if (typeof cb === "function") cb(result.splice(offset,count));
         });
       };
@@ -43,6 +46,7 @@ define(['angular'], function (angular ) {
       this.mediaCurrentUser = function (cb, count, offset) {
         if (!offset) offset = 0;
         userMedia.query(function (result) {
+          if (!count) count = result.length;
           if (typeof cb === "function") cb(result.splice(offset, count));
         });
       };
@@ -51,6 +55,7 @@ define(['angular'], function (angular ) {
         if (!offset) offset = 0;
         var mediaResource = $resource("http://15sfest.com/media/user/"+username, {id: "@id"});
         mediaResource.query(function(result) {
+          if (!count) count = result.length;
           if (typeof cb === "function") cb(result.splice(offset,count));
         });
       };
