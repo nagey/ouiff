@@ -1,3 +1,4 @@
+/*global module, console, require */
 module.exports = function (app) {
   "use strict";
   
@@ -6,8 +7,6 @@ module.exports = function (app) {
   
   
   var geocoder = require("geocoder");
-  
-  var ObjectId = require('mongojs').ObjectId;
   
   function processGeocodeResult(result) {
     var locationObject = {};
@@ -77,7 +76,7 @@ module.exports = function (app) {
 
     app.extras.redisClient.get(minTagId, function (err, my_min_id) {
       if (err) { 
-        console.log("error on redis retrieval", err) 
+        console.log("error on redis retrieval", err); 
         app.extras.stathat.track("redis error",1);
       }
       app.extras.Instagram.tags.recent({ name: tagName,
@@ -91,15 +90,16 @@ module.exports = function (app) {
             getCountryAndInsert(data[m]);
           }
           //app.extras.mongo.media.insert(data);
+          var newTagsCallback = function (err, docs) {
+            if (err) app.extras.stathat.track("database error", 1);
+            if (docs) app.extras.stathat.track("new tags", docs.length);
+          };
           for (var i in data) {
             var tagList = [];
             for (var t in data[i].tags) {
               tagList.push({tag:data[i].tags[t]});
             }
-            app.extras.mongo.tags.insert(tagList, function (err, docs) {
-              if (err) app.extras.stathat.track("database error", 1);
-              if (docs) app.extras.stathat.track("new tags", docs.length);
-            });
+            app.extras.mongo.tags.insert(tagList, newTagsCallback);
           }
           if (data.length) {
             getNewMedia(tagName);
@@ -151,4 +151,4 @@ module.exports = function (app) {
   });
   
 
-}
+};

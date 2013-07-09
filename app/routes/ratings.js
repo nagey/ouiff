@@ -1,3 +1,4 @@
+/*global module, console, require */
 module.exports = function (app) {
   'use strict';
   var Twit = require("twit");
@@ -10,9 +11,9 @@ module.exports = function (app) {
     if (rating.review.indexOf("http://15sfest.com/social/watch/") === -1) {
       rating.review += " http://15sfest.com/social/watch/"+rating.id;
     }
-    rating.score = parseInt(rating.score);
+    rating.score = parseInt(rating.score,10);
     return rating;
-  }
+  };
   
   app.post("/rate/:media_id", function (req, res) {
     if (!req.user) {
@@ -38,8 +39,10 @@ module.exports = function (app) {
             created_at: new Date()
           };
           ratingDocument.shares = ["facebook", "twitter"];
-          ratingDocument.review = "this video is great!"
+          ratingDocument.review = "this video is great!";
           ratingDocument = validateRating(ratingDocument);
+          var twitterCallback = function () {};
+          var facebookCallback = function (res) { console.log(res); };
           console.log(req.user.tokens);
           if (ratingDocument.shares) {
             for (var network in ratingDocument.shares) {
@@ -47,7 +50,7 @@ module.exports = function (app) {
                 case "facebook":
                   if (!req.user.tokens.facebook) break;
                   FB.setAccessToken(req.user.tokens.facebook[0]);
-                  FB.api("/me/video.rates", 'post', {"rating:value": ratingDocument.score, "rating:scale": 5, "rating:normalized_value": ratingDocument.score*.2, "review_text": ratingDocument.review, "movie": "http://15sfest.com/watch/"+ratingDocument.id}, function (res) { console.log(res); });
+                  FB.api("/me/video.rates", 'post', {"rating:value": ratingDocument.score, "rating:scale": 5, "rating:normalized_value": ratingDocument.score*0.2, "review_text": ratingDocument.review, "movie": "http://15sfest.com/watch/"+ratingDocument.id}, facebookCallback);
                   // something
                   break;
                 case "twitter":
@@ -58,7 +61,7 @@ module.exports = function (app) {
                     access_token: req.user.tokens.twitter[0],
                     access_token_secret: req.user.tokens.twitter[1]
                   });
-                  T.post("/statuses/update", {status: ratingDocument.review}, function () {});
+                  T.post("/statuses/update", {status: ratingDocument.review}, twitterCallback);
                   //something else
                   break;
               }

@@ -1,4 +1,4 @@
-/*global console */
+/*global module, console */
 module.exports = function (app) {
   "use strict";
   

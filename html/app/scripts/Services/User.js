@@ -1,4 +1,4 @@
-/*global define */
+/*global define, console */
 define(['angular'], function (angular ) {
     'use strict';
 
@@ -15,14 +15,14 @@ define(['angular'], function (angular ) {
           userObj = user;
           $rootScope.$broadcast("userLogin", user);
         }
-      }
+      };
 
       $window.sendUser = function (user) {
         //console.log("in sendUser");
         if (user.profileList) {
           loginUser(user);
         }
-      }
+      };
       
       this.status = function (cb) {
         if (hasStatus) {
@@ -60,11 +60,11 @@ define(['angular'], function (angular ) {
               }
             });
         }
-      }
+      };
       
       
       this.status(function (user) {
         console.log("User Status", user);
       });
-    }
+    };
 });

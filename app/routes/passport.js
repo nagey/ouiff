@@ -1,7 +1,7 @@
+/*global module, require, console */
 module.exports = function (app) {
   "use strict";
   
-  var LocalStrategy = require('passport-local').Strategy;
   var FacebookStrategy = require('passport-facebook').Strategy;
   var TwitterStrategy = require('passport-twitter').Strategy;
   var InstagramStrategy = require('passport-instagram').Strategy;
@@ -9,14 +9,15 @@ module.exports = function (app) {
   var ObjectId = require("mongojs").ObjectId;
   
   var createOrUpdateUser = function (req, profile, done, token1, token2) {
+    var userObject;
     if (!req.user) {
-      var userObject = {};
+      userObject = {};
       userObject.socialProfiles = {};
       userObject.profileList = [];
     }
     else {
       userObject = JSON.parse(JSON.stringify(req.user));
-      userObject._id = ObjectId(userObject._id);
+      userObject._id = new ObjectId(userObject._id);
       if (!userObject.profileList) userObject.profileList = [];
     }
     userObject.tokens = userObject.tokens || {};
@@ -61,7 +62,7 @@ module.exports = function (app) {
         if (typeof docs == "Array") done(null, docs[0]);
         else done(null, userObject);
       }
-    }
+    };
     
     if (req.user) {
       if ((!req.user.socialProfiles[profile.provider]) || ((req.user.socialProfiles[profile.provider]) && (req.user.socialProfiles[profile.provider]._raw !== userObject.socialProfiles[profile.provider]._raw))) {
@@ -93,7 +94,7 @@ module.exports = function (app) {
         app.extras.mongo.users.insert(userObject, mongoCallback);
     }
     
-  }
+  };
   
   var fetchOrCreateUser = function (req, profile, done, token1, token2) {
     if (req.user) {
@@ -114,7 +115,9 @@ module.exports = function (app) {
           app.extras.stathat.track("user - "+ profile.provider+" - successful login", 1);
           if ((!docs[0].tokens) || (docs[0].tokens[profile.provider][0] !== token1) || (docs[0].tokens[profile.provider][1]) !== token2) {
             var providerTokens = "tokens."+profile.provider;
-            app.extras.mongo.users.update({_id: docs[0]._id}, {$set: {providerTokens: [token1, token2]}});
+            var updateDocument = {$set: {}};
+            updateDocument["$set"][providerTokens] = [token1, token2];
+            app.extras.mongo.users.update({_id: docs[0]._id}, updateDocument);
           }
           done(null, docs[0]);
         }
@@ -128,7 +131,7 @@ module.exports = function (app) {
         }
       });
     }
-  } 
+  }; 
   
   // Setup Instagram
   app.extras.passport.use(new InstagramStrategy({
@@ -145,7 +148,7 @@ module.exports = function (app) {
   
   FacebookStrategy.prototype.autorizationParams = function () {
     return {display: "popup"};
-  }
+  };
   
   // Setup Facebook
   app.extras.passport.use(new FacebookStrategy({
@@ -176,7 +179,7 @@ module.exports = function (app) {
     return function (req, res, next) {
       app.extras.stathat.track("login - "+ service+" - "+status, 1);  
       next();
-    }
+    };
   };
   
   
@@ -187,7 +190,7 @@ module.exports = function (app) {
 
   app.extras.passport.deserializeUser(function(id,done) {
     console.log('deserializing user', id);
-    app.extras.mongo.users.find({"_id":ObjectId(id)}).toArray(function(err,docs) {
+    app.extras.mongo.users.find({"_id":new ObjectId(id)}).toArray(function(err,docs) {
       done('',docs[0]);
     });
   });
@@ -242,6 +245,6 @@ module.exports = function (app) {
     else {
       res.send({"status": false});
     }
-  })
+  });
   
 };

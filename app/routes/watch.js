@@ -1,3 +1,4 @@
+/*global module */
 module.exports = function (app) {
   app.get("/social/watch/:media", function (req, res) {
     app.extras.stathat.track("social watch", 1);  
@@ -12,4 +13,4 @@ module.exports = function (app) {
     });
   });
   
-}
+};

@@ -1,5 +1,5 @@
 /*global define */
-define(['angular', 'jquery'], function (angular, $) {
+define(['angular', 'jquery'], function () {
     'use strict';
 
     return function RateCtrl($scope, $rootScope, user, $http) {
@@ -14,10 +14,10 @@ define(['angular', 'jquery'], function (angular, $) {
               'id': $rootScope.activeVid,
               'review': $scope.message,
               'score': $scope.rate
-            }
-            $http.post("/rate/"+ratingPost.id, ratingPost).success(function (d,s,h,c) {
+            };
+            $http.post("/rate/"+ratingPost.id, ratingPost).success(function () {
               $rootScope.$broadcast('close_modal');
-            }).error(function (d,s,h,c) {
+            }).error(function () {
               //console.log("error: ", d,s,h,c);
             });
 
@@ -25,6 +25,6 @@ define(['angular', 'jquery'], function (angular, $) {
             $rootScope.$broadcast('auth_request'/*, [1,2,3]*/);
           }
         });
-      }
+      };
     };
 });
