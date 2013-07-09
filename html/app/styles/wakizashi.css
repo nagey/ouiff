@@ -526,6 +526,14 @@ outline: none;
 
 
 
+#profile .avatar {
+	-webkit-border-radius: 500px;
+	   -moz-border-radius: 500px;
+	        border-radius: 500px;
+}
+
+
+
 @media (max-width: 979px) {
 #header h1 {
 

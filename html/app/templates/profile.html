@@ -1,21 +1,62 @@
-<div class="container">
+<div id="profile" class="container">
     <div class="row">
-    	<h1>{{profile.displayName}}</h1>
-	</div>
-	<div class="row">
-    	<h1>{{profile.username}}</h1>
-	</div>
-	<div class="row">
-    	<p>{{profile.website}}</p>
-	</div>
-	<div class="row">
-    	<p>{{profile.bio}}</p>
-	</div>
-	<div class="row">
-    	<p>{{profile.location}}</p>
-	</div>
-	<div class="row">
-    	<img ng-src="{{profile.profilePicture}}">
+    	<div class="span4">
+            <img class="avatar" ng-src="{{profile.profilePicture}}">
+             
+            <h1>{{profile.username}}</h1>
+        
+            <p><a href="{{profile.website}}">{{profile.website}}</a></p>
+        
+            <p>{{profile.bio}}</p>
+        </div>
+	</div>	
+</div>
+
+<div class="container">
+	<h2>Films</h2>
+    <div class="row">
+		
+				<div ng-animate=" 'fadeIn' " class="entry span3">
+					<img src="images/suki.jpeg" width="612" height="612" alt="FPO" />
+					<div class="meta clearfix">
+						
+						<p class="desc">#Gin and #tonic with @fevertree and @greenhatgin #15sfest</p>
+						<p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
+						<p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
+				 	</div>
+           		</div>
+			
+				<div ng-animate=" 'fadeIn' " class="entry span3">
+					<img src="images/suki.jpeg" width="612" height="612" alt="FPO" />
+					<div class="meta clearfix">
+						
+						<p class="desc">#Gin and #tonic with @fevertree and @greenhatgin #15sfest</p>
+						<p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
+						<p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
+				 	</div>
+           		</div>
+			
+				<div ng-animate=" 'fadeIn' " class="entry span3">
+					<img src="images/suki.jpeg" width="612" height="612" alt="FPO" />
+					<div class="meta clearfix">
+						
+						<p class="desc">#Gin and #tonic with @fevertree and @greenhatgin #15sfest</p>
+						<p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
+						<p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
+				 	</div>
+           		</div>
+			
+				<div ng-animate=" 'fadeIn' " class="entry span3">
+					<img src="images/suki.jpeg" width="612" height="612" alt="FPO" />
+					<div class="meta clearfix">
+						
+						<p class="desc">#Gin and #tonic with @fevertree and @greenhatgin #15sfest</p>
+						<p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
+						<p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
+				 	</div>
+           		</div>
+			
+		
 	</div>
 
 	<div class="row">
