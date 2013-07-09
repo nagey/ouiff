@@ -30,9 +30,10 @@ define(['angular'], function (angular ) {
         });
       }
 
-      this.mediaById = function (cb, id){
-        Media.query(function(result) {
-          if (typeof cb === "function") cb(result.splice(0,1));
+      this.mediaById = function (id, cb){
+        var clip = Media.get({id: id}, function(result) {
+          if (typeof cb === "function") cb(clip);
+          else return clip;
         });
       }
 
