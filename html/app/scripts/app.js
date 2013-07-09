@@ -35,7 +35,7 @@ define([
     app.controller("AuthCtrl", ["$location", "$scope", '$rootScope', "user", AuthCtrl]);
     app.controller("LightboxCtrl", ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media", LightboxCtrl]);
     app.controller("VideoCtrl", ["$scope",  VideoCtrl]);
-    app.controller("ProfileCtrl", ["$scope", "$location", "$routeParams", "user", ProfileCtrl]);
+    app.controller("ProfileCtrl", ["$scope", "$location", "$routeParams", "user",  "media", ProfileCtrl]);
     
     app.service("media", ["$resource", "$rootScope", Media]);
     app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);

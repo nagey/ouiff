@@ -17,4 +17,21 @@
 	<div class="row">
     	<img ng-src="{{profile.profilePicture}}">
 	</div>
+
+	<div class="row">
+		<div class="span12">
+			<div class="row">
+				<div ng-repeat="video in videos" ng-animate=" 'fadeIn' " class="entry span3">
+                    <img ng-click="imgClick(video)" ng-src="{{video.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
+                    <div class="meta clearfix">
+                        <p class="user">{{video.user.username}}</p>
+                        <p class="desc">{{video.caption.text}}</p>
+                        <p class="geo"><img ng-show="{{video.location.country}}" ng-src="/images/flags/{{video.location.country}}.png"></p>
+                        <p class="rating"><rating value="video.score" max="5" readonly="true"></rating></p>
+                    </div>
+                </div>
+			</div>				
+		</div>
+	</div>
+
 </div>
