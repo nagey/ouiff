@@ -26,8 +26,8 @@ define([
         when('/watch', {templateUrl: 'templates/watch.html',   controller: VideoListCtrl}).
         when('/watch/:videoId', {templateUrl: 'templates/modal.html', controller: LightboxCtrl}).
         when('/login', {templateUrl: 'templates/modal.html', controller: LightboxCtrl}).
-        when('/user', {templateUrl: 'templates/user.html', controller: UserCtrl}).
-        when('/user/:userId', {templateUrl: 'templates/user.html', controller: UserCtrl}).
+        when('/profile', {templateUrl: 'templates/user.html', controller: ProfileCtrl}).
+        when('/profile/:userId', {templateUrl: 'templates/user.html', controller: ProfileCtrl}).
         otherwise({redirectTo: '/watch'});
     }]);
 

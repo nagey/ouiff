@@ -87,18 +87,15 @@ define(['angular', 'jquery'], function (angular, $) {
     }*/
 
     if($routeParams.videoId){
-      console.log('hello')
-        media.mediaById(function (result) {
-            
-        $scope.videoItem = result[0];
+        media.mediaById($routeParams.videoId, function (result) {
+        $scope.videoItem = result;
         $rootScope.activeVid = $scope.videoItem.id;
 
         $scope.source = $scope.videoItem.videos.standard_resolution.url;
         $scope.display = 'video';
         $scope.setHandler = true;
         $scope.isOpen = true;
-        console.log('hello2', $scope)
-      },$routeParams.videoId);
+      });
     }
   };
 });
