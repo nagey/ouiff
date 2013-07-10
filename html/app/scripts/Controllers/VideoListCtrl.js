@@ -21,7 +21,7 @@ define(['angular', 'jquery', 'angular-modal'], function () {
       },4);
       media.featured(function (result) {
         $scope.videos[1] = {
-          title: "Featured", 
+          title: "Featured",
           css: "featured",
           span: 3,
           videos: result

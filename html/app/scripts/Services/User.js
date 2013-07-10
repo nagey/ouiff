@@ -11,18 +11,14 @@ define(['angular'], function () {
 
       var loginUser = function (user) {
         console.log("in loginUser", user);
-        console.log("stack 0",onceLoggedInStack[0]); 
         if (user) {
-          console.log("inside user block");
           hasStatus = true;
           loggedIn = true;
           userObj = user;
-          
-          console.log("processing stack");
+
           // Fire callbacks in the "onceLoggedInStack"
           var cb;
           while (!!(cb = onceLoggedInStack.pop())) {
-            console.log("onceloggedinstack callback", cb);
             cb(userObj);
           }
           $rootScope.$broadcast("userLogin", user);
