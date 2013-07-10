@@ -4,7 +4,7 @@ require.config({
         angular: '../bower_components/angular-unstable/angular',
         "ng-resource": '../bower_components/angular-resource/angular-resource.min',
         'angular-ui': '../bower_components/angular-ui/build/angular-ui',
-        'angular-modal': '../bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.4.0',
+        'angular-modal': '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         bootstrap: 'vendor/bootstrap'
       },
       shim: {
