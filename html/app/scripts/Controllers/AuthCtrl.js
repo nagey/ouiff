@@ -27,7 +27,7 @@ define(['angular', 'jquery'], function () {
 
       $scope.checkStatus = function(){
 
-        console.log('AuthCtrl checkStatus')
+        console.log('AuthCtrl checkStatus');
         user.status(function(status){
           if(status.loggedIn){
             $scope.loggedIn = true;
@@ -37,9 +37,9 @@ define(['angular', 'jquery'], function () {
                 if($scope.profile.profileList[i] === $scope.services[j].key){
                   $scope.services[j].checked = true;
                   $scope.services[j].auth = true;
-                  console.log('checkStatus pass')
-                  if($location.path() != "/login"){
-                    console.log($location.path())
+                  console.log('checkStatus pass');
+                  if($location.path() !== "/login"){
+                    console.log($location.path());
                   }
 
                   break;
@@ -60,7 +60,7 @@ define(['angular', 'jquery'], function () {
 
           console.log('connect to  service',service);
 
-          return window.open(service.url,
+          return $window.open(service.url,
             title,
             'toolbar=no,'+
             ' location=no,'+
