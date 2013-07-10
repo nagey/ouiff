@@ -21,5 +21,5 @@ define(['angular', 'jquery'], function () {
         $scope.imgClick = function (item){
           $location.path('/watch/'+ item.id);
         };
-    };
-});
+      };
+  });

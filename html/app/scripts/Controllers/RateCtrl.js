@@ -27,4 +27,4 @@ define(['angular', 'jquery'], function () {
         });
       };
     };
-});
+  });
