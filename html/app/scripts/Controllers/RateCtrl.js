@@ -27,4 +27,8 @@ define(['angular', 'jquery'], function () {
         });
       };
     };
+
+    RateCtrl.$inject = ["$scope", "$rootScope", "user", "$http"];
+
+    return RateCtrl;
   });

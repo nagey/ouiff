@@ -37,8 +37,15 @@ define([
     app.controller("VideoCtrl", ["$scope",  VideoCtrl]);
     app.controller("ProfileCtrl", ["$scope", "$location", "$routeParams", "user",  "media", ProfileCtrl]);
 
-    app.service("media", ["$resource", "$rootScope", Media]);
-    app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);
+    /*app.controller("AuthCtrl", AuthCtrl);
+    app.controller("LightboxCtrl", LightboxCtrl);
+    app.controller("ProfileCtrl", ProfileCtrl);
+    app.controller("RateCtrl", RateCtrl);
+    app.controller("VideoListCtrl", VideoListCtrl);
+    app.controller("VideoCtrl", VideoCtrl);*/
+
+    app.service("media", Media);
+    app.service("user", User);
 
     $(document).ready(function () {
       angular.bootstrap(document, ["fest"]);

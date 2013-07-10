@@ -2,7 +2,7 @@
 define(['angular', 'jquery', 'angular-modal'], function () {
     'use strict';
 
-    return function VideoListCtrl($location, $scope, $rootScope, media) { //user also being injected, but not currently used
+    var VideoListCtrl = function ($location, $scope, media) {
 
       media.index();
 
@@ -24,4 +24,8 @@ define(['angular', 'jquery', 'angular-modal'], function () {
       };
 
     };
+
+    VideoListCtrl.$inject = ["$location", "$scope", "media"];
+
+    return VideoListCtrl;
   });

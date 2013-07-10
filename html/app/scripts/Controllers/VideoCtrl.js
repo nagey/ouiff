@@ -1,8 +1,8 @@
 /*global define */
-define(['angular', 'jquery'], function (angular, $) {
+define(['jquery', 'angular'], function ($) {
     'use strict';
 
-    return function VideoCtrl($scope) {
+    var VideoCtrl = function ($scope) {
         $scope.bindListener = function(){
 
           $('#play-btn, #videoPlayer').bind('click',function(){
@@ -29,4 +29,8 @@ define(['angular', 'jquery'], function (angular, $) {
           });
         };
       };
+
+    VideoCtrl.$inject = ["$scope"];
+
+    return VideoCtrl;
   });

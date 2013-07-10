@@ -2,7 +2,7 @@
 define(['angular', 'jquery'], function () {
     'use strict';
 
-    return function AuthCtrl($location, $scope, $rootScope, user, $window) {
+    var AuthCtrl = function ($location, $scope, user, $window) {
 
       $scope.services = [
         {name: "Instagram", key:'instagram', url: "/auth/instagram", w: 575, h:400, checked: false, auth: false},
@@ -18,12 +18,10 @@ define(['angular', 'jquery'], function () {
       });
 
       $scope.openAuth = function(){
-        //$rootScope.$broadcast('open_modal', {display: 'auth'});
         $location.path('/login');
       };
 
       $scope.openProfile = function(){
-        //$rootScope.$broadcast('open_modal', {display: 'auth'});
         $location.path('/profile');
       };
 
@@ -78,4 +76,8 @@ define(['angular', 'jquery'], function () {
         }
       };
     };
+
+    AuthCtrl.$inject = ["$location", "$scope", "user", "$window"];
+
+    return AuthCtrl;
   });

@@ -1,4 +1,5 @@
 /*global module, require, console */
+/*jslint sub:true */
 module.exports = function (app) {
   "use strict";
   
@@ -245,6 +246,11 @@ module.exports = function (app) {
     else {
       res.send({"status": false});
     }
+  });
+  
+  app.get("/auth/logout", function (req, res) {
+    req.logout();
+    res.send("OK");
   });
   
 };

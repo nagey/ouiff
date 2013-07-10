@@ -2,7 +2,7 @@
 define(['angular', 'jquery'], function () {
     'use strict';
 
-    return function ProfileCtrl($scope, $location, $routeParams, user, media) {
+    var ProfileCtrl = function ($scope, $location, user, media) {
         user.status(function(status){
           $scope.videos = [];
 
@@ -19,9 +19,13 @@ define(['angular', 'jquery'], function () {
         });
 
         $scope.imgClick = function (item){
-        	$location.prevPath = $location.path();
-        	$location.path('/watch/'+ item.id);
-      	}
-    };
-});
+          $location.prevPath = $location.path();
+          $location.path('/watch/'+ item.id);
+        };
+      };
+
+    ProfileCtrl.$inject = ["$scope", "$location", "user", "media"];
+
+    return ProfileCtrl;
+  });
 
