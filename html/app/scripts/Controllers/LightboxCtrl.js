@@ -56,7 +56,11 @@ define(['angular', 'jquery'], function (angular, $) {
 
     // Functions
     $scope.closeModal = function (){
-      if($location.prevPath) $location.path($location.prevPath);
+      if($location.prevPath) {
+        $location.path($location.prevPath);
+      }else{
+        $location.path('');
+      }
       $scope.isOpen = false;
     };
 
