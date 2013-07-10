@@ -1,4 +1,5 @@
 /*global define, console */
+/*jshint sub:true */
 define(['angular'], function () {
     'use strict';
 
@@ -17,7 +18,7 @@ define(['angular'], function () {
         }
       };
 
-      $window.sendUser = function (user) {
+      $window["sendUser"] = function (user) {
         //console.log("in sendUser");
         if (user.profileList) {
           loginUser(user);
