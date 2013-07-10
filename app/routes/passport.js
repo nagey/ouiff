@@ -248,4 +248,9 @@ module.exports = function (app) {
     }
   });
   
+  app.get("/auth/logout", function (req, res) {
+    req.logout();
+    res.send("OK");
+  });
+  
 };
