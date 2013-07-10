@@ -3,7 +3,7 @@ define(['angular', 'jquery'], function () {
     'use strict';
 
     return function AuthCtrl($location, $scope, $rootScope, user, $window) {
-      
+
       $scope.services = [
         {name: "Instagram", key:'instagram', url: "/auth/instagram", w: 575, h:400, checked: false, auth: false},
         {name: "Facebook", key:'facebook', url: "/auth/facebook", w: 500, h:200, checked: false, auth: false},
@@ -21,12 +21,12 @@ define(['angular', 'jquery'], function () {
         //$rootScope.$broadcast('open_modal', {display: 'auth'});
         $location.path('/login');
       };
-      
+
       $scope.openProfile = function(){
         //$rootScope.$broadcast('open_modal', {display: 'auth'});
         $location.path('/profile');
       };
-      
+
       $scope.checkStatus = function(){
         user.status(function(status){
           if(status.loggedIn){
@@ -34,7 +34,7 @@ define(['angular', 'jquery'], function () {
             $scope.profile = status.profile;
             for(var i in $scope.profile.profileList){
               for(var j in $scope.services){
-                if($scope.profile.profileList[i] == $scope.services[j].key){
+                if($scope.profile.profileList[i] === $scope.services[j].key){
                   $scope.services[j].checked = true;
                   $scope.services[j].auth = true;
                   break;
@@ -44,7 +44,7 @@ define(['angular', 'jquery'], function () {
           }
         });
       };
-      
+
       $scope.login = function(service){
         if(!service.auth){
           var w = service.w;
@@ -54,9 +54,9 @@ define(['angular', 'jquery'], function () {
           var top = (screen.height/2)-(h/2);
 
           console.log('connect to  service',service);
-          
-          return $window.open(service.url, 
-            title, 
+
+          return $window.open(service.url,
+            title,
             'toolbar=no,'+
             ' location=no,'+
             ' directories=no,'+
@@ -68,8 +68,8 @@ define(['angular', 'jquery'], function () {
             ' width='+w+
             ', height='+h+
             ', top='+top+
-            ', left='+left);      
-          }
-        };
+            ', left='+left);
+        }
+      };
     };
-});
+  });

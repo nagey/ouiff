@@ -1,4 +1,5 @@
 /*global define, console */
+/*jshint eqeqeq:false, camelcase:false   */
 define(['angular', 'jquery'], function (angular, $) {
   'use strict';
 
@@ -41,8 +42,12 @@ define(['angular', 'jquery'], function (angular, $) {
 
     // Scope Listeners
     $scope.$watch(function() {return $location.path();}, function(newv, old) {
-      if (newv == old) return;
-      if (!newv) return;
+      if (newv == old) {
+        return;
+      }
+      if (!newv) {
+        return;
+      }
       //$scope.checkURL();
     });
 
@@ -50,7 +55,7 @@ define(['angular', 'jquery'], function (angular, $) {
       if (newv == old) {
         return;
       }
-      if (!newv){
+      if (!newv) {
         return;
       }
       $timeout(function() {
@@ -68,24 +73,23 @@ define(['angular', 'jquery'], function (angular, $) {
     };
 
     console.log("asdfas",$location);
-    
-    if($routeParams.videoId){
-        media.mediaById($routeParams.videoId, function (result) {
-          $scope.videoItem = result;
-          $rootScope.activeVid = $scope.videoItem.id;
 
-          $scope.source = $scope.videoItem.videos.standard_resolution.url;
-          $scope.display = 'video';
-          $scope.setHandler = true;
-          $scope.isOpen = true;
+    if($routeParams.videoId){
+      media.mediaById($routeParams.videoId, function (result) {
+        $scope.videoItem = result;
+        $rootScope.activeVid = $scope.videoItem.id;
+
+        $scope.source = $scope.videoItem.videos.standard_resolution.url;
+        $scope.display = 'video';
+        $scope.setHandler = true;
+        $scope.isOpen = true;
       });
-    }else if($location.$$path == '/login'){
+    }else if($location.$$path === '/login'){
       console.log("asdfas",$location);
 
       $scope.display = 'auth';
       $scope.isOpen = true;
     }
-    
-    
+
   };
 });
