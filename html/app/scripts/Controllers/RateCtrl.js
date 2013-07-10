@@ -2,7 +2,7 @@
 define(['angular', 'jquery'], function () {
     'use strict';
 
-    return function RateCtrl($scope, $rootScope, user, $http) {
+    var RateCtrl = function ($scope, $rootScope, user, $http) {
 
       $scope.rate = 0;
       $scope.isReadonly = false;
@@ -27,4 +27,8 @@ define(['angular', 'jquery'], function () {
         });
       };
     };
+
+    RateCtrl.$inject = ["$scope", "$rootScope", "user", "$http"];
+
+    return RateCtrl;
   });

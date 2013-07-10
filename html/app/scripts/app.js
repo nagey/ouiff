@@ -30,15 +30,15 @@ define([
         otherwise({redirectTo: '/watch'});
     }]);
 
-    app.controller("RateCtrl", ["$scope", '$rootScope', "user", "$http", RateCtrl]);
-    app.controller("VideoListCtrl", ["$location", "$scope", '$rootScope',"media", "user", VideoListCtrl]);
-    app.controller("AuthCtrl", ["$location", "$scope", '$rootScope', "user", "$window", AuthCtrl]);
-    app.controller("LightboxCtrl", ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media", LightboxCtrl]);
-    app.controller("VideoCtrl", ["$scope",  VideoCtrl]);
-    app.controller("ProfileCtrl", ["$scope", "$location", "$routeParams", "user",  "media", ProfileCtrl]);
+    app.controller("AuthCtrl", AuthCtrl);
+    app.controller("LightboxCtrl", LightboxCtrl);
+    app.controller("ProfileCtrl", ProfileCtrl);
+    app.controller("RateCtrl", RateCtrl);
+    app.controller("VideoListCtrl", VideoListCtrl);
+    app.controller("VideoCtrl", VideoCtrl);
 
-    app.service("media", ["$resource", "$rootScope", Media]);
-    app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);
+    app.service("media", Media);
+    app.service("user", User);
 
     $(document).ready(function () {
       angular.bootstrap(document, ["fest"]);

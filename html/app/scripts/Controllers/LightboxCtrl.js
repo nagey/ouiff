@@ -3,7 +3,7 @@
 define(['angular', 'jquery'], function (angular, $) {
   'use strict';
 
-  return function LightboxCtrl( $scope, $location, $route, $routeParams, $rootScope, $timeout, media) {
+  var LightboxCtrl = function ( $scope, $location, $route, $routeParams, $rootScope, $timeout, media) {
     $scope.tpl={};
     $scope.isOpen = false;
     $scope.opts = {
@@ -21,8 +21,8 @@ define(['angular', 'jquery'], function (angular, $) {
     $scope.$on('auth_request', function() {
       $scope.display = "auth";
     });
-    
-    $scope.$on('close_modal', function(event, data) {
+
+    $scope.$on('close_modal', function() {
 
       $scope.closeModal();
     });
@@ -79,4 +79,8 @@ define(['angular', 'jquery'], function (angular, $) {
     }
 
   };
+
+  LightboxCtrl.$inject = ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media"];
+
+  return LightboxCtrl;
 });

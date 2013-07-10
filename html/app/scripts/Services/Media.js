@@ -2,7 +2,7 @@
 define(['angular'], function () {
     'use strict';
 
-    return function Media($resource, $rootScope) {
+    var Media = function ($resource, $rootScope) {
       var MediaRsc = $resource('http://15sfest.com/media/:id', {id:'@id'});
       var FeaturedMedia = $resource('http://15sfest.com/media/featured/:id', {id:'@id'});
       var BestMedia = $resource('http://15sfest.com/media/top/:id', {id:'@id'});
@@ -76,4 +76,8 @@ define(['angular'], function () {
       };
 
     };
+
+    Media.$inject = ["$resource", "$rootScope"];
+
+    return Media;
   });

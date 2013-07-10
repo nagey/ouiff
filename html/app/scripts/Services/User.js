@@ -2,7 +2,7 @@
 define(['angular'], function () {
     'use strict';
 
-    return function User($resource, $window, $rootScope, $http) {
+    var User = function ($resource, $window, $rootScope, $http) {
       var hasStatus = false;
       var loggedIn = false;
       var userObj;
@@ -70,4 +70,8 @@ define(['angular'], function () {
         console.log("User Status", user);
       });
     };
+
+    User.$inject = ["$resource", "$window", "$rootScope", "$http"];
+
+    return User;
   });
