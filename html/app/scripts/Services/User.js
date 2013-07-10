@@ -9,7 +9,7 @@ define(['angular'], function () {
       var userObj;
 
       var loginUser = function (user) {
-        console.log("in loginUser", user, $rootScope);
+        //console.log("in loginUser", user, $rootScope);
         if (user) {
           hasStatus = true;
           loggedIn = true;
@@ -18,8 +18,14 @@ define(['angular'], function () {
         }
       };
 
+      var logoutUser = function () {
+        loggedIn = false;
+        userObj = undefined;
+        $rootScope.$broadcast("userLogout");
+      };
+
       $window["sendUser"] = function (user) {
-        console.log("in sendUser");
+        //console.log("in sendUser");
         if (user.profileList) {
           loginUser(user);
         }
@@ -67,9 +73,17 @@ define(['angular'], function () {
         }
       };
 
+      this.logout = function () {
+        $http({method: "GET", url: "/auth/logout"}).
+          success(function () {
+            logoutUser();
+          });
+      };
+
       this.status(function (user) {
         console.log("User Status", user);
       });
+
     };
 
     User.$inject = ["$resource", "$window", "$rootScope", "$http"];
