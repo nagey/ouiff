@@ -1,19 +1,19 @@
 /*global define */
-define(['angular'], function (angular ) {
+define(['angular'], function () {
   'use strict';
   return function ModalDirective () {
     return {
       restrict: 'E',
       transclude: true,
       scope: { source: "@" },
-      controller: ,
-      link: function($scope, $element, attrs){
+      controller: undefined,
+      link: function($scope, $element){
           var v = $($element).find("#videoPlayer")[0];
-          $(v).bind("ended", function(e) {
-            console.log("Fdofiajsfoijadsoifjasdoifjasoidjf");
+          $(v).bind("ended", function() {
+            console.log("video ended - link function of ModalDirective");
           });
           console.log(v);
-      },
+        },
       template:
         '<div id="modal-window" modal="isOpen" close="closeModal()" >'+
           '<div class="modal-body row">'+
@@ -33,5 +33,5 @@ define(['angular'], function (angular ) {
         '</div>',
       replace: true
     };
-  }
+  };
 });

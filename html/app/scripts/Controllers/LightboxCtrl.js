@@ -1,4 +1,4 @@
-/*global define */
+/*global define, console */
 define(['angular', 'jquery'], function (angular, $) {
   'use strict';
 
@@ -8,7 +8,7 @@ define(['angular', 'jquery'], function (angular, $) {
     $scope.opts = {
       backdropFade: true,
       dialogFade:true
-    }
+    };
 
     $scope.tpl.rate = 'templates/rate.html';
     $scope.tpl.videoControls = 'templates/videoControls.html';
@@ -17,15 +17,16 @@ define(['angular', 'jquery'], function (angular, $) {
 
 
     // Event Listeners
-    $scope.$on('auth_request', function(event, data) {
+    $scope.$on('auth_request', function() {
       $scope.display = "auth";
     });
     
     $scope.$on('close_modal', function(event, data) {
+
       $scope.closeModal();
     });
 
-    $scope.$on('userLogin', function(event, data) {
+    $scope.$on('userLogin', function() {
       if($scope.isOpen){
         $scope.closeModal();
         $scope.$apply();
@@ -42,7 +43,7 @@ define(['angular', 'jquery'], function (angular, $) {
       }
       $timeout(function() {
         $scope.setHandler = false;
-        $('#videoPlayer').bind('ended',function(e){
+        $('#videoPlayer').bind('ended',function(){
           $scope.display = "rate";
           $scope.$apply();
         });
@@ -56,7 +57,7 @@ define(['angular', 'jquery'], function (angular, $) {
       console.log('$route',$route);
       $location.path($location.prevPath);
       $scope.isOpen = false;
-    }
+    };
 
     if($routeParams.videoId){
         media.mediaById($routeParams.videoId, function (result) {
@@ -73,5 +74,7 @@ define(['angular', 'jquery'], function (angular, $) {
       $scope.display = 'auth';
       $scope.isOpen = true;
     }
+    
+    
   };
 });

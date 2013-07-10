@@ -1,9 +1,6 @@
 /*global define, angular, document */
 define([
   'jquery',
-  'bootstrap', 
-  'angular',
-  'angular-modal',
   'Controllers/VideoListCtrl',
   'Controllers/RateCtrl',
   'Controllers/AuthCtrl',
@@ -13,12 +10,15 @@ define([
   'Services/User',
   'Controllers/LightboxCtrl',
   'Utils/menuScroll',
-  "ng-resource"
-  ], function ($, bootstrap, angular_blank, angular_modal, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, ProfileCtrl, Media, User, LightboxCtrl) {
+  "ng-resource",
+  'bootstrap',
+  'angular',
+  'angular-modal'
+], function ($, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, ProfileCtrl, Media, User, LightboxCtrl) {
     'use strict';
 
     var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
-      
+
       $locationProvider.html5Mode(false);
 
       $routeProvider.
@@ -36,13 +36,13 @@ define([
     app.controller("LightboxCtrl", ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media", LightboxCtrl]);
     app.controller("VideoCtrl", ["$scope",  VideoCtrl]);
     app.controller("ProfileCtrl", ["$scope", "$location", "$routeParams", "user",  "media", ProfileCtrl]);
-    
+
     app.service("media", ["$resource", "$rootScope", Media]);
     app.service("user", ["$resource", "$window", "$rootScope", "$http", User]);
-    
+
     $(document).ready(function () {
       angular.bootstrap(document, ["fest"]);
     });
 
-    return '\'Allo \'Allo!';
-});
+    return;
+  });

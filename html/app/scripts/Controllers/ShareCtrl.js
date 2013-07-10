@@ -1,5 +1,5 @@
 /*global define */
-define(['angular', 'jquery'], function (angular, $) {
+define(['angular', 'jquery'], function () {
     'use strict';
 
     return function ShareCtrl($scope,  $rootScope, user) {
@@ -16,21 +16,21 @@ define(['angular', 'jquery'], function (angular, $) {
           $scope.loggedIn = true;
           $scope.profile = status.profile;
           for(var i in $scope.profile.profileList){
-          	for(var j in $scope.services){
-          		if($scope.profile.profileList[i] == $scope.services[j].key){
-          			$scope.services[j].checked = true;
-          			$scope.services[j].auth = true;
-          			break;
-          		}
-          	}
+            for(var j in $scope.services){
+              if($scope.profile.profileList[i] === $scope.services[j].key){
+                $scope.services[j].checked = true;
+                $scope.services[j].auth = true;
+                break;
+              }
+            }
           }
         }
       });
 
       $scope.checkAuth = function(service){
-      	if(!service.auth){
-      		$rootScope.$broadcast('auth_login', service);
-      	}
-      }
+        if(!service.auth){
+          $rootScope.$broadcast('auth_login', service);
+        }
+      };
     };
-});
+  });
