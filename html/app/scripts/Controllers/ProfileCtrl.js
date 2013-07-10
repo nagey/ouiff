@@ -19,6 +19,7 @@ define(['angular', 'jquery'], function (angular, $) {
         });
 
         $scope.imgClick = function (item){
+        	$location.prevPath = $location.path();
         	$location.path('/watch/'+ item.id);
       	}
     };

@@ -554,6 +554,17 @@ outline: none;
 .rate-submit {
 	margin-top:30px;
 }
+.fadeIn-leave {
+-webkit-transition: .2s linear all;
+	-moz-transition: .2s linear all;
+	-o-transition: .2s linear all;
+	-ms-transition: .2s linear all;
+	transition: .2s linear all;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+}
+
 .fadeIn-enter {
 -webkit-transition: .5s linear all;
 	-moz-transition: .5s linear all;

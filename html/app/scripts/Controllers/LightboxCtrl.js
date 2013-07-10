@@ -20,14 +20,7 @@ define(['angular', 'jquery'], function (angular, $) {
     $scope.$on('auth_request', function(event, data) {
       $scope.display = "auth";
     });
-
-    /*$scope.$on('open_modal', function(event, data) {
-      $scope.source = data.vid_src;
-      $scope.display = data.display;
-      $scope.setHandler = true;
-      $scope.isOpen = true;
-    });*/
-
+    
     $scope.$on('close_modal', function(event, data) {
       $scope.closeModal();
     });
@@ -40,12 +33,6 @@ define(['angular', 'jquery'], function (angular, $) {
     });
 
     // Scope Listeners
-    $scope.$watch(function() {return $location.path();}, function(newv, old) {
-      if (newv == old) return;
-      if (!newv) return;
-      //$scope.checkURL();
-    });
-
     $scope.$watch("setHandler", function(newv, old) {
       if (newv == old) {
         return;
@@ -62,12 +49,15 @@ define(['angular', 'jquery'], function (angular, $) {
       }, 500);
     });
 
+
+
+    // Functions
     $scope.closeModal = function (){
-      $location.path('');
+      console.log('$route',$route);
+      $location.path($location.prevPath);
       $scope.isOpen = false;
     }
 
-    console.log("asdfas",$location)
     if($routeParams.videoId){
         media.mediaById($routeParams.videoId, function (result) {
           $scope.videoItem = result;
@@ -79,7 +69,6 @@ define(['angular', 'jquery'], function (angular, $) {
           $scope.isOpen = true;
       });
     }else if($location.$$path == '/login'){
-      console.log("asdfas",$location)
 
       $scope.display = 'auth';
       $scope.isOpen = true;

@@ -19,7 +19,9 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
       },2);
 
       $scope.imgClick = function (item){
+        $location.prevPath = $location.path();
         $location.path('/watch/'+ item.id);
+
       }
     };
 });
