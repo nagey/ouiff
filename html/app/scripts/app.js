@@ -30,7 +30,7 @@ define([
         otherwise({redirectTo: '/watch'});
     }]);
 
-    app.controller("RateCtrl", ["$scope", '$rootScope', "user", "$http", RateCtrl]);
+    app.controller("RateCtrl", ["$scope", "$location", '$rootScope', "user", "$http", RateCtrl]);
     app.controller("VideoListCtrl", ["$location", "$scope", '$rootScope',"media", "user", VideoListCtrl]);
     app.controller("AuthCtrl", ["$location", "$scope", '$rootScope', "user", "$window", AuthCtrl]);
     app.controller("LightboxCtrl", ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media", LightboxCtrl]);

@@ -16,9 +16,12 @@ define(['angular', 'jquery'], function (angular, $) {
     $scope.tpl.auth = 'templates/auth.html';
     $scope.pathArr = [];
 
-
+    console.log("rate:", $scope.rate);
     // Event Listeners
-    $scope.$on('auth_request', function() {
+    $scope.$on('auth_request', function(rate) {
+      if(rate) $scope.rate = rate;
+
+      console.log("rate2:", $scope.rate);
       $scope.display = "auth";
     });
     
@@ -56,8 +59,7 @@ define(['angular', 'jquery'], function (angular, $) {
 
     // Functions
     $scope.closeModal = function (){
-      console.log('$route',$route);
-      $location.path($location.prevPath);
+      if($location.prevPath) $location.path($location.prevPath);
       $scope.isOpen = false;
     };
 
