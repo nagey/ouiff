@@ -10,18 +10,22 @@ define(['angular'], function () {
       var onceLoggedInStack = [];
 
       var loginUser = function (user) {
-        //console.log("in loginUser", user, $rootScope);
+        console.log("in loginUser", user);
+        console.log("stack 0",onceLoggedInStack[0]); 
         if (user) {
+          console.log("inside user block");
           hasStatus = true;
           loggedIn = true;
           userObj = user;
-          $rootScope.$broadcast("userLogin", user);
-
+          
+          console.log("processing stack");
           // Fire callbacks in the "onceLoggedInStack"
           var cb;
           while (!!(cb = onceLoggedInStack.pop())) {
+            console.log("onceloggedinstack callback", cb);
             cb(userObj);
           }
+          $rootScope.$broadcast("userLogin", user);
         }
       };
 
@@ -32,7 +36,7 @@ define(['angular'], function () {
       };
 
       $window["sendUser"] = function (user) {
-        //console.log("in sendUser");
+        console.log("in sendUser");
         if (user.profileList) {
           loginUser(user);
         }

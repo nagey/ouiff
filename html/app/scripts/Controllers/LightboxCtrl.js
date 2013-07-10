@@ -18,10 +18,7 @@ define(['angular', 'jquery'], function (angular, $) {
 
     console.log("rate:", $scope.rate);
     // Event Listeners
-    $scope.$on('auth_request', function(rate) {
-      if(rate) $scope.rate = rate;
-
-      console.log("rate2:", $scope.rate);
+    $scope.$on('auth_request', function() {
       $scope.display = "auth";
     });
 

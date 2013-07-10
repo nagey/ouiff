@@ -2,7 +2,7 @@
 define(['angular', 'jquery'], function () {
     'use strict';
 
-    var AuthCtrl = function ($location, $scope, user, $window) {
+    var AuthCtrl = function ($location, $scope,  $rootScope, user, $window) {
 
       $scope.services = [
         {name: "Instagram", key:'instagram', url: "/auth/instagram", w: 575, h:400, checked: false, auth: false},
@@ -26,6 +26,7 @@ define(['angular', 'jquery'], function () {
       };
 
       $scope.checkStatus = function(){
+
         console.log('AuthCtrl checkStatus')
         user.status(function(status){
           if(status.loggedIn){
@@ -59,7 +60,7 @@ define(['angular', 'jquery'], function () {
 
           console.log('connect to  service',service);
 
-          return $window.open(service.url,
+          return window.open(service.url,
             title,
             'toolbar=no,'+
             ' location=no,'+
