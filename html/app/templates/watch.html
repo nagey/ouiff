@@ -1,43 +1,18 @@
-
     <div class="container">
-        <div class="row">
-            <div class="best-of span6">
-                <h2>Highest Rated</h2>
-                <div class="row">
-                    <div ng-repeat="best in bestOfList" class="entry span3">
-                        <img ng-click="imgClick(best)" ng-src="{{best.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
-                        <div class="meta clearfix">
-                            <p class="user">{{best.user.username}}</p>
-                            <p class="desc">{{best.caption.text}}</p>
-                            <p class="geo"><img ng-show="{{best.location.country}}" ng-src="/images/flags/{{best.location.country}}.png"></p>
-                            <p class="rating"><rating value="best.score" max="5" readonly="true"></rating></p>
-                        </div>
-                    </div>
-				</div>
-			</div>
-			<div class="featured span3">
-                <h2>Featured</h2>       
-            	<div ng-repeat="feature in featuredList" class="entry">
-                    <img ng-click="imgClick(feature)" ng-src="{{feature.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
-                    <div class="meta clearfix">
-                        <p class="user">{{feature.user.username}}</p>
-                        <p class="desc">{{feature.caption.text}}</p>
-                        <p class="geo"><img ng-show="{{feature.location.country}}" ng-src="/images/flags/{{feature.location.country}}.png"></p>
-                        <p class="rating"><span class="hash">###</span>##</p>
-                    </div>    
+      <div class="row">
+        <div class="{{group.css}} span{{group.span}}" ng-repeat="group in videos">
+          <h2>{{group.title}}</h2>
+          <div class="row">
+            <div ng-repeat="video in group.videos track by $index" class="entry span3">
+                <img ng-click="imgClick(video)" ng-src="{{video.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
+                <div class="meta clearfix">
+                    <p class="user">{{video.user.username}}</p>
+                    <p class="desc">{{video.caption.text}}</p>
+                    <p class="geo"><img class="flag flag-{{video.location.country}}"></p>
+                    <p class="rating"><rating value="video.score" max="5" readonly="true"></rating></p>
                 </div>
             </div>
-			<div class="latest span3">
-                <h2>Latest</h2>            
-                <div ng-repeat="latest in latestList" class="entry"> 
-                    <img ng-click="imgClick(latest)" ng-src="{{latest.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
-                    <div class="meta clearfix">
-                        <p class="user">{{latest.user.username}}</p>
-                        <p class="desc">{{latest.caption.text}}</p>
-                        <p class="geo"><img ng-show="{{latest.location.country}}" ng-src="/images/flags/{{latest.location.country}}.png"></p>
-                        <p class="rating"><span class="hash">###</span>##</p>
-                    </div>    
-                </div>   
-            </div>
+          </div>
         </div>
+      </div>
     </div>
