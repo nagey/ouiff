@@ -9,7 +9,7 @@
     "angular": "*",
     "angular-unstable": "~1.1.5",
     "angular-ui": "*",
-    "angular-ui-bootstrap": "*",
+    "angular-bootstrap": "*",
     "angular-resource": "*"
   },
   "devDependencies": {}
