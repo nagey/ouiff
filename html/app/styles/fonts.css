@@ -3,11 +3,11 @@
 
 @font-face {
     font-family: 'tommaso';
-    src: url('/images/tommaso-webfont.eot');
-    src: url('/images/tommaso-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/images/tommaso-webfont.woff') format('woff'),
-         url('/images/tommaso-webfont.ttf') format('truetype'),
-         url('/images/tommaso-webfont.svg#tommasoregular') format('svg');
+    src: url('fonts/tommaso-webfont.eot');
+    src: url('fonts/tommaso-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/tommaso-webfont.woff') format('woff'),
+         url('fonts/tommaso-webfont.ttf') format('truetype'),
+         url('fonts/tommaso-webfont.svg#tommasoregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -15,11 +15,11 @@
 
 @font-face {
     font-family: 'salome';
-    src: url('/images/salome_fine-webfont.eot');
-    src: url('/images/salome_fine-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/images/salome_fine-webfont.woff') format('woff'),
-         url('/images/salome_fine-webfont.ttf') format('truetype'),
-         url('/images/salome_fine-webfont.svg#salome_fineregular') format('svg');
+    src: url('fonts/salome_fine-webfont.eot');
+    src: url('fonts/salome_fine-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/salome_fine-webfont.woff') format('woff'),
+         url('fonts/salome_fine-webfont.ttf') format('truetype'),
+         url('fonts/salome_fine-webfont.svg#salome_fineregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
