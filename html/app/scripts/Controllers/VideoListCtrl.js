@@ -1,8 +1,8 @@
 /*global define */
-define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_modal) {
+define(['angular', 'jquery', 'angular-modal'], function () {
     'use strict';
 
-    return function VideoListCtrl($location, $scope, $rootScope, media, user) {
+    return function VideoListCtrl($location, $scope, $rootScope, media) { //user also being injected, but not currently used
 
       media.index();
 
@@ -20,6 +20,6 @@ define(['angular', 'jquery', 'angular-modal'], function (angular, $, angular_mod
 
       $scope.imgClick = function (item){
         $location.path('/watch/'+ item.id);
-      }
+      };
     };
-});
+  });

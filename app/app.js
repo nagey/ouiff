@@ -1,4 +1,4 @@
-/*global require, process, __dirname, console */
+/*jslint stupid:true */
 function main() {
   'use strict';
 
@@ -25,7 +25,9 @@ function main() {
   app.extras.passport = require('passport');
   app.extras.stathat = require("stathat");
   app.extras.stathat.track = function (counter, amount, cb) {
-    if (!cb) cb = function () {};
+    if (!cb) {
+     cb = function () {};
+    }
     app.extras.stathat.trackEZCount("15sfest@nagey.com", counter, amount, cb);
   };
 
@@ -71,7 +73,7 @@ function main() {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
-    if ('OPTIONS' == req.method) {
+    if ('OPTIONS' === req.method) {
       res.send(200);
     }
     else {

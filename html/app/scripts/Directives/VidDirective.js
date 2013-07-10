@@ -1,12 +1,12 @@
 /*global define */
-define(['angular'], function (angular ) {
+define(['angular'], function () {
   'use strict';
   return function VidDirective () {
     return {
       restrict: 'E',
       transclude: true,
       scope: { source: "@" },
-      controller: function($scope, $element) {
+      controller: function($scope) {
         $scope.tpl={};
         $scope.displays={};
         $scope.tpl.rank = 'templates/rate.html';
@@ -18,29 +18,29 @@ define(['angular'], function (angular ) {
         $scope.displays.showShare = false;
         $scope.displays.showAuth = false;
 
-      $scope.$on('share_request', function(event, mass) {
-        console.log('share_request');
-        for (var i in $scope.displays){
-          $scope.displays[i] = false
-        }
-        $scope.displays.showShare = true;
-      });
+        $scope.$on('share_request', function() {
+          console.log('share_request');
+          for (var i in $scope.displays){
+            $scope.displays[i] = false;
+          }
+          $scope.displays.showShare = true;
+        });
 
-      $scope.$on('auth_request', function(event, mass) {
-        console.log('auth_request');
-        for (var i in $scope.displays){
-          $scope.displays[i] = false
-        }
-        $scope.displays.showAuth = true;
-      });
+        $scope.$on('auth_request', function() {
+          console.log('auth_request');
+          for (var i in $scope.displays){
+            $scope.displays[i] = false;
+          }
+          $scope.displays.showAuth = true;
+        });
 
       },
-      link: function($scope, $element, attrs){
-        $($element).children('video').bind('ended',function(e){
+      link: function($scope, $element){
+        $($element).children('video').bind('ended',function(){
           $scope.displays.showVideo = false;
           $scope.displays.showRank = true;
           $scope.$apply();
-        })
+        });
       },
       template:
         '<div id="modal-content" >' +
@@ -53,5 +53,5 @@ define(['angular'], function (angular ) {
         '</div>',
       replace: true
     };
-  }
+  };
 });

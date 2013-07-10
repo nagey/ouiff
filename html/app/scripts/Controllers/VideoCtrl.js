@@ -7,22 +7,26 @@ define(['angular', 'jquery'], function (angular, $) {
 
           $('#play-btn, #videoPlayer').bind('click',function(){
             var video = document.getElementById("videoPlayer");
-            if($('#control-window').hasClass('playing'))
+            if($('#control-window').hasClass('playing')) {
               video.pause();
-            else
+            }
+            else {
               video.play();
+            }
 
             $('#control-window').toggleClass('playing');
           });
 
           $('#mute-btn').bind('click',function(){
-            if($('#control-window').hasClass('muted'))
+            if($('#control-window').hasClass('muted')) {
               $('#videoPlayer').prop('muted', false);
-            else
+            }
+            else {
               $('#videoPlayer').prop('muted', true);
+            }
 
             $('#control-window').toggleClass('muted');
           });
-        }
-    };
-});
+        };
+      };
+  });

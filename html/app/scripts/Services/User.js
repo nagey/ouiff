@@ -1,5 +1,5 @@
 /*global define, console */
-define(['angular'], function (angular ) {
+define(['angular'], function () {
     'use strict';
 
     return function User($resource, $window, $rootScope, $http) {
@@ -23,48 +23,51 @@ define(['angular'], function (angular ) {
           loginUser(user);
         }
       };
-      
+
       this.status = function (cb) {
         if (hasStatus) {
           if (!loggedIn) {
-            if (typeof cb == 'function') {
+            if (typeof cb === 'function') {
               cb({"loggedIn": loggedIn});
             }
-            else return {"loggedIn": loggedIn};
+            else {
+              return {"loggedIn": loggedIn};
+            }
           }
           else {
-            if (typeof cb == 'function') {
+            if (typeof cb === 'function') {
               cb({"loggedIn": loggedIn, "profile": userObj});
             }
-            else return {"loggedIn": loggedIn, "profile": userObj};
+            else {
+              return {"loggedIn": loggedIn, "profile": userObj};
+            }
           }
         }
         else {
           $http({method: 'GET', url: '/auth/status'}).
-            success(function(data, status, headers, config) {
+            success(function(data) {
               console.log("return from auth status: ", data);
               if (data.status) {
                 loginUser(data.user);
-                if (typeof cb == 'function') {
+                if (typeof cb === 'function') {
                   cb({"loggedIn": loggedIn, "profile": userObj});
                 }
               }
               else {
-                if (typeof cb == 'function') {
+                if (typeof cb === 'function') {
                   cb({"loggedIn": loggedIn});
                 }
               }
             }).error(function () {
-              if (typeof cb == 'function') {
+              if (typeof cb === 'function') {
                 cb({"loggedIn": loggedIn });
               }
             });
         }
       };
-      
-      
+
       this.status(function (user) {
         console.log("User Status", user);
       });
     };
-});
+  });

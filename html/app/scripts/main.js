@@ -6,31 +6,29 @@ require.config({
         'angular-ui': '../bower_components/angular-ui/build/angular-ui',
         'angular-modal': '../bower_components/angular-ui-bootstrap/dist/ui-bootstrap-tpls-0.4.0',
         bootstrap: 'vendor/bootstrap'
-    },
-    shim: {
+      },
+      shim: {
         bootstrap: {
             deps: ['jquery'],
             exports: 'jquery'
-        },
-        "angular-ui" : {
+          },
+          "angular-ui" : {
             deps: ["jquery", "angular"]
-        },
-        "ng-resource" : {
+          },
+          "ng-resource" : {
             deps: ["angular"]
-        },
-        "angular-modal" : {
+          },
+          "angular-modal" : {
             deps: ["angular-ui"]
+          }
         }
-    }
-});
+      });
 
 require(
 
-  ['app'], function (app) {
+  ['app'], function () {
     'use strict';
     // use app here
     //console.log(app);
    // console.log('Running jQuery %s', $().jquery);
-
-
-});
+  });

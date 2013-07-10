@@ -1,8 +1,8 @@
 /*global define */
-define(['angular', 'jquery'], function (angular, $) {
+define(['angular', 'jquery'], function () {
     'use strict';
 
-    return function UserCtrl($scope, $routeParams, user) {
+    return function UserCtrl($scope, $routeParams) {
         console.log('UserCtrl',$routeParams);
-    };
-});
+      };
+  });
