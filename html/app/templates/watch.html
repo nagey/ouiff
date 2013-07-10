@@ -1,6 +1,6 @@
     <div class="container">
       <div class="row">
-        <div class="{{group.css}} span{{group.span}}" ng-repeat="group in videos">
+        <div class="{{group.css}} span{{group.span}}" ng-repeat="group in videos track by $index">
           <h2>{{group.title}}</h2>
           <div class="row">
             <div ng-repeat="video in group.videos track by $index" class="entry span3">
