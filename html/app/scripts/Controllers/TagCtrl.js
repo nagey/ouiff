@@ -12,7 +12,7 @@ define(['jquery', 'angular'], function () {
 
       $scope.tagClick = function (tag){
         $location.path('/categories/'+ tag);
-      }
+      };
     };
 
     TagCtrl.$inject = ["$scope", "$location","media"];

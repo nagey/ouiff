@@ -13,7 +13,7 @@ define(['angular', 'jquery', 'angular-modal'], function () {
             css: "best-of",
             span: 12,
             videos: result
-        };
+          };
       }, 4);
 
       media.mediaByTag($scope.tag, function(result){
@@ -22,7 +22,7 @@ define(['angular', 'jquery', 'angular-modal'], function () {
             css: "latest",
             span: 12,
             videos: result
-        };
+          };
       });
 
       $scope.imgClick = function (item){
