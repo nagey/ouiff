@@ -45,6 +45,7 @@ define([
 
     app.service("media", Media);
     app.service("user", User);
+    app.service("analytics", Analytics);
 
     $(document).ready(function () {
       angular.bootstrap(document, ["fest"]);
