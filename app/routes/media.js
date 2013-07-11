@@ -103,7 +103,7 @@ module.exports = function (app) {
   });
 
   app.get("/media/user/:queryUser", function (req, res) {
-    app.extras.stathat.track("media - fetch for user "+req.params.queryUser, 1);
+    app.extras.stathat.track("media - fetch for user",1);
     var queryUser = req.params.queryUser + '';
     var userType = "user.";
     userType += (Number(queryUser) === parseInt(queryUser,10)) ? "id" : "username";
@@ -114,7 +114,7 @@ module.exports = function (app) {
   });
 
   app.get("/media/:medium", function(req, res){
-    app.extras.stathat.track("media - fetch media "+req.params.medium, 1);
+    app.extras.stathat.track("media - fetch media", 1);
     app.extras.mongo.media.find({id: req.params.medium}, function (err,docs) {
       if (err) {
         res.status(500).send("Error: ", err, docs);
