@@ -8,7 +8,7 @@
                 <div class="meta clearfix">
                     <p class="user">{{video.user.username}}</p>
                     <p class="desc">{{video.caption.text}}</p>
-                    <p class="geo"><img class="flag flag-{{video.location.country}}"></p>
+                    <p class="geo"><img ng-show="{{video.location.country}}" class="flag flag-{{video.location.country}}"></p>
                     <p class="rating"><rating value="video.score" max="5" readonly="true"></rating></p>
                 </div>
             </div>
