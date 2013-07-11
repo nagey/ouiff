@@ -1,4 +1,4 @@
-/*jslint stupid:true */
+/*jslint stupid:true, node:true */
 function main() {
   'use strict';
 
@@ -23,13 +23,7 @@ function main() {
   app.extras.cookieParser = express.cookieParser(app.config.sessionSecret);
   app.extras.Instagram = require("instagram-node-lib");
   app.extras.passport = require('passport');
-  app.extras.stathat = require("stathat");
-  app.extras.stathat.track = function (counter, amount, cb) {
-    if (!cb) {
-     cb = function () {};
-    }
-    app.extras.stathat.trackEZCount("15sfest@nagey.com", counter, amount, cb);
-  };
+  app.extras.stathat = stathat;
 
   app.extras.twitter = {};
   app.extras.twitter.consumerKey = 'D8JARxxwjzdE2P65kws46A';
@@ -135,22 +129,42 @@ function main() {
     }
   });
 
-  /*
-  var resources = {};
-  fs.readdirSync(__dirname+'/resources/').forEach(function(file){
-    var resource_fname = __dirname + '/resources/' + file;
-    var resource_name = path.basename(resource_fname, '.js');
-    if(resource_name[0] !== "."){ 
-      app.resource(resource_name, require(resource_fname)(app));
-      //resources[resource_name] = require(resource_fname)(app);
-    }
-  });
-  */
 
   server.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
   });
 }
 
-main();
+var stathat = require("stathat");
 
+stathat.track = function (counter, amount, cb) {
+  "use strict";
+  if (!cb) {
+   cb = function () {};
+  }
+  stathat.trackEZCount("15sfest@nagey.com", counter, amount, cb);
+};
+
+
+var cluster = require('cluster');
+if (cluster.isMaster) {
+  var forkIt = function (cpu, count) {
+    "use strict";
+    console.log("Forking new process for CPU "+count+" a "+cpu.model);
+    cluster.fork();
+  };
+
+  var os = require('os');
+  os.cpus().forEach(forkIt);
+}
+else {
+  console.log("Starting worker "+cluster.worker.id);
+  main();
+}
+
+cluster.on('exit', function (worker) {
+  "use strict";
+  stathat.track("worker process died", 1);
+  console.log('Worker ' + worker.id + ' died');
+  cluster.fork();
+});
