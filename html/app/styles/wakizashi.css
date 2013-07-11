@@ -543,13 +543,13 @@ outline: none;
 	background:transparent url(../images/icon-rate-hash-filled.png) center center no-repeat;
 }
 
-#rate-window #share-window {
+/*#rate-window #share-window {
 	display:none;
 }
 
 #rate-window textarea {
 	display:none;
-}
+}*/
 
 .rate-submit {
 	margin-top:30px;
