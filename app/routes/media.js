@@ -98,7 +98,12 @@ module.exports = function (app) {
         app.extras.stathat.track("database error", 1);
         res.status(500).send("database error");
       }
-      else res.send(docs);
+      else {
+        docs.forEach(function (element, index, array) {
+          array[index] = {"tag": element._id, "number": element.number};
+        });
+        res.send(docs);
+      }
     });
   });
   
