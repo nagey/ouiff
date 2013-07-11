@@ -7,6 +7,17 @@ define(['angular'], function() {
       if ($window._gaq) {
         $window._gaq.push(['_trackPageview', $location.path()]);
       }
+      else if (ga) {
+        console.log('using ga')l
+        ga('send', {'hitType': 'pageview', 'page': $location.path()});
+      }
+      else if ($window.ga) {
+        console.log('using $window.ga');
+        $window.ga('send', {'hitType': 'pageview', 'page': $location.path()});
+      }
+      else {
+        console.log("can't find gaq");
+      }
     };
     $rootScope.$on('$routeChangeSuccess', track);
   };
