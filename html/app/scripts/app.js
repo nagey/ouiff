@@ -10,6 +10,7 @@ define([
 	'Controllers/TagVideoListCtrl',
   'Services/Media',
   'Services/User',
+  'Services/Analytics',
   'Controllers/LightboxCtrl',
   'Utils/menuScroll',
   "ng-resource",
