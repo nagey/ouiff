@@ -10,7 +10,9 @@ module.exports = function (app) {
         res.status(500).send("Error: "+ err);
         app.extras.stathat.track("database error", 1);
       }
-      else res.send(docs);
+      else {
+        res.send(docs);
+      }
     });
   }
   
@@ -57,7 +59,7 @@ module.exports = function (app) {
         });
       }
     });
-  }
+  };
   
   app.get("/media", function(req, res){
     app.extras.stathat.track("media - fetch all", 1);
