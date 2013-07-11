@@ -2,16 +2,20 @@
 define(['jquery', 'angular'], function () {
     'use strict';
 
-    var TagCtrl = function ($scope, media) {
+    var TagCtrl = function ($scope, $location, media) {
       $scope.tpl = 'templates/tags.html';
 
       media.tags(function(tags){
         console.log("tags",tags);
         $scope.tags = tags;
       });
+
+      $scope.tagClick = function (tag){
+        $location.path('/categories/'+ tag);
+      }
     };
 
-    TagCtrl.$inject = ["$scope", "media"];
+    TagCtrl.$inject = ["$scope", "$location","media"];
 
     return TagCtrl;
   });
