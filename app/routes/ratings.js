@@ -38,8 +38,8 @@ module.exports = function (app) {
             shares: req.body.shares,
             created_at: new Date()
           };
-          ratingDocument.shares = ["facebook", "twitter"];
-          ratingDocument.review = "this video is great!";
+          //ratingDocument.shares = ["facebook", "twitter"];
+          //ratingDocument.review = "this video is great!";
           ratingDocument = validateRating(ratingDocument);
           var twitterCallback = function () {};
           var facebookCallback = function (res) { console.log(res); };
@@ -69,7 +69,7 @@ module.exports = function (app) {
           }
           app.extras.mongo.ratings.insert(ratingDocument, function (err, docs) {
             if (err) app.extras.stathat.track("database error", 1);
-            if (docs) app.extras.stathat.track("rating - new rating submitted", 1);
+            if (docs) app.extras.stathat.track("rating - new rating submitted", ratingDocument.score);
           });
           res.send({"status": "OK" });
         }
