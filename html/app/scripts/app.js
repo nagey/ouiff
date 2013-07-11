@@ -17,7 +17,7 @@ define([
   'bootstrap',
   'angular',
   'angular-modal'
-], function ($, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, ProfileCtrl, TagCtrl, TagVideoListCtrl, Media, User, LightboxCtrl) {
+], function ($, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, ProfileCtrl, TagCtrl, TagVideoListCtrl, Media, User, Analytics, LightboxCtrl) {
     'use strict';
 
     var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
