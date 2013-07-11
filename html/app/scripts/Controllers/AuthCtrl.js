@@ -78,7 +78,7 @@ define(['angular', 'jquery'], function () {
       };
     };
 
-    AuthCtrl.$inject = ["$location", "$scope", "user", "$window"];
+    AuthCtrl.$inject = ["$location", "$scope", "user", "$window", "analytics"];
 
     return AuthCtrl;
   });
