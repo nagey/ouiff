@@ -226,6 +226,7 @@ div.gold a {
 
 .gold .entry .meta {
 	padding:10px;
+	height: 100px;
 	background-color:#567572;
 	-webkit-border-radius: 0 0 2px 2px;
 	-moz-border-radius: 0 0 2px 2px;
