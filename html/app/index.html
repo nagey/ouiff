@@ -52,22 +52,7 @@
         </div>
         <div id="board" class="gold" ng-view ng-animate=" 'fadeIn' "></div>
         
-        <div id="categories" class="green">
-        
-        	<div class="container">            
-            	               
-            	<a class="btn btn-large">Comedy</a>  
-                <a class="btn btn-large">Horror</a>    
-                <a class="btn btn-large">Romance</a>  
-                <a class="btn btn-large">Action</a> 
-                <a class="btn btn-large">Experimental</a> 
-                <a class="btn btn-large">Fantasy</a>   
-                <a class="btn btn-large">Science Fiction</a>  
-                <a class="btn btn-large">Drama</a>
-                <a class="btn btn-large hilite">View All</a>                                                               
-                
-            </div>
-        
+        <div id="categories" class="green" ng-controller="TagCtrl" ng-include src="tpl">
         </div>       
 
         <div id="participate" class="gold">
@@ -136,8 +121,8 @@
                     <img src="images/logo-qorvis.png" width="272" height="107" alt="Qorvis">
                     </a>
         		</div>
-        </div>       
-        
+        </div>
+        <div class="modal-container" ng-controller="LightboxCtrl" ng-include src="tpl.modal"></div>
         
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>

@@ -5,7 +5,8 @@ define([
   'Controllers/RateCtrl',
   'Controllers/AuthCtrl',
   'Controllers/VideoCtrl',
-	'Controllers/ProfileCtrl',
+  'Controllers/ProfileCtrl',
+	'Controllers/TagCtrl',
   'Services/Media',
   'Services/User',
   'Controllers/LightboxCtrl',
@@ -14,7 +15,7 @@ define([
   'bootstrap',
   'angular',
   'angular-modal'
-], function ($, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, ProfileCtrl, Media, User, LightboxCtrl) {
+], function ($, VideoListCtrl, RateCtrl, AuthCtrl, VideoCtrl, ProfileCtrl, TagCtrl, Media, User, LightboxCtrl) {
     'use strict';
 
     var app = angular.module("fest", ["ngResource", 'ui.bootstrap']).config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -23,8 +24,8 @@ define([
 
       $routeProvider.
         when('/watch', {templateUrl: 'templates/watch.html',   controller: VideoListCtrl}).
-        when('/watch/:videoId', {templateUrl: 'templates/modal.html', controller: LightboxCtrl}).
-        when('/login', {templateUrl: 'templates/modal.html', controller: LightboxCtrl}).
+        when('/watch/:videoId', {templateUrl: 'templates/watch.html', controller: VideoListCtrl}).
+        when('/login', {templateUrl: 'templates/watch.html', controller: VideoListCtrl}).
         when('/profile', {templateUrl: 'templates/profile.html', controller: ProfileCtrl}).
         when('/profile/:userId', {templateUrl: 'templates/profile.html', controller: ProfileCtrl}).
         otherwise({redirectTo: '/watch'});
@@ -36,6 +37,7 @@ define([
     app.controller("RateCtrl", RateCtrl);
     app.controller("VideoListCtrl", VideoListCtrl);
     app.controller("VideoCtrl", VideoCtrl);
+    app.controller("TagCtrl", TagCtrl);
 
     app.service("media", Media);
     app.service("user", User);

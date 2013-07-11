@@ -11,6 +11,7 @@ define(['angular', 'jquery'], function (angular, $) {
       dialogFade:true
     };
 
+    $scope.tpl.modal = 'templates/modal.html';
     $scope.tpl.rate = 'templates/rate.html';
     $scope.tpl.videoControls = 'templates/videoControls.html';
     $scope.tpl.auth = 'templates/auth.html';
@@ -23,7 +24,7 @@ define(['angular', 'jquery'], function (angular, $) {
     });
 
     $scope.$on('close_modal', function() {
-
+      console.log('close_modal');
       $scope.closeModal();
     });
 
@@ -52,34 +53,35 @@ define(['angular', 'jquery'], function (angular, $) {
       }, 500);
     });
 
+    $scope.$on('$routeChangeSuccess', function (scope, next, current) {
+      if($routeParams.videoId){
+        media.mediaById($routeParams.videoId, function (result) {
+          $scope.videoItem = result;
+          $rootScope.activeVid = $scope.videoItem.id;
+
+          $scope.source = $scope.videoItem.videos.standard_resolution.url;
+          $scope.display = 'video';
+          $scope.setHandler = true;
+          $scope.isOpen = true;
+        });
+      }else if($location.$$path == '/login'){
+
+        $scope.display = 'auth';
+        $scope.isOpen = true;
+      }
+    });
+
 
 
     // Functions
     $scope.closeModal = function (){
+      $scope.isOpen = false;
       if($location.prevPath) {
         $location.path($location.prevPath);
       }else{
         $location.path('');
       }
-      $scope.isOpen = false;
     };
-
-
-    if($routeParams.videoId){
-      media.mediaById($routeParams.videoId, function (result) {
-        $scope.videoItem = result;
-        $rootScope.activeVid = $scope.videoItem.id;
-
-        $scope.source = $scope.videoItem.videos.standard_resolution.url;
-        $scope.display = 'video';
-        $scope.setHandler = true;
-        $scope.isOpen = true;
-      });
-    }else if($location.$$path == '/login'){
-
-      $scope.display = 'auth';
-      $scope.isOpen = true;
-    }
 
   };
 

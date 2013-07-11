@@ -2,7 +2,7 @@
 define(['angular', 'jquery'], function () {
     'use strict';
 
-    var RateCtrl = function ($scope, $location, $rootScope, user, $http) {
+    var RateCtrl = function ($scope, $rootScope, user, $http) {
 
       $scope.rate = 0;
       $scope.isReadonly = false;
@@ -18,7 +18,7 @@ define(['angular', 'jquery'], function () {
           $http.post("/rate/"+ratingPost.id, ratingPost).success(function () {
 
             $rootScope.$broadcast('close_modal');
-            console.log('HEY');
+            console.log('HEY!@#', $rootScope);
           }).error(function () {
           //console.log("error: ", d,s,h,c);
           });
