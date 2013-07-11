@@ -12,6 +12,7 @@ define(['angular', 'jquery', 'angular-modal'], function () {
             title: "Highest Rated",
             css: "best-of",
             span: 12,
+            empty: "Rate some videos FOOL!",
             videos: result
           };
       }, 4);
