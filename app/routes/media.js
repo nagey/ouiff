@@ -79,7 +79,20 @@ module.exports = function (app) {
   
   app.get("/media/tag", function (req, res) {
     app.extras.stathat.track("tags - fetch list", 1);
-    app.extras.mongo.tags.find({}, function (err, docs) {
+    var tagCounter = [
+      {
+        "$unwind" : "$tags"
+      },
+      {
+        "$group" : {
+          "_id" : "$tags",
+          "number" : {
+            "$sum" : 1
+          }
+        }
+      }
+    ];
+    app.extras.mongo.media.aggregate(tagCounter, function (err, docs) {
       if (err) {
         console.log(err);
         app.extras.stathat.track("database error", 1);
