@@ -1,5 +1,5 @@
 /*global define */
-define(['jquery', 'angular'], function ($) {
+define(['jquery', 'angular'], function () {
     'use strict';
 
     var TagCtrl = function ($scope, media) {

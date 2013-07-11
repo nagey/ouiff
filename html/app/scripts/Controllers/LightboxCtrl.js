@@ -1,9 +1,9 @@
 /*global define, console */
 /*jshint eqeqeq:false, camelcase:false   */
-define(['angular', 'jquery'], function (angular, $) {
+define(['jquery'], function ($) {
   'use strict';
 
-  var LightboxCtrl = function ( $scope, $location, $route, $routeParams, $rootScope, $timeout, media) {
+  var LightboxCtrl = function ( $scope, $location, $routeParams, $rootScope, $timeout, media) {
     $scope.tpl={};
     $scope.isOpen = false;
     $scope.opts = {
@@ -53,7 +53,7 @@ define(['angular', 'jquery'], function (angular, $) {
       }, 500);
     });
 
-    $scope.$on('$routeChangeSuccess', function (scope, next, current) {
+    $scope.$on('$routeChangeSuccess', function () {
       if($routeParams.videoId){
         media.mediaById($routeParams.videoId, function (result) {
           $scope.videoItem = result;
@@ -64,7 +64,7 @@ define(['angular', 'jquery'], function (angular, $) {
           $scope.setHandler = true;
           $scope.isOpen = true;
         });
-      }else if($location.$$path == '/login'){
+      }else if($location.$$path === '/login'){
 
         $scope.display = 'auth';
         $scope.isOpen = true;
@@ -85,7 +85,7 @@ define(['angular', 'jquery'], function (angular, $) {
 
   };
 
-  LightboxCtrl.$inject = ["$scope", "$location", "$route", "$routeParams", "$rootScope", "$timeout", "media"];
+  LightboxCtrl.$inject = ["$scope", "$location", "$routeParams", "$rootScope", "$timeout", "media"];
 
   return LightboxCtrl;
 });
