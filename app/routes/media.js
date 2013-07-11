@@ -4,7 +4,7 @@ module.exports = function (app) {
   
   var resultDocument = { };
   
-  function fetchAndSendMedia(query, res) {
+  var fetchAndSendMedia = function (query, res) {
     app.extras.mongo.media.find(query, resultDocument).sort({"created_time": -1}).limit(10, function (err,docs) {
       if (err) {
         res.status(500).send("Error: "+ err);
@@ -14,9 +14,9 @@ module.exports = function (app) {
         res.send(docs);
       }
     });
-  }
+  };
   
-  function fetchAndSendTopMedia(query, res) {
+  var fetchAndSendTopMedia = function (query, res) {
     var aggregationOptions = [ 
       { $match: query },
       { $group: 
