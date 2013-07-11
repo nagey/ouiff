@@ -1,5 +1,5 @@
 /*global define */
-define(['angular'], function(angular) {
+define(['angular'], function() {
   'use strict';
   // Setup Google Analytics Tracking for different views and paths
   var Analytics = function($rootScope, $window, $location) {
@@ -10,7 +10,7 @@ define(['angular'], function(angular) {
   };
 
   Analytics.$inject = ['$rootScope', '$window', '$location'];
-  
+
   return Analytics;
 
 });
