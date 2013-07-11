@@ -1,4 +1,4 @@
-/*global define */
+/*global define, ga */
 define(['angular'], function() {
   'use strict';
   // Setup Google Analytics Tracking for different views and paths
@@ -8,7 +8,7 @@ define(['angular'], function() {
         $window._gaq.push(['_trackPageview', $location.path()]);
       }
       else if (ga) {
-        console.log('using ga')l
+        console.log('using ga');
         ga('send', {'hitType': 'pageview', 'page': $location.path()});
       }
       else if ($window.ga) {
