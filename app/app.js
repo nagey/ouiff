@@ -162,6 +162,7 @@ if (cluster.isMaster) {
   os.cpus().forEach(forkIt);
 }
 else {
+  // NOTE: Only worker 1 will fire the instagram subscription, if worker 1 dies before this happens, no subscription :(
   console.log("Starting worker "+cluster.worker.id);
   main();
 }

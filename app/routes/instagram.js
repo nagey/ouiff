@@ -110,6 +110,10 @@ module.exports = function (app) {
   }
   
   function subscribeToTag(tagName) {
+    var cluster = require("cluster");
+    if (cluster.worker.id !== 1) {
+      return;
+    }
     app.extras.Instagram.tags.subscribe({ 
       object_id: tagName,
       callback_url: app.config.appProtocol + "://" + app.config.appDomain + "/instagram/subscription/"+ tagName +"/callback"
