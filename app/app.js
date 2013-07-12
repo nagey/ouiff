@@ -1,4 +1,7 @@
 /*jslint stupid:true, node:true */
+
+var stathat = require("stathat");
+
 function main() {
   'use strict';
 
@@ -134,8 +137,6 @@ function main() {
     console.log("Express server listening on port " + app.get('port'));
   });
 }
-
-var stathat = require("stathat");
 
 stathat.track = function (counter, amount, cb) {
   "use strict";
