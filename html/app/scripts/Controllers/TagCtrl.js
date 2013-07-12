@@ -10,6 +10,8 @@ define(['jquery', 'angular'], function () {
         $scope.tags = tags;
       });
 
+      $scope.predicate = '-number';
+
       $scope.tagClick = function (tag){
         $location.path('/categories/'+ tag);
       };
