@@ -592,6 +592,7 @@ outline: none;
 
 #profile + #films {
 	padding-top:50px;
+	padding-bottom:50px;
 }
 
 #profile .avatar {
