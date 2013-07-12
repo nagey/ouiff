@@ -1,4 +1,4 @@
 <div class="container">
-	<a class="btn btn-large" ng-repeat="tag in tags | orderBy:predicate:reverse" ng-click="tagClick(tag.tag)">{{tag.tag}} <span>{{tag.number}}</span></a>
-	<a class="btn btn-large hilite">View All</a>
+	<a ng-repeat="tag in tags | orderBy:predicate:reverse"  class="btn btn-large" ng-class='tag.classes' ng-click="tagClick(tag.tag)">{{tag.tag}} <span>{{tag.number}}</span></a>
+	<a class="btn" ng-class='allBtn.classes'>View All</a>
 </div>

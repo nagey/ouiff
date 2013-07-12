@@ -4,6 +4,7 @@ define(['jquery', 'angular'], function () {
 
     var TagCtrl = function ($scope, $location, media) {
       $scope.tpl = 'templates/tags.html';
+      $scope.allBtn = {};
 
       media.tags(function(tags){
         console.log("tags",tags);
@@ -11,6 +12,23 @@ define(['jquery', 'angular'], function () {
       });
 
       $scope.predicate = '-number';
+
+
+      $scope.$on('$routeChangeSuccess', function(scope, current, previous){
+
+        angular.forEach($scope.tags, function(value, key){
+          if(value.tag == current.params.tag){
+            value.classes = "hilite";
+          }else{
+            value.classes = "";
+          }
+        });
+        if(current.params.tag){
+          $scope.allBtn.classes = "";
+        }else{
+          $scope.allBtn.classes = "hilite";
+        }
+      });
 
       $scope.tagClick = function (tag){
         $location.path('/categories/'+ tag);
