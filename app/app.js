@@ -119,9 +119,9 @@ function main() {
     app.use(app.extras.passport.session());
     app.use(app.router);
     app.use(require('stylus').middleware(__dirname + '/public'));
-    //app.use(express["static"](path.join(__dirname, 'public')));
-    app.use(gzippo.staticGzip(__dirname, 'public'));
-    app.use(gzippo.compress());
+    app.use(express["static"](path.join(__dirname, 'public')));
+    //app.use(gzippo.staticGzip(__dirname, 'public'));
+    //app.use(gzippo.compress());
   });
 
 
