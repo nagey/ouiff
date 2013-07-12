@@ -25,7 +25,8 @@
     "geocoder": "*",
     "stathat": "*",
     "twit": "*",
-    "fb": "*"
+    "fb": "*",
+    "gzippo": "0.1.x"
   },
   "keywords": [
     "instagram",

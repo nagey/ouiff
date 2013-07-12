@@ -12,7 +12,8 @@ function main() {
     path = require('path'),
     ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn,
     mongojs = require('mongojs'),
-    fs = require('fs');
+    fs = require('fs'),
+    gzippo = require('gzippo');
 
 
   var app = express();
@@ -118,7 +119,9 @@ function main() {
     app.use(app.extras.passport.session());
     app.use(app.router);
     app.use(require('stylus').middleware(__dirname + '/public'));
-    app.use(express["static"](path.join(__dirname, 'public')));
+    //app.use(express["static"](path.join(__dirname, 'public')));
+    app.use(gzippo.staticGzip(__dirname, 'public'));
+    app.use(gzippo.compress());
   });
 
 
