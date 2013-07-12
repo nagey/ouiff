@@ -87,7 +87,9 @@ module.exports = function (app) {
           }
           app.extras.stathat.track("instagram - media from API", data.length);
           for (var m in data) {
-            getCountryAndInsert(data[m]);
+            if (data[m].type === "video") {
+              getCountryAndInsert(data[m]);
+            }
           }
           //app.extras.mongo.media.insert(data);
           var newTagsCallback = function (err, docs) {
