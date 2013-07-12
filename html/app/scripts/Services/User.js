@@ -7,7 +7,7 @@ define(['angular'], function () {
       var hasStatus = false;
       var loggedIn = false;
       var userObj;
-      var onceLoggedInStack = [];
+      var onceLoggedInStacks = { any: []};
 
       var loginUser = function (user) {
         console.log("in loginUser", user);
@@ -16,11 +16,16 @@ define(['angular'], function () {
           loggedIn = true;
           userObj = user;
 
-          // Fire callbacks in the "onceLoggedInStack"
+          // Fire callbacks in the "onceLoggedInStacks"
           var cb;
-          while (!!(cb = onceLoggedInStack.pop())) {
+          while (!!(cb = onceLoggedInStacks.any.pop())) {
             cb(userObj);
           }
+          userObj.profileList.forEach(function (element) {
+            while (!!(cb = onceLoggedInStacks[element].pop())) {
+              cb(userObj);
+            }
+          });
           $rootScope.$broadcast("userLogin", user);
         }
       };
@@ -38,12 +43,35 @@ define(['angular'], function () {
         }
       };
 
-      this.onceLoggedIn = function (cb) {
-        if (loggedIn && (typeof cb === "function")) {
-          cb(userObj);
+      this.onceLoggedIn = function (var1, var2) {
+        var cb, service;
+        if (typeof var1 === "function") {
+          cb = var1;
+          service = "any";
         }
-        else if (typeof cb === "function") {
-          onceLoggedInStack.push(cb);
+        else if ((typeof var1 === "string") && (typeof var2 === "function")) {
+          cb = var2;
+          service = var1;
+        }
+        else {
+          return;
+        }
+
+        var insertCallback = function () {
+          onceLoggedInStacks[service] = onceLoggedInStacks[service] || [];
+          onceLoggedInStacks[service].push(cb);
+        };
+
+        if (loggedIn) {
+          if ((service === 'any') || (userObj.profileList.indexOf(service) !== -1)) {
+            cb(userObj);
+          }
+          else {
+            insertCallback();
+          }
+        }
+        else {
+          insertCallback();
         }
       };
 
