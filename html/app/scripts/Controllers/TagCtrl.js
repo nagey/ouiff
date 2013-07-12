@@ -1,4 +1,4 @@
-/*global define */
+/*global define, angular*/
 define(['jquery', 'angular'], function () {
     'use strict';
 
@@ -14,10 +14,10 @@ define(['jquery', 'angular'], function () {
       $scope.predicate = '-number';
 
 
-      $scope.$on('$routeChangeSuccess', function(scope, current, previous){
+      $scope.$on('$routeChangeSuccess', function(scope, current){
 
-        angular.forEach($scope.tags, function(value, key){
-          if(value.tag == current.params.tag){
+        angular.forEach($scope.tags, function(value){
+          if(value.tag === current.params.tag){
             value.classes = "hilite";
           }else{
             value.classes = "";
