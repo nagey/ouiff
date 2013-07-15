@@ -28,9 +28,11 @@ define(['angular', 'jquery'], function () {
       $scope.checkStatus = function(){
         var j;
         console.log('AuthCtrl checkStatus');
-        var setServiceLoggedIn = function(){
-          $scope.services[j].checked = true;
-          $scope.services[j].auth = true;
+        var setServiceLoggedIn = function(service){
+          return function() {
+            $scope.services[service].checked = true;
+            $scope.services[service].auth = true;
+          };
         };
         user.status(function(status){
           if(status.loggedIn){
@@ -39,7 +41,7 @@ define(['angular', 'jquery'], function () {
             for(var i in $scope.profile.profileList){
               for(var j in $scope.services){
                 if($scope.profile.profileList[i] === $scope.services[j].key){
-                  user.onceLoggedIn($scope.services[j].key, setServiceLoggedIn());
+                  user.onceLoggedIn($scope.services[j].key, setServiceLoggedIn(j));
                   break;
                 }
               }

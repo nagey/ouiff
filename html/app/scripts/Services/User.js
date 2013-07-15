@@ -19,11 +19,15 @@ define(['angular'], function () {
           // Fire callbacks in the "onceLoggedInStacks"
           var cb;
           while (!!(cb = onceLoggedInStacks.any.pop())) {
+            console.log("firing any callback", cb);
             cb(userObj);
           }
           userObj.profileList.forEach(function (element) {
-            while (!!(cb = onceLoggedInStacks[element].pop())) {
-              cb(userObj);
+            if (onceLoggedInStacks[element]) {
+              while (!!(cb = onceLoggedInStacks[element].pop())) {
+                console.log("firing " + element + " callback", cb);
+                cb(userObj);
+              }
             }
           });
           $rootScope.$broadcast("userLogin", user);
