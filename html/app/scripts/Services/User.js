@@ -121,6 +121,17 @@ define(['angular'], function () {
         }
       };
 
+      this.getProfile = function (userId, cb) {
+        if (typeof cb === "function") {
+          $http({method: "GET", url: "/auth/status/"+userId}).
+            success(function (data) {
+              if (data.user) {
+                cb(data.user);
+              }
+            });
+        }
+      };
+
       this.logout = function () {
         $http({method: "GET", url: "/auth/logout"}).
           success(function () {

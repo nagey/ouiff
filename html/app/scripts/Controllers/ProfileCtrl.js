@@ -1,31 +1,46 @@
 /*global define, console */
 define(['angular', 'jquery'], function () {
-    'use strict';
+  'use strict';
 
-    var ProfileCtrl = function ($scope, $location, user, media) {
-        user.status(function(status){
-          $scope.videos = [];
+  var ProfileCtrl = function ($scope, $location, user, media, $routeParams) {
 
-          if(status.loggedIn){
-            console.log('ProfileCtrl user profile',status.profile);
-            $scope.profile = status.profile;
-            media.mediaByUser('dasmart', function(videos){
-              console.log(videos);
-              $scope.videos = videos;
-            });
-          }else{
-            $location.path('/login');
-          }
-        });
+    $scope.loading = true;
+    $scope.videos = [];
 
-        $scope.imgClick = function (item){
-          $location.prevPath = $location.path();
-          $location.path('/watch/'+ item.id);
-        };
-      };
+    var mediaCallback = function(videos){
+      console.log(videos);
+      $scope.videos = videos;
+      $scope.loading = false;
+    };
 
-    ProfileCtrl.$inject = ["$scope", "$location", "user", "media"];
+    if ($routeParams.userId) {
+      user.getProfile($routeParams.userId, function (profile) {
+        $scope.profile = profile;
+        media.mediaByUser($scope.profile.username, mediaCallback);
+      });
+    }
+    else {
+      user.status(function(status){
+        if (status.loggedId) {
+          console.log('ProfileCtrl user profile',status.profile);
+          $scope.profile = status.profile;
+        }
+        else{
+          $location.path('/login');
+        }
+        media.mediaByUser($scope.profile.username, mediaCallback);
+      });
+    }
 
-    return ProfileCtrl;
-  });
+    $scope.imgClick = function (item){
+      $location.prevPath = $location.path();
+      $location.path('/watch/'+ item.id);
+    };
+
+  };
+
+  ProfileCtrl.$inject = ["$scope", "$location", "user", "media", "$routeParams"];
+
+  return ProfileCtrl;
+});
 
