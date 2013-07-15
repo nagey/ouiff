@@ -519,7 +519,7 @@ outline: none;
 	background-color:rgba(231,193,100, 0.8);
 }
 
-.rate-pad-hate-myself {
+.rate-pad {
 	width:80%;
 	height:80%;
 	padding:10%;
@@ -626,4 +626,44 @@ line-height: 1.2em;
 body { padding:0; }
 .container { padding:0 20px; }
 
+}
+
+
+
+
+
+
+/**
+ * Ed's CSS
+ */
+
+a,
+a:hover,
+.btn,
+.btn:hover{
+	-webkit-transition: .25s linear all;
+	-moz-transition: .25s linear all;
+	-o-transition: .25s linear all;
+	-ms-transition: .25s linear all;
+	transition: .25s linear all;
+}
+
+a,
+.btn,
+.rate-pad i,
+.entry img{
+	cursor: pointer;
+}
+
+.rate-input{
+	text-align: center;
+}
+
+.modal textarea{
+	width: 436px;
+	background: transparent;
+	border: 4px solid #567572;
+	border-radius: 0;
+	color:#567572;
+	font-family: "Courier New", Courier, monospace;
 }
