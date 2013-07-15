@@ -670,7 +670,7 @@ a,
 	font-family: "Courier New", Courier, monospace;
 }
 
-#share-window .btn-group button{
+#share-window button{
 	width: 48px;
 	height: 48px;
 	background-size: 48px 48px;
@@ -678,8 +678,8 @@ a,
 	opacity: .5;
 }
 
-#share-window .btn-group button:hover,
-#share-window .btn-group button.active{
+#share-window button:hover,
+#share-window button.active{
 	opacity: 1;
 }
 
