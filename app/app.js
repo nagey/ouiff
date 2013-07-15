@@ -12,8 +12,8 @@ function main() {
     path = require('path'),
     ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn,
     mongojs = require('mongojs'),
-    fs = require('fs'),
-    gzippo = require('gzippo');
+    fs = require('fs')/*,
+    gzippo = require('gzippo')*/;
 
 
   var app = express();
