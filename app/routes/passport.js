@@ -248,6 +248,32 @@ module.exports = function (app) {
     }
   });
   
+  app.get("/auth/status/:userId", function (req, res) {
+    app.extras.mongo.users.find({username: req.params.userId}, function (err, docs) {
+      console.log(err,docs);
+      if (err) {
+        app.extras.stathat.track("user - database error on find", 1);
+        app.extras.stathat.track("database error", 1);
+        res.status(500).send({"status": "db error"});
+      }
+      else if (docs.length > 1) {
+        app.extras.stathat.track("user - multiple users found", 1);
+        app.extras.stathat.track("database error", 1);
+        res.status(500).send({"status": "db error"});
+      }
+      else if (docs.length === 0) {
+        res.send({"status": "maybe", "user" : {"username" : req.params.userId}});
+      }
+      else {
+        var user = docs[0];
+        delete user.socialProfiles;
+        delete user.tokens;
+        delete user.providerTokens;
+        res.send({"status": true, "user": user});
+      }
+    });
+  });
+  
   app.get("/auth/logout", function (req, res) {
     req.logout();
     res.send("OK");
