@@ -640,7 +640,9 @@ body { padding:0; }
 a,
 a:hover,
 .btn,
-.btn:hover{
+.btn:hover,
+button,
+button:hover{
 	-webkit-transition: .25s linear all;
 	-moz-transition: .25s linear all;
 	-o-transition: .25s linear all;
@@ -666,4 +668,27 @@ a,
 	border-radius: 0;
 	color:#567572;
 	font-family: "Courier New", Courier, monospace;
+}
+
+#share-window .btn-group button{
+	width: 48px;
+	height: 48px;
+	background-size: 48px 48px;
+	border: none;
+	opacity: .5;
+}
+
+#share-window .btn-group button:hover,
+#share-window .btn-group button.active{
+	opacity: 1;
+}
+
+button.instagram{
+	background: url('../images/icon-Instagram.png');
+}
+button.twitter{
+	background: url('../images/icon-Twitter.png');
+}
+button.facebook{
+	background: url('../images/icon-FB.png');
 }

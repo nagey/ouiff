@@ -9,7 +9,7 @@
     </div>
     <div id="share-window" ng-controller="AuthCtrl">
 	    <div class="btn-group"  ng-init="checkStatus()">
-	        <button type="button" class="btn btn-large btn-primary"  ng-repeat="service in services"  ng-model="service.checked" ng-click="login(service)" btn-checkbox>{{service.name}}</button>
+	        <button type="button"   ng-class="service.key" ng-repeat="service in services"  ng-model="service.checked" ng-click="login(service)" btn-checkbox></button>
 	    </div>
 	</div>
 
