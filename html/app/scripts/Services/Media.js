@@ -10,6 +10,7 @@ define(['angular'], function () {
 
       var returnResults = function (cb, count, offset) {
         return function(result) {
+          console.log("work",result);
           if (!count) {
             count = result.length;
           }
@@ -71,6 +72,7 @@ define(['angular'], function () {
       };
 
       this.tags = function (cb, count, offset) {
+        console.log("getting tags list");
         var tagService = $resource("http://15sfest.com/media/tag", {id: "@id"});
         tagService.query(returnResults(cb, count, offset));
       };

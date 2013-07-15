@@ -17,7 +17,6 @@ define(['jquery'], function ($) {
     $scope.tpl.auth = 'templates/auth.html';
     $scope.pathArr = [];
 
-    console.log("rate:", $scope.rate);
     // Event Listeners
     $scope.$on('auth_request', function() {
       $scope.display = "auth";

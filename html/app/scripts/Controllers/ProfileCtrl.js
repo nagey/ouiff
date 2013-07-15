@@ -8,10 +8,10 @@ define(['angular', 'jquery'], function () {
     $scope.videos = [];
 
     var mediaCallback = function(videos){
-      console.log(videos);
       $scope.videos = videos;
       $scope.loading = false;
     };
+    console.log('ProfileCtrl',$routeParams.userId);
 
     if ($routeParams.userId) {
       user.getProfile($routeParams.userId, function (profile) {
@@ -21,13 +21,14 @@ define(['angular', 'jquery'], function () {
     }
     else {
       user.status(function(status){
-        if (status.loggedId) {
-          console.log('ProfileCtrl user profile',status.profile);
+        console.log('ProfileCtrl',status)
+        if (status.loggedIn) {
           $scope.profile = status.profile;
         }
         else{
           $location.path('/login');
         }
+        console.log('ProfileCtrl username', $scope.profile)
         media.mediaByUser($scope.profile.username, mediaCallback);
       });
     }
@@ -35,6 +36,10 @@ define(['angular', 'jquery'], function () {
     $scope.imgClick = function (item){
       $location.prevPath = $location.path();
       $location.path('/watch/'+ item.id);
+    };
+    $scope.profileClick = function (item){
+      //$location.prevPath = $location.path();
+      $location.path('/profile/'+ item.user.username);
     };
 
   };

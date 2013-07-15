@@ -687,6 +687,10 @@ a,
 	cursor: pointer;
 }
 
+.entry .meta a{
+	color: #E5C36E;
+}
+
 .rate-input{
 	text-align: center;
 }

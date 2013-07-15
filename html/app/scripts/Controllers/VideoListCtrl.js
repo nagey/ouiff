@@ -41,7 +41,10 @@ define(['angular', 'jquery', 'angular-modal'], function () {
         $location.prevPath = $location.path();
         $location.path('/watch/'+ item.id);
       };
-
+      $scope.profileClick = function (item){
+        //$location.prevPath = $location.path();
+        $location.path('/profile/'+ item.user.username);
+      };
     };
 
     VideoListCtrl.$inject = ["$location", "$scope", "media"];

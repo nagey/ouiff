@@ -6,7 +6,7 @@
             <div ng-repeat="video in group.videos track by $index" class="entry span3">
                 <img ng-click="imgClick(video)" ng-src="{{video.images.standard_resolution.url}}" width="612" height="612" alt="FPO">
                 <div class="meta clearfix">
-                    <p class="user">{{video.user.username}}</p>
+                    <p class="user"><a ng-click="profileClick(video)">{{video.user.username}}</a></p>
                     <p class="desc">{{video.caption.text}}</p>
                     <p class="geo"><img ng-show="video.location.country" class="flag flag-{{video.location.country}}"></p>
                     <p class="rating"><rating value="video.score" max="5" readonly="true"></rating></p>

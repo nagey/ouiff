@@ -27,7 +27,6 @@ define(['angular', 'jquery'], function () {
 
       $scope.checkStatus = function(){
         var j;
-        console.log('AuthCtrl checkStatus');
         var setServiceLoggedIn = function(service){
           return function() {
             $scope.services[service].checked = true;
