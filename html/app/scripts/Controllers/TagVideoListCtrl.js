@@ -31,6 +31,10 @@ define(['angular', 'jquery', 'angular-modal'], function () {
         $location.path('/watch/'+ item.id);
       };
 
+      $scope.profileClick = function (item){
+        $location.path('/profile/'+ item.user.username);
+      };
+
     };
 
     TagVideoListCtrl.$inject = ["$location",  "$routeParams", "$scope", "media"];

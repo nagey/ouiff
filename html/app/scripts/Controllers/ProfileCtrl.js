@@ -21,14 +21,14 @@ define(['angular', 'jquery'], function () {
     }
     else {
       user.status(function(status){
-        console.log('ProfileCtrl',status)
+        console.log('ProfileCtrl',status);
         if (status.loggedIn) {
           $scope.profile = status.profile;
         }
         else{
           $location.path('/login');
         }
-        console.log('ProfileCtrl username', $scope.profile)
+        console.log('ProfileCtrl username', $scope.profile);
         media.mediaByUser($scope.profile.username, mediaCallback);
       });
     }
