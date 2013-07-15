@@ -24,6 +24,7 @@ define(['angular', 'jquery', 'angular-modal'], function () {
           title: "Featured",
           css: "featured",
           span: 3,
+          empty: "Empty",
           videos: result
         };
       },2);
