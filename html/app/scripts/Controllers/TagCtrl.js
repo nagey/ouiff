@@ -6,9 +6,7 @@ define(['jquery', 'angular'], function () {
       $scope.tpl = 'templates/tags.html';
       $scope.allBtn = {};
 
-      console.log('TagCtrl');
       media.tags(function(tags){
-        console.log("tags",tags);
         $scope.tags = tags;
       });
 

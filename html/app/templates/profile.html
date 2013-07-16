@@ -9,7 +9,8 @@
             <p><a href="{{profile.website}}">{{profile.website}}</a></p>
         	<p>{{profile.bio}}</p>
         </div>
-        <div class="span3">
+        <div class="span3 share-btns">
+            <button ng-class="service" ng-repeat="service in profile.profileList" ng-href=""></button>
             <a href="#"><img src="images/icon-Instagram.png" width="48" height="48" alt="Instagram" /></a>
             <a href="#"><img src="images/icon-FB.png" width="48" height="48" alt="Facebook" /></a>
             <a href="#"><img src="images/icon-Twitter.png" width="48" height="48" alt="Twitter" /></a>

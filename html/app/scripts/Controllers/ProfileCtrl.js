@@ -11,24 +11,30 @@ define(['angular', 'jquery'], function () {
       $scope.videos = videos;
       $scope.loading = false;
     };
-    console.log('ProfileCtrl',$routeParams.userId);
 
     if ($routeParams.userId) {
       user.getProfile($routeParams.userId, function (profile) {
         $scope.profile = profile;
         media.mediaByUser($scope.profile.username, mediaCallback);
+
+        if(!$scope.profile.profilePicture){
+          $scope.profile.profilePicture = "images/profile-default.png";
+        }
+        if(!$scope.profile.profileList){
+          $scope.profile.profileList = ["instagram"];
+        }
+
+        console.log('ProfileCtrl profile:', $scope.profile);
       });
     }
     else {
       user.status(function(status){
-        console.log('ProfileCtrl',status);
         if (status.loggedIn) {
           $scope.profile = status.profile;
         }
         else{
           $location.path('/login');
         }
-        console.log('ProfileCtrl username', $scope.profile);
         media.mediaByUser($scope.profile.username, mediaCallback);
       });
     }
