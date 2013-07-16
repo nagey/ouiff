@@ -237,17 +237,36 @@ module.exports = function (app) {
     res.render("auth-success", { user: sanitizedUser });
     //res.send(req.user);
   });
+
+  var prepareUser = function (user, safe) {
+    user.socialLinks = {};
+    if (user.socialProfiles.twitter) {
+      user.socialLinks.twitter = "http://twitter.com/" + user.socialProfiles.twitter.username;
+    }
+    if (user.socialProfiles.facebook) {
+      user.socialLinks.facebook = user.socialProfiles.facebook.profileUrl;
+    }
+    if (user.socialProfiles.instagram) {
+      user.socialLinks.instagram = "http://instagram.com/" + user.socialProfiles.instagram.username;
+    }
+    delete user.socialProfiles;
+    if (!safe) {
+      delete user.tokens;
+      delete user.providerTokens;
+    }
+    
+    return user;
+  };
   
   app.get("/auth/status", function (req, res) {
     if (req.user) {
-      delete req.user.socialProfiles;
-      res.send({"status": true, "user": req.user});
+      res.send({"status": true, "user": prepareUser(req.user, true)});
     }
     else {
       res.send({"status": false});
     }
   });
-  
+
   app.get("/auth/status/:userId", function (req, res) {
     app.extras.mongo.users.find({username: req.params.userId}, function (err, docs) {
       console.log(err,docs);
@@ -265,10 +284,7 @@ module.exports = function (app) {
         res.send({"status": "maybe", "user" : {"username" : req.params.userId}});
       }
       else {
-        var user = docs[0];
-        delete user.socialProfiles;
-        delete user.tokens;
-        delete user.providerTokens;
+        var user = prepareUser(docs[0]);
         res.send({"status": true, "user": user});
       }
     });
