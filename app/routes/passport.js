@@ -19,37 +19,75 @@ module.exports = function (app) {
     else {
       userObject = JSON.parse(JSON.stringify(req.user));
       userObject._id = new ObjectId(userObject._id);
-      if (!userObject.profileList) userObject.profileList = [];
+      if (!userObject.profileList) {
+        userObject.profileList = [];
+      }
     }
     userObject.tokens = userObject.tokens || {};
     userObject.tokens[profile.provider] = [token1, token2];
     userObject.socialProfiles[profile.provider] = profile;
-    if (userObject.profileList.indexOf(profile.provider) === -1) userObject.profileList.push(profile.provider);
+    if (userObject.profileList.indexOf(profile.provider) === -1) {
+      userObject.profileList.push(profile.provider);
+    }
     console.log(userObject.profileList.indexOf(profile.provider), profile.provider);
     switch (profile.provider) {
       case 'instagram':
         userObject.instagramConnected = true;
-        if (!userObject.username) userObject.username = profile._json.data.username;
-        if (!userObject.displayName) userObject.displayName = profile._json.data.name;
-        if (!userObject.profilePicture) userObject.profilePicture = profile._json.data.profile_picture;
-        if (!userObject.website) userObject.website = profile._json.data.website;
-        if (!userObject.bio) userObject.bio = profile._json.data.bio;
+        if (!userObject.username) {
+          userObject.username = profile._json.data.username;
+        }
+        if (!userObject.displayName) {
+          userObject.displayName = profile._json.data.name;
+        }
+        if (!userObject.profilePicture) {
+          userObject.profilePicture = profile._json.data.profile_picture;
+        }
+        if (!userObject.website) {
+          userObject.website = profile._json.data.website;
+        }
+        if (!userObject.bio) {
+          userObject.bio = profile._json.data.bio;
+        }
         break;
       case 'facebook':
-        if (!userObject.username) userObject.username = profile._json.username;
-        if (!userObject.displayName) userObject.displayName = profile._json.name;
-        if (!userObject.gender) userObject.gender = profile._json.gender;
-        if (!userObject.email) userObject.email = profile._json.email;
-        if (!userObject.hometown) userObject.hometown = profile._json.hometown.name;
-        if (!userObject.location) userObject.location = profile._json.location.name;
+        if (!userObject.username) {
+          userObject.username = profile._json.username;
+        }
+        if (!userObject.displayName) {
+          userObject.displayName = profile._json.name;
+        }
+        if (!userObject.gender) {
+          userObject.gender = profile._json.gender;
+        }
+        if (!userObject.email) {
+          userObject.email = profile._json.email;
+        }
+        if (!userObject.hometown) {
+          userObject.hometown = profile._json.hometown.name;
+        }
+        if (!userObject.location) {
+          userObject.location = profile._json.location.name;
+        }
         break;
       case 'twitter':
-        if (!userObject.username) userObject.username = profile._json.screen_name;
-        if (!userObject.displayName) userObject.displayName = profile._json.name;
-        if (!userObject.profilePicture) userObject.profilePicture = profile._json.profile_image_url;
-        if (!userObject.website) userObject.website = profile._json.url;
-        if (!userObject.bio) userObject.bio = profile._json.description;
-        if (!userObject.location) userObject.location = profile._json.location;
+        if (!userObject.username) {
+          userObject.username = profile._json.screen_name;
+        }
+        if (!userObject.displayName) {
+          userObject.displayName = profile._json.name;
+        }
+        if (!userObject.profilePicture) {
+          userObject.profilePicture = profile._json.profile_image_url;
+        }
+        if (!userObject.website) {
+          userObject.website = profile._json.url;
+        }
+        if (!userObject.bio) {
+          userObject.bio = profile._json.description;
+        }
+        if (!userObject.location) {
+          userObject.location = profile._json.location;
+        }
         break;
     }
     
@@ -60,8 +98,12 @@ module.exports = function (app) {
         app.extras.stathat.track("user - "+ profile.provider+" - database error", 1);
       }
       else {
-        if (typeof docs == "Array") done(null, docs[0]);
-        else done(null, userObject);
+        if (typeof docs === "Array") {
+          done(null, docs[0]);
+        }
+        else {
+          done(null, userObject);
+        }
       }
     };
     
