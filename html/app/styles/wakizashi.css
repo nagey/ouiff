@@ -226,11 +226,14 @@ div.gold a {
 
 .gold .entry .meta {
 	padding: 10px;
-	height: 125px;
 	background-color:#567572;
 	-webkit-border-radius: 0 0 2px 2px;
 	-moz-border-radius: 0 0 2px 2px;
 	border-radius: 0 0 2px 2px;
+}
+
+.gold .entry .meta {
+	height: 125px;
 }
 
 .green .entry .meta {
