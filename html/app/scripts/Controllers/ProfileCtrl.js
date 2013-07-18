@@ -42,7 +42,6 @@ define(['angular', 'jquery'], function () {
         }
         media.mediaByUser($scope.profile.username, mediaCallback);
       });
-      
     }
 
     $scope.imgClick = function (item){

@@ -1,4 +1,4 @@
-/*global define, screen, console */
+/*global define, screen, console, angular */
 define(['angular', 'jquery'], function () {
     'use strict';
 
@@ -19,7 +19,7 @@ define(['angular', 'jquery'], function () {
 
       $scope.$on('connectService', function(e, service) {
         console.log('connectService', service);
-        angular.forEach($scope.services, function(value, index) {
+        angular.forEach($scope.services, function(value) {
           if(service === value.key){
             console.log(value);
             $scope.login(value);
