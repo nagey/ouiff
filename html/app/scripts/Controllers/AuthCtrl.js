@@ -17,10 +17,19 @@ define(['angular', 'jquery'], function () {
         $scope.checkStatus();
       });
 
+      $scope.$on('connectService', function(e, service) {
+        console.log('connectService', service);
+        angular.forEach($scope.services, function(value, index) {
+          if(service === value.key){
+            console.log(value);
+            $scope.login(value);
+          }
+        });
+      });
+
       $scope.openAuth = function(){
         $location.path('/login');
       };
-
       $scope.openProfile = function(){
         $location.path('/profile');
       };

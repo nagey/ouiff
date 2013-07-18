@@ -2,7 +2,7 @@
 define(['angular', 'jquery'], function () {
   'use strict';
 
-  var ProfileCtrl = function ($scope, $location, user, media, $routeParams) {
+  var ProfileCtrl = function ($scope, $rootScope, $location, user, media, $routeParams) {
 
     $scope.loading = true;
     $scope.videos = [];
@@ -15,6 +15,7 @@ define(['angular', 'jquery'], function () {
     if ($routeParams.userId) {
       user.getProfile($routeParams.userId, function (profile) {
         $scope.profile = profile;
+
         media.mediaByUser($scope.profile.username, mediaCallback);
 
         if(!$scope.profile.profilePicture){
@@ -31,12 +32,17 @@ define(['angular', 'jquery'], function () {
       user.status(function(status){
         if (status.loggedIn) {
           $scope.profile = status.profile;
+          $scope.hasInstagram = ('instagram' in status.profile.socialLinks);
+          $scope.hasFacebook  = ('facebook'  in status.profile.socialLinks);
+          $scope.hasTwitter   = ('twitter'   in status.profile.socialLinks);
+
         }
         else{
           $location.path('/login');
         }
         media.mediaByUser($scope.profile.username, mediaCallback);
       });
+      
     }
 
     $scope.imgClick = function (item){
@@ -48,9 +54,14 @@ define(['angular', 'jquery'], function () {
       $location.path('/profile/'+ item.user.username);
     };
 
+    $scope.authClick = function (service){
+      $rootScope.$broadcast('connectService', service);
+      console.log('authClick', service);
+    };
+
   };
 
-  ProfileCtrl.$inject = ["$scope", "$location", "user", "media", "$routeParams"];
+  ProfileCtrl.$inject = ["$scope", "$rootScope", "$location", "user", "media", "$routeParams"];
 
   return ProfileCtrl;
 });

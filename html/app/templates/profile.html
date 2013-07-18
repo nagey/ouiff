@@ -10,10 +10,10 @@
         	<p>{{profile.bio}}</p>
         </div>
         <div class="span3 share-btns">
-            <button ng-class="service" ng-repeat="service in profile.profileList" ng-href=""></button>
-            <a href="#"><img src="images/icon-Instagram.png" width="48" height="48" alt="Instagram" /></a>
-            <a href="#"><img src="images/icon-FB.png" width="48" height="48" alt="Facebook" /></a>
-            <a href="#"><img src="images/icon-Twitter.png" width="48" height="48" alt="Twitter" /></a>
+            <a ng-repeat="(service, link) in profile.socialLinks" href="{{link}}" ng-class="link" ><button  ng-class="service" class="active" ></button></a>
+            <a ng-hide="hasInstagram" ng-click="authClick('instagram')"><button  class="instagram" ></button></a>
+            <a ng-hide="hasFacebook"  ng-click="authClick('facebook')"><button  class="facebook" ></button></a>
+            <a ng-hide="hasTwitter" ng-click="authClick('twitter')"><button  class="twitter" ></button></a>
         </div>
         <div class="span3 badges">
         
