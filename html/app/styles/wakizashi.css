@@ -732,6 +732,7 @@ a,
 	color: #E5C36E;
 }
 
+#share-window,
 .rate-input{
 	text-align: center;
 }
@@ -745,11 +746,15 @@ a,
 	opacity: .5;
 }
 
+#share-window button:hover{
+	opacity: .75;
+}
+
 .share-btns button.active:hover,
 .share-btns button.active,
 .activeUser .share-btns button:hover,
-#share-window button:hover,
-#share-window button.active{
+#share-window button.active,
+#share-window button.active:hover{
 	opacity: 1;
 	cursor: pointer;
 }
@@ -760,6 +765,9 @@ a,
 
 .share-btns button.active{
 	margin-left: 10px;
+}
+#share-window button{
+	margin-right: 10px;
 }
 
 button.instagram,
