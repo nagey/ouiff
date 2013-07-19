@@ -71,6 +71,21 @@ module.exports = function (app) {
     app.extras.stathat.track("media - fetch featured", 1);
     fetchAndSendMedia({featured: true}, res);
   });
+  
+  app.post("/media/feature", function (req, res) {
+    if (req.user) {
+      if (app.extras.user.hasPermission(req.user, "feature_media")) {
+        app.extras.mongo.media.update({"id": req.body.mediaId, "featured":req.body.featured}, {$set: {"featured": !req.body.featured}});
+        res.send({"success": true});
+      }
+      else {
+        res.send({"success": false});
+      }
+    }
+    else {
+      res.send({"success": false});
+    }
+  });
 
   app.get("/media/top", function (req,res) {
     app.extras.stathat.track("media - fetch top", 1);

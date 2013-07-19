@@ -2,7 +2,7 @@
 define(['angular'], function () {
     'use strict';
 
-    var Media = function ($resource, $rootScope) {
+    var Media = function ($resource, $rootScope, $http) {
       var MediaRsc = $resource('http://15sfest.com/media/:id', {id:'@id'});
       var FeaturedMedia = $resource('http://15sfest.com/media/featured/:id', {id:'@id'});
       var BestMedia = $resource('http://15sfest.com/media/top/:id', {id:'@id'});
@@ -74,10 +74,17 @@ define(['angular'], function () {
         var tagService = $resource("http://15sfest.com/media/tag", {id: "@id"});
         tagService.query(returnResults(cb, count, offset));
       };
+      
+      this.featureMedia = function (mediaId, featured, cb) {
+        if (typeof cb !== "function") {
+          cb = function () {};
+        }
+        $http.post("/media/feature", {"mediaId": mediaId, "featured": featured}).success(cb);
+      };
 
     };
 
-    Media.$inject = ["$resource", "$rootScope"];
+    Media.$inject = ["$resource", "$rootScope", "$http"];
 
     return Media;
   });

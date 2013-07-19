@@ -4,9 +4,11 @@ define(['jquery', 'angular'], function ($) {
 
     var VideoCtrl = function ($scope, user, media) {
 
+      $scope.featureMedia = function () {
+        media.featureMedia($scope.videoItem.id, $scope.videoItem.featured);
+        $scope.videoItem.featured = !$scope.videoItem.featured;
       };
 
-    VideoCtrl.$inject = ["$scope"];
       $scope.playVideo = function() {
         var video = document.getElementById("videoPlayer");
         if($('#control-window').hasClass('playing')) {
@@ -30,9 +32,11 @@ define(['jquery', 'angular'], function ($) {
         $('#control-window').toggleClass('muted');
       };
 
+      $scope.canFeature = user.hasPermission("feature_media");
 
     };
 
+    VideoCtrl.$inject = ["$scope", "user", "media"];
 
     return VideoCtrl;
   });

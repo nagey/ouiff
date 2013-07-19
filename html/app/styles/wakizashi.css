@@ -514,6 +514,22 @@ outline: none;
 	cursor:pointer;
 }
 
+#feature-btn {
+	width:90px;
+	margin:-30px 0 0 65px;
+	height:30px;
+	background:#264542;
+  color:#C5C3CE;
+	text-align:center;
+	line-height:30px;
+	cursor:pointer;
+}
+
+#feature-btn.featured {
+  color:#E5C36E;
+  background:#567572;
+}
+
 #control-window.playing #play-btn {
 	opacity:0;
 }

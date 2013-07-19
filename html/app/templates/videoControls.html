@@ -1,4 +1,5 @@
 <div id="control-window" class="" ng-controller="VideoCtrl">
     <div id="mute-btn" ng-click="muteVideo()">mute</div>
+    <div ng-show="canFeature" id="feature-btn" ng-click="featureMedia()" ng-class="{featured: videoItem.featured}">featured</div>
     <div id="play-btn" ng-click="playVideo()"><span>play</span></div>
 </div>
