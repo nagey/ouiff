@@ -132,6 +132,21 @@ define(['angular'], function () {
         }
       };
 
+      this.hasPermission = function (permission) {
+        if (!loggedIn) {
+          return false;
+        }
+        else if (!userObj.permissions) {
+          return false;
+        }
+        else if (userObj.permissions.indexOf(permission) > -1) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      };
+
       this.logout = function () {
         $http({method: "GET", url: "/auth/logout"}).
           success(function () {

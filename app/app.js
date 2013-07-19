@@ -42,9 +42,29 @@ function main() {
   app.extras.instagram.clientSecret = '80d7a8a4247e498ab6df545f9c5806d2';
 
   app.extras.orion = {};
-  app.extras.orion.listId = "81c5f38d6031ef48d1ee088b786626a7";
+  app.extras.orion.listid = "81c5f38d6031ef48d1ee088b786626a7";
   app.extras.orion.clientId = "a84e30b65a3c2f4d70d631b3dd52163a";
   app.extras.orion.clientApiKey = "8884b359f9dff9ca9c65b5ced3832da2032292870f1f7aea";
+
+  app.extras.user = {};
+  app.extras.user.hasPermission = function (user, permission) {
+    var hasPermission = false;
+    if (!user.permissions) {
+      return false;
+    }
+    if (typeof permission === "array") {
+      permission.forEach(permission, function (element) {
+        if (user.permissions.indexOf(element) > -1) {
+          hasPermission = true;
+        }
+      });
+    } else {
+      if (user.permissions.indexOf(permission) > -1) {
+        hasPermission = true;
+      }
+    }
+    return hasPermission;
+  }
 
 
   app.extras.redisClient = redis.createClient();
