@@ -74,7 +74,7 @@ define(['angular'], function () {
         var tagService = $resource("http://15sfest.com/media/tag", {id: "@id"});
         tagService.query(returnResults(cb, count, offset));
       };
-      
+
       this.featureMedia = function (mediaId, featured, cb) {
         if (typeof cb !== "function") {
           cb = function () {};
