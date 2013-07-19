@@ -4,17 +4,27 @@ define(['angular', 'jquery'], function () {
 
   var ProfileCtrl = function ($scope, $rootScope, $location, user, media, $routeParams) {
 
-    $scope.loading = true;
-    $scope.videos = [];
-
     var mediaCallback = function(videos){
       $scope.videos = videos;
       $scope.loading = false;
+    },
+    setSocial = function (profile){
+      console.log('profile',profile);
+      if(profile.socialLinks){
+        $scope.hasInstagram = ('instagram' in profile.socialLinks);
+        $scope.hasFacebook  = ('facebook'  in profile.socialLinks);
+        $scope.hasTwitter   = ('twitter'   in profile.socialLinks);
+      }
     };
+
+    $scope.loading = true;
+    $scope.videos = [];
+    $scope.empty = "No films available";
 
     if ($routeParams.userId) {
       user.getProfile($routeParams.userId, function (profile) {
         $scope.profile = profile;
+        setSocial(profile);
 
         media.mediaByUser($scope.profile.username, mediaCallback);
 
@@ -31,11 +41,10 @@ define(['angular', 'jquery'], function () {
     else {
       user.status(function(status){
         if (status.loggedIn) {
+          $scope.activeUser = true;
+          $scope.profileClass = "activeUser";
           $scope.profile = status.profile;
-          $scope.hasInstagram = ('instagram' in status.profile.socialLinks);
-          $scope.hasFacebook  = ('facebook'  in status.profile.socialLinks);
-          $scope.hasTwitter   = ('twitter'   in status.profile.socialLinks);
-
+          setSocial(status.profile);
         }
         else{
           $location.path('/login');
@@ -43,7 +52,6 @@ define(['angular', 'jquery'], function () {
         media.mediaByUser($scope.profile.username, mediaCallback);
       });
     }
-
     $scope.imgClick = function (item){
       $location.prevPath = $location.path();
       $location.path('/watch/'+ item.id);
@@ -54,8 +62,9 @@ define(['angular', 'jquery'], function () {
     };
 
     $scope.authClick = function (service){
-      $rootScope.$broadcast('connectService', service);
-      console.log('authClick', service);
+      if($scope.activeUser){
+        $rootScope.$broadcast('connectService', service);
+      }
     };
 
   };

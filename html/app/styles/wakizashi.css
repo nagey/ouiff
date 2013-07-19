@@ -745,11 +745,21 @@ a,
 	opacity: .5;
 }
 
+.share-btns button.active:hover,
 .share-btns button.active,
-.share-btns button:hover,
+.activeUser .share-btns button:hover,
 #share-window button:hover,
 #share-window button.active{
 	opacity: 1;
+	cursor: pointer;
+}
+
+.share-btns button:hover{
+	cursor: default;
+}
+
+.share-btns button.active{
+	margin-left: 10px;
 }
 
 button.instagram,
@@ -761,4 +771,8 @@ button.twitter{
 }
 button.facebook{
 	background: url('../images/icon-FB.png');
+}
+
+#films.green{
+	margin-bottom: -100px;
 }

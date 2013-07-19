@@ -1,4 +1,4 @@
-<div id="profile" class="container gold">
+<div id="profile" ng-class="profileClass" class="container gold profile">
     
     <div class="row">
         <div class="span3">
@@ -10,15 +10,13 @@
         	<p>{{profile.bio}}</p>
         </div>
         <div class="span3 share-btns">
-            <a ng-repeat="(service, link) in profile.socialLinks" href="{{link}}" ng-class="link" ><button  ng-class="service" class="active" ></button></a>
+            <a ng-repeat="(service, link) in profile.socialLinks" href="{{link}}"><button  ng-class="service" class="active" ></button></a>
             <a ng-hide="hasInstagram" ng-click="authClick('instagram')"><button  class="instagram" ></button></a>
             <a ng-hide="hasFacebook"  ng-click="authClick('facebook')"><button  class="facebook" ></button></a>
             <a ng-hide="hasTwitter" ng-click="authClick('twitter')"><button  class="twitter" ></button></a>
         </div>
         <div class="span3 badges">
-        
-        
-            
+
         </div>
 	</div>	
 
@@ -39,8 +37,7 @@
                     <p class="rating"><rating value="video.score" max="5" readonly="true"></rating></p>
                 </div>
             </div>
-        </div>	
-        
-    </div>			
-
+            <div ng-hide="videos.length" class="span"><h1>{{empty}}</h1></div>
+        </div>
+    </div>
 </div>
