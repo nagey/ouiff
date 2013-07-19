@@ -9,6 +9,47 @@ module.exports = function (app) {
   
   var ObjectId = require("mongojs").ObjectId;
   
+  var validator = require("validator");
+  
+  var http = require("http");
+
+  var subscribeToOrionList = function (userObject) {
+    try {
+      validator.check(userObject.email).isEmail();
+      
+      var options = {
+        hostname: 'api.createsend.com',
+        port: 80,
+        path: '/api/v3/subscribers/' + app.extras.orion.listId + '.xml',
+        method: 'POST'
+      };
+
+      var postBody = {
+        "EmailAddress" : userObject.email,
+        "Name" : userObject.displayName
+      };
+
+      var req = http.request(options, function(res) {
+        if (res.statusCode === 200) {
+          app.extras.stathat.track("email subscription new user", 1);
+        }
+        else {
+          app.extras.stathat.track("email subscription error", 1);
+        }
+      });
+
+      req.on('error', function() {
+        app.extras.stathat.track("email subscription api error", 1);
+      });
+
+      req.write(postBody);
+      req.end();
+    }
+    catch (e) {
+      return;
+    }
+  };
+  
   var createOrUpdateUser = function (req, profile, done, token1, token2) {
     var userObject;
     if (!req.user) {
@@ -106,7 +147,7 @@ module.exports = function (app) {
         }
       }
     };
-    
+        
     if (req.user) {
       if ((!req.user.socialProfiles[profile.provider]) || ((req.user.socialProfiles[profile.provider]) && (req.user.socialProfiles[profile.provider]._raw !== userObject.socialProfiles[profile.provider]._raw))) {
         //console.log("req.user: ",JSON.stringify(req.user));
@@ -118,6 +159,9 @@ module.exports = function (app) {
           app.extras.stathat.track("user - "+ profile.provider+" - profile update", 1);
         }
         app.extras.mongo.users.update({_id: req.user._id}, userObject, mongoCallback);
+        if (!req.user.email && userObject.email) {
+          subscribeToOrionList(userObject);
+        }
       }
       else {
         console.log("User Object unchanged");
@@ -135,6 +179,9 @@ module.exports = function (app) {
     else {
         app.extras.stathat.track("user - "+ profile.provider+" - new user registration", 1);
         app.extras.mongo.users.insert(userObject, mongoCallback);
+        if (userObject.email) {
+          subscribeToOrionList(userObject);
+        }
     }
     
   };
@@ -267,17 +314,44 @@ module.exports = function (app) {
       })
   );
   
+  app.post("/auth/setEmail", function (req, res) {
+    try {
+      validator.check(req.body.email).isEmail();
+      req.user.email = req.body.email;
+      subscribeToOrionList(req.user);
+      if (req.user) {
+        app.extras.mongo.users.update({_id: req.user._id}, {$set: {"email": req.body.email}}, function (err, docs) {
+          console.log(err,docs);
+        });
+        res.send({"success": true});
+      }
+    }
+    catch (e) {
+      console.log(e);
+    }
+    res.redirect("/auth/success");
+  });
+  
   app.get("/auth/failed", function (req, res) {
     app.extras.stathat.track("login - failure", 1);  
     res.status(401).send("Authentication Failed");
   });
   
   app.get("/auth/success", function (req, res) {
-    app.extras.stathat.track("login - success", 1);  
-    var sanitizedUser = req.user;
-    delete sanitizedUser.socialProfiles;
-    res.render("auth-success", { user: sanitizedUser });
-    //res.send(req.user);
+    app.extras.stathat.track("login - success", 1);
+    if (req.user) {
+      var sanitizedUser = req.user;
+      delete sanitizedUser.socialProfiles;
+      if (req.user.email) {
+        res.render("auth-success", { user: sanitizedUser });
+      }
+      else {
+        res.render("auth-getEmail");
+      }
+    }
+    else {
+      res.redirect("/");
+    }
   });
 
   var prepareUser = function (user, safe) {

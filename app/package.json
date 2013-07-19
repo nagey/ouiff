@@ -25,7 +25,8 @@
     "geocoder": "*",
     "stathat": "*",
     "twit": "*",
-    "fb": "*"
+    "fb": "*",
+    "validator": "*"
   },
   "keywords": [
     "instagram",
